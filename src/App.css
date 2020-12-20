@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.displayButtons {
+  display: initial;
+}
+
+.notDisplayButtons {
+  display: none;
+}
+
+.previewMode {
+  display: none;
+}
