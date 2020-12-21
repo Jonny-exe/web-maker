@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Preview from './Preview'
+import AddButton from './AddButton'
+import Input from './Input'
+import DropdownMenu from './DropdownMenu'
+import RenderContent from './RenderContent'
 
 function App() {
+	// const [inputValue, setInputValue] = useState("")
   const [divCount, setDivCount] = useState(0)
   const [displayButtons, setDisplayButtons] = useState(false)
   const [array, setArray] = useState([""])
   const [input, setInput] = useState("")
-  const [savedInput, setSavedInput] = useState({textContent: ""})
+  const [savedInput, setSavedInput] = useState({ textContent: "" })
   const [savedIndex, setSavedIndex] = useState(1)
-  const [savedStyle, setSavedStyle] = useState({borderStyle: ""})
+  const [savedStyle, setSavedStyle] = useState({ borderStyle: "" })
   const [editCount, setEditCount] = useState(0)
   const [previewMode, setPreviewMode] = useState(false)
+  const [content, setContent] = useState([
+  ])
 
   const addToDivCount = () => {
     setDivCount(divCount + 1)
@@ -41,46 +48,26 @@ function App() {
     setEditCount(editCount + 1)
     setDisplayButtons(false)
     savedStyle.borderStyle = "none"
-    savedInput.textContent = ""
     setInput("")
   }
+
 
   const logStyle = (e: any) => {
     console.log(e.target.style.borderStyle)
   }
 
-  const handlePreview = () => {
-    setPreviewMode(true)
+  const handlePreview = (bool: boolean) => {
+    setPreviewMode(bool)
   }
-
-  const handleUnPreview = () => {
-    setPreviewMode(false)
-  }
-  
   return (
     <div className="App">
-      <button className={previewMode ? "previewMode" : ""} onClick={handlePreview}> Preview </button>
-      <button className={previewMode ? "" : "previewMode"} onClick={handleUnPreview}> UnPreview </button>
-      <button className={previewMode ? "previewMode" : ""} onClick={addToDivCount}> Add div </button>
-      <input type="text" className={previewMode ? "previewMode" : ""} onChange={handleInput} value={input}></input>
-      <button onClick={editDiv} className={`${previewMode ? "previewMode" : ""} ${displayButtons ? "displayButtons" : "notDisplayButtons"}`}> Edit </button>
-      <h1 className={previewMode ? "previewMode" : ""}> {divCount} </h1>
-      <h1 className={previewMode ? "previewMode" : ""}> {editCount} </h1>
-      <div> {
-        array.map((x, i) => (
-          <div onClick={(e: any) => {
-            console.log(logStyle)
-            handleDiv(x, i, e)
-            savedStyle.borderStyle = ""
-            e.target.style.border = "1px solid black"
-            e.target.style.borderRadius = "5px"
-            console.log(e.target.textContent)
-          }}>{x}</div>
-          )
-        )
-      }
-
+      <div className="tools">
+        <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
+        <Input input={input} setInput={setInput} savedInput={savedInput} previewMode={previewMode} />
+        <button onClick={editDiv} className={`preview ${previewMode ? "previewMode" : ""} ${displayButtons ? "displayButtons" : "notDisplayButtons"}`}> Edit </button>
+        <AddButton content={content} setContent={setContent} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
+      <RenderContent handleDiv={handleDiv} savedStyle={savedStyle} content={content} />
     </div>
   );
 }

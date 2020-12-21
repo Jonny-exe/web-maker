@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  --speed: 500ms;
 }
 
 .displayButtons {
@@ -12,4 +13,84 @@
 
 .previewMode {
   display: none;
+  color: #B5FFE6;
+}
+
+.preview {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: aquamarine;
+  border: none;
+  background-color: rgba(0,0,0,0);
+}
+
+.editing {
+  display: initial;
+}
+
+.notEditing {
+  display: none;
+}
+
+.tools {
+  display: flex;
+  padding: 1%;
+  justify-content: space-between;
+  background-color: #B5FFE6;
+}
+
+.dropdown {
+  /* transform: translate(-45%); */
+  background-color: aquamarine;
+  padding: 1rem;
+  overflow: hidden;
+  transition-duration: 0.2s;
+}
+
+.dropdownItemsContainer {
+  border-radius: 20px;
+  position: float;
+}
+
+.dropdown:hover {
+  /* transform: translate(-45%); */
+  background-color: #B5FFE6;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  border-radius: 20%;
+  padding: 0.5rem;
+}
+
+.dropdownMenuItems {
+  position: absolute;
+}
+
+.showDropdownItems {
+  transform: scaleY(1) translate(-76%);
+  transition-duration: 500ms;
+}
+
+.notShowDropdownItems {
+  transform-origin: top;
+  transform: scaleY(0) translate(-76%);
+  transition-duration: 500ms;
+}
+
+.addButton {
+  color: aquamarine;
+}
+
+.addButtonContainer {
+  background-color: #B5FFE6;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid aquamarine;
+  background-color: rgba(0,0,0,0);
+  margin-top: 3%;
+  margin-bottom: auto;
 }
