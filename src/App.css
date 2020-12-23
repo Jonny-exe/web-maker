@@ -4,6 +4,24 @@
   --secondaryColor: #c9ffed;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+select {
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 [placeholder]:empty:before {
   content: attr(placeholder);
   color: lightgrey;
@@ -163,6 +181,10 @@
   color: white;
 }
 
+.addImageModalButton {
+  cursor: pointer;
+}
+
 .checkboxContainer {
   --checkboxWidth: 40px;
   --checkboxHeight: calc(var(--checkboxWidth) / 2);
@@ -232,4 +254,24 @@
   color: aquamarine;
   margin-bottom: 3%;
   margin-top: 3%;
+}
+
+.imageModalSizeInputContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.imageModalContainer {
+  color: aquamarine;
+}
+
+.imageModalSelect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageModalSelect {
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DropdownItems from './DropdownItems'
+import ModalImage from './ModalImage'
 
 
 /* <FontAwesomeIcon icon={faPlusSquare} style={{ width: "" }} onClick={props.addToDivCount} className={props.previewMode ? "previewMode" : ""} /> */
@@ -23,15 +24,7 @@ const AddButton = (props: any) => {
       </div>
       <DropdownItems imageSrc={imageSrc} applyCount={applyCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={setAddImageOverlayActive} menuState={menuState} />
       <div className={`overlay addButtonOverlay ${menuState ? "overlayActive addButtonOverlayActive" : ""}`} onClick={() => setMenuState(false)}></div>
-      <div className={`overlay addImageOverlay ${addImageOverlayActive ? "overlayActive addImageOverlayActive" : ""}`} onClick={() => setAddImageOverlayActive(false)}></div>
-      <div className={`addImageModal editModal ${addImageOverlayActive ? "editModalActive" : ""}`}>
-        <h2 className="addImageModalHeader"> Add your image url </h2>
-        <input type="text" className={`input ${props.previewMode ? "previewMode" : ""}`} value={imageSrc} placeholder="https:you-image-url" onChange={(e: any) => setImageSrc(e.target.value)}  ></input>
-        <button className="preview addImageModalButton" onClick={() => {
-          setAddImageOverlayActive(false);
-          setApplyCount(applyCount + 1)
-        }}> Apply </button>
-      </div>
+      <ModalImage imageSrc={imageSrc} setImageSrc={setImageSrc} setApplyCount={setApplyCount} applyCount={applyCount} addImageOverlayActive={addImageOverlayActive} setAddImageOverlayActive={setAddImageOverlayActive}  />
     </div>
   );
 }
