@@ -11,7 +11,7 @@ export const DropdownItems = (props: any) => {
 			<AddItem type={"h2"} text={"SubTitle"} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
 			<AddItem type={"h3"} text={"Heading"} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
 			<AddItem type={"p"} text={"Text"} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
-			<AddImage type={"img"} text={"Image"} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
+			<AddImage type={"img"} text={"Image"} src={props.imageSrc} applyCount={props.applyCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={props.setAddImageOverlayActive}/>
 		</div>
 	)
 }

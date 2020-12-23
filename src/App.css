@@ -148,6 +148,21 @@
   z-index: 11;
 }
 
+.addImageModal {
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  padding: 3%;
+}
+
+.addImageModalHeader {
+  color: aquamarine;
+}
+
+.addImageModalButton:hover {
+  color: white;
+}
+
 .checkboxContainer {
   --checkboxWidth: 40px;
   --checkboxHeight: calc(var(--checkboxWidth) / 2);

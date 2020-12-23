@@ -47,8 +47,11 @@ export const div = {
 export const image = {
     type: "img",
     text: "Image",
+    src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.whYid2jKN-8c3BUhtIoSTgHaEK%26pid%3DApi&f=1",
     style: {
-        margin: "1%"
+        margin: "1%",
+        width: "250px",
+        height: "250px"
     },
 }
 

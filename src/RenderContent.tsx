@@ -8,7 +8,9 @@ export const RenderContent = (props: any) => {
 			{console.log(props.content)}
 			{
 				props.content.map((x: any, i: number) => (
-					x.type == "img" ? <img src="" alt="Image"></img>: React.createElement(x.type, {
+					// Images must be done separatly
+					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img>: 
+					React.createElement(x.type, {
             style: x.style,
             contentEditable: "true",
             placeholder: x.text,
