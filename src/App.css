@@ -259,6 +259,7 @@ input[type=number] {
 .imageModalSizeInputContainer {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .imageModalContainer {
@@ -275,3 +276,17 @@ input[type=number] {
 .imageModalSelect {
   cursor: pointer;
 }
+
+.imageModalInformationDiv {
+  /* border-bottom: solid 1px; */
+  background-color: aquamarine;
+  color: var(--secondaryColor);
+  margin: 1%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 1%;
+}
+
+/* .imageModalTable {
+  margin: auto;
+} */

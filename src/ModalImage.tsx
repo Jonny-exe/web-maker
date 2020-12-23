@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ModalImageSizeTabel from './ModalImageSizeTable'
 
 
 /* <FontAwesomeIcon icon={faPlusSquare} style={{ width: "" }} onClick={props.addToDivCount} className={props.previewMode ? "previewMode" : ""} /> */
@@ -9,38 +10,9 @@ const ModalImage = (props: any) => {
 			<div className={`addImageModal editModal ${props.addImageOverlayActive ? "editModalActive" : ""}`}>
 				<h2 className="addImageModalHeader"> Add your image url </h2>
 				<input type="text" className={`input ${props.previewMode ? "previewMode" : ""}`} value={props.imageSrc} placeholder="https:you-image-url" onChange={(e: any) => props.setImageSrc(e.target.value)}  ></input>
+				<div className="imageModalInformationDiv"> Select your image messurement, if you image is already good leave everything blank</div>
 				<div className="imageModalSizeInputContainer">
-					<table>
-						<tr>
-							<td>
-								<div> Select messurement </div>
-							</td>
-							<td>
-								<select className="preview imageModalSelect">
-									<option value="px"> Pixel </option>
-									<option value="%"> Percentage </option>
-								</select>
-							</td>
-						</tr>
-						<tr className="imageModalTable">
-							<td>
-								<span> Width </span>
-							</td>
-							<td>
-								<input type="number" placeholder="Desired Image width" className="preview"></input>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span> Height </span>
-							</td>
-							<td>
-								<input type="number" placeholder="Desired Image width" className="preview"></input>
-							</td>
-						</tr>
-					</table>
-					<div className="imageModalSelect">
-					</div>
+					<ModalImageSizeTabel imageSizes={props.imageSizes} />
 				</div>
 				<button className="preview addImageModalButton" onClick={() => {
 					props.setAddImageOverlayActive(false)
