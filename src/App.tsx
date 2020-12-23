@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 import './App.css';
 import Preview from './Preview'
 import AddButton from './AddButton'
-import Input from './Input'
+import Modal from './Modal'
 import DropdownMenu from './DropdownMenu'
 import RenderContent from './RenderContent'
+// import Styles from './StylesTextAlign'
+import Edit from './Edit'
 
 function App() {
-	// const [inputValue, setInputValue] = useState("")
+  // const [inputValue, setInputValue] = useState("")
+  const [modalStateActive, setModalStateActive] = useState(false)
+  const [addButtonStateActive, setAddButtonStateActive] = useState(false)
   const [divCount, setDivCount] = useState(0)
   const [displayButtons, setDisplayButtons] = useState(false)
   const [array, setArray] = useState([""])
   const [input, setInput] = useState("")
+  const [html, setHtml] = useState("")
   const [savedInput, setSavedInput] = useState({ textContent: "" })
   const [savedIndex, setSavedIndex] = useState(1)
-  const [savedStyle, setSavedStyle] = useState({ borderStyle: "" })
+  const [savedStyle, setSavedStyle] = useState({ textAlign: "", borderStyle: ""})
   const [editCount, setEditCount] = useState(0)
   const [previewMode, setPreviewMode] = useState(false)
-  const [content, setContent] = useState([
-  ])
+  const [content, setContent] = useState([])
 
   const addToDivCount = () => {
     setDivCount(divCount + 1)
@@ -28,10 +32,10 @@ function App() {
     setArray(newArray)
   }
 
-  const handleInput = (event: any) => {
-    setInput(event.target.value)
-    savedInput.textContent = event.target.value
-  }
+  // const handleInput = (event: any) => {
+  //   setInput(event.target.value)
+  //   savedInput.textContent = event.target.value
+  // }
 
   const handleDiv = (content: string, index: number, event: any) => {
     setInput(content)
@@ -41,15 +45,16 @@ function App() {
     setDisplayButtons(true)
   }
 
-  const editDiv = () => {
-    var newArray = array
-    newArray[savedIndex] = input
-    setArray(newArray)
-    setEditCount(editCount + 1)
-    setDisplayButtons(false)
-    savedStyle.borderStyle = "none"
-    setInput("")
-  }
+  // const editDiv = () => {
+  //   var newArray = array
+  //   newArray[savedIndex] = input
+  //   setArray(newArray)
+  //   setEditCount(editCount + 1)
+  //   setDisplayButtons(false)
+  //   savedStyle.borderStyle = "none"
+  //   setSavedInput({textContent: ""}) // This cant be done savedInput.textContent because it is a reference to event.target.textContent
+  //   setInput("")
+  // }
 
 
   const logStyle = (e: any) => {
@@ -63,11 +68,12 @@ function App() {
     <div className="App">
       <div className="tools">
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
-        <Input input={input} setInput={setInput} savedInput={savedInput} previewMode={previewMode} />
-        <button onClick={editDiv} className={`preview ${previewMode ? "previewMode" : ""} ${displayButtons ? "displayButtons" : "notDisplayButtons"}`}> Edit </button>
-        <AddButton content={content} setContent={setContent} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
+        <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} />
+        {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}
+        <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
-      <RenderContent handleDiv={handleDiv} savedStyle={savedStyle} content={content} />
+      <Modal input={input} setInput={setInput} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
+      <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
     </div>
   );
 }
