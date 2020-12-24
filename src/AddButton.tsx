@@ -11,7 +11,7 @@ const AddButton = (props: any) => {
   const [menuState, setMenuState] = useState(false)
   const [addImageOverlayActive, setAddImageOverlayActive] = useState(false)
   const [applyCount, setApplyCount] = useState(0)
-	const [imageSizes, setImageSizes] = useState({ width: 0, height: 0, magnitude: ""})
+  const [imageSizes, setImageSizes] = useState({ width: 1, height: 1, magnitude: "" })
   console.log(imageSizes)
 
   const handleClick = () => {
@@ -25,7 +25,7 @@ const AddButton = (props: any) => {
       </div>
       <DropdownItems imageSrc={imageSrc} imageSizes={imageSizes} applyCount={applyCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={setAddImageOverlayActive} menuState={menuState} />
       <div className={`overlay addButtonOverlay ${menuState ? "overlayActive addButtonOverlayActive" : ""}`} onClick={() => setMenuState(false)}></div>
-      <ModalImage imageSrc={imageSrc} setImageSrc={setImageSrc} imageSizes={imageSizes} setImageSizes={setImageSizes} setApplyCount={setApplyCount} applyCount={applyCount} addImageOverlayActive={addImageOverlayActive} setAddImageOverlayActive={setAddImageOverlayActive}  />
+      <ModalImage imageSrc={imageSrc} setImageSrc={setImageSrc} imageSizes={imageSizes} setImageSizes={setImageSizes} setApplyCount={setApplyCount} applyCount={applyCount} addImageOverlayActive={addImageOverlayActive} setAddImageOverlayActive={setAddImageOverlayActive} />
     </div>
   );
 }

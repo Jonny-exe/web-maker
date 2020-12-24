@@ -5,9 +5,8 @@ export const Edit = (props: any) => {
 	return (
 		<div className="preview">
 			<button onClick={() => {
-				// props.editDiv()
 				props.setModalStateActive(true)
-				}} className={`preview ${props.previewMode ? "previewMode" : ""} ${props.displayButtons ? "displayButtons" : "notDisplayButtons"}`}> Edit </button>
+			}} className={`preview ${props.previewMode ? "previewMode" : ""} ${props.displayButtons ? "displayButtons" : "notDisplayButtons"}`}> Edit </button>
 		</div>
 	)
 }

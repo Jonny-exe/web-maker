@@ -7,10 +7,6 @@ const ModalImageSizeTable = (props: any) => {
 		props.imageSizes.width = 1
 	} 
 
-	useEffect(() => {
-		props.imageSizes.magnitude = "px"
-	}, [])
-
 	return (
 		<table className="imageModalTable">
 			<tr>
@@ -19,8 +15,9 @@ const ModalImageSizeTable = (props: any) => {
 				</td>
 				<td>
 					<select onChange={(e: any) => props.imageSizes.magnitude = e.target.value} className="preview imageModalSelect">
-						<option value="px"> Pixel </option>
+						<option value=""></option>
 						<option value="%"> Percentage </option>
+						<option value="px"> Pixel </option>
 					</select>
 				</td>
 			</tr>
