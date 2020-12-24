@@ -19,7 +19,7 @@ function App() {
   const [html, setHtml] = useState("")
   const [savedInput, setSavedInput] = useState({ textContent: "" })
   const [savedIndex, setSavedIndex] = useState(1)
-  const [savedStyle, setSavedStyle] = useState({ textAlign: "", borderStyle: ""})
+  const [savedStyle, setSavedStyle] = useState({ textAlign: "", borderStyle: "" })
   const [editCount, setEditCount] = useState(0)
   const [previewMode, setPreviewMode] = useState(false)
   const [content, setContent] = useState([])

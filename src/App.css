@@ -2,6 +2,8 @@
   text-align: center;
   --speed: 500ms;
   --secondaryColor: #c9ffed;
+  width: 100%;
+  overflow: hidden;
 }
 
 input::-webkit-outer-spin-button,
