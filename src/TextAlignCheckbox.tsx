@@ -7,6 +7,11 @@ export const TextAlignCheckbox = (props: any) => {
     props.setSelected(props.type)
     props.savedStyle.textAlign = props.type
   }
+
+  useEffect(() => {
+    props.setSelected(props.savedStyle.textAlign)
+  }, [props.modalStateActive])
+
   return (
     <label className="checkboxContainer" onClick={handleClick}>
       <input type="checkbox" className="checkbox" checked={props.selected == props.type ? true : false}></input>

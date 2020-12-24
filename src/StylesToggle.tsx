@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
 export const StylesToggle = (props: any) => {
-	const [style, setStyle] = useState(false)
+	const [checkbox, setCheckbox] = useState(false)
 
 	const handleCheckbox = (event: any) => {
 		if (event.target.checked) {
 			props.savedStyle[props.propertyToToggle] = props.on
-			setStyle(true)
+			setCheckbox(true)
 		} else {
 			props.savedStyle[props.propertyToToggle] = props.off
-			setStyle(false)
+			setCheckbox(false)
 		}
 	}
 
@@ -17,9 +17,9 @@ export const StylesToggle = (props: any) => {
 	useEffect(() => {
 		if (props.modalStateActive) {
 			if (props.savedStyle[props.propertyToToggle] == props.on) {
-				setStyle(true)
+				setCheckbox(true)
 			} else {
-				setStyle(false)
+				setCheckbox(false)
 			}
 		}
 	}, [props.modalStateActive])
@@ -27,7 +27,7 @@ export const StylesToggle = (props: any) => {
 	return (
 		<div className="stylesBorderContainer">
 			<label className="checkboxContainer">
-				<input onClick={(e: any) => handleCheckbox(e)} type="checkbox" checked={style} className="checkbox"></input>
+				<input onClick={(e: any) => handleCheckbox(e)} type="checkbox" checked={checkbox} className="checkbox"></input>
 				<div className="checkboxFill"></div>
 			</label>
 			<span> {props.nameOfStyle} </span>
