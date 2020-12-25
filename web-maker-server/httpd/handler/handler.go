@@ -1,22 +1,32 @@
 package handler
 
 import (
+	// "go.mongodb.org/mongo-driver/bson" 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
 	"reflect"
 	"os"
 	"log"
 	"fmt"
 	"path"
 	"database/sql"
+	"net/http"
+	"encoding/json"
 )
 
-func Insert() {
-	insert, err := db.Query("INSERT INTO test1(price, name) VALUES(3333, 'newTest')")
+func Insert(w http.ResponseWriter, r *http.Request) {
+	var req models.TokenAndRecovery_key
+	json.NewDecoder(r.Body).Decode(&req)
+	// insForm, err := db.Prepare("insert into token_recovery(token, recovery) values(?,?)")
+	insert, err := db.Prepare("INSERT INTO token_recovery(token, recovery) VALUES(?, ?)")
 	if err != nil {
 		panic(err.Error())
 	}
+
+	insert.Exec(req.Token, req.Recovery_key)
 	defer insert.Close()
+	json.NewEncoder(w).Encode(req)
 }
 
 
@@ -48,5 +58,4 @@ func Connect() {
 	db, err = sql.Open("mysql", connectionKey)
 	log.Println(reflect.TypeOf(db))
 	// hanlder.Insert()
-	Insert()
 }

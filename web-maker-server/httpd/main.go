@@ -23,7 +23,7 @@ func handleRequest() error {
 	// }
 
 	myRouter := mux.NewRouter().StrictSlash(true)
-	// myRouter.HandleFunc("/test", handler.Base64ToImage).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/insertTokenRecovery", handler.Insert).Methods("GET", "OPTIONS")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
