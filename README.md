@@ -5,9 +5,9 @@ This is a web maker tool
 #Built with: 
  
 ## Frontend:
-React
+ - React
 
 ## Backend:
-Golang
-MySQL
-Nginx
+ - Golang
+ - MySQL
+ - Nginx
