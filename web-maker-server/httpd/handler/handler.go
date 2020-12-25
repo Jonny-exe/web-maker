@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-func Insert(w http.ResponseWriter, r *http.Request) {
+func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
 	var req models.TokenAndRecovery_key
 	json.NewDecoder(r.Body).Decode(&req)
 	// insForm, err := db.Prepare("insert into token_recovery(token, recovery) values(?,?)")
@@ -27,6 +27,45 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 	insert.Exec(req.Token, req.Recovery_key)
 	defer insert.Close()
 	json.NewEncoder(w).Encode(req)
+}
+
+func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
+	// Before doing this you have to check if the token alredy exists
+	var req models.TokenAndObject
+	json.NewDecoder(r.Body).Decode(&req)
+	insert, err := db.Prepare("INSERT INTO token_object(token, object) VALUES(?, ?)")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	insert.Exec(req.Token, req.Object)
+	defer insert.Close()
+	json.NewEncoder(w).Encode(req)
+}
+
+func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
+	var req models.TokenAndObject
+	json.NewDecoder(r.Body).Decode(&req)
+	update, err := db.Prepare("update token_object set object=? where token=?")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	update.Exec(req.Object, req.Token)
+	defer update.Close()
+	json.NewEncoder(w).Encode(req)
+}
+
+func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
+	var req models.Recovery_key
+	var token string
+	json.NewDecoder(r.Body).Decode(&req)
+	err := db.QueryRow("select token from token_recovery where recovery=?", req.Recovery_key).Scan(&token)
+	if err != nil {
+		panic(err.Error())
+	}
+	log.Println(token)
+	json.NewEncoder(w).Encode(token)
 }
 
 
