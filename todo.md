@@ -1,1 +1,0 @@
-1. Make on hover dislay buttons to move or edit

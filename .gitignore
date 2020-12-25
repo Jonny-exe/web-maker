@@ -1,3 +1,8 @@
 node_modules/*
 node_modules
 .env
+
+./web-maker/.env
+./web-maker-sever/.env
+./web-maker/node_modules/*
+./web-maker/node_modules
