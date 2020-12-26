@@ -9,11 +9,14 @@ export const RenderContent = (props: any) => {
 			{
 				props.content.map((x: any, i: number) => (
 					// Images must be done separatly
+
+					// {const hi = ""}
 					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img>: 
 					React.createElement(x.type, {
             style: x.style,
             contentEditable: "true",
-            placeholder: x.text,
+						placeholder: x.text,
+						text2: "",
 						onClick: (e: any) => {
 							console.log(x)
 							// props.handleDiv(e.target.innerText, i, e) // this could be set to e.target.innerHTML to use " text "
@@ -23,11 +26,16 @@ export const RenderContent = (props: any) => {
 							// e.target.style.borderRadius = "5px"
 							props.setSavedStyle(e.target.style)
 						},
+						onInput: (e: any) => {
+							console.log(e.target)
+							console.log(e.target.textContent)
+							x.text2 = e.target.textContent
+						},
 						focusout:  (e: any) => {
 							props.setDisplayButtons(false)
 						}
 					},
-						x.children.length != 0 && x.children != undefined ? <RenderContent1 content={x.children} /> : "",
+						x.children.length != 0 && x.children != undefined ? <RenderContent1 content={x.children} /> : x.text2,
 					)
 				))
 			}

@@ -67,10 +67,13 @@ function App() {
   const handlePreview = (bool: boolean) => {
     setPreviewMode(bool)
   }
+
+
+  console.log(content)
   return (
     <div className="App">
       <div className="tools">
-        <Login content={content} token={token} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
+        <Login content={content} setContent={setContent} token={token} setToken={setToken} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
         <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} />
         {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}

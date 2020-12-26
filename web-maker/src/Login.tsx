@@ -12,7 +12,7 @@ const Login = (props: any) => {
 	return (
 		<>
 			<FontAwesomeIcon size={"1x"} icon={faUser} className={`preview ${props.previewMode ? "previewMode" : ""}`} onClick={handleClick} />
-			<ModalLogin content={props.content} token={props.token} loginModalStateActive={props.loginModalStateActive} setLoginModalStateActive={props.setLoginModalStateActive} />
+			<ModalLogin content={props.content} setContent={props.setContent} token={props.token} setToken={props.setToken} loginModalStateActive={props.loginModalStateActive} setLoginModalStateActive={props.setLoginModalStateActive} />
 		</>
 	);
 }
