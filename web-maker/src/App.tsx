@@ -5,12 +5,14 @@ import AddButton from './AddButton'
 import Modal from './Modal'
 import DropdownMenu from './DropdownMenu'
 import RenderContent from './RenderContent'
+import Login from './Login'
 // import Styles from './StylesTextAlign'
 import Edit from './Edit'
 
 function App() {
   // const [inputValue, setInputValue] = useState("")
   const [modalStateActive, setModalStateActive] = useState(false)
+  const [loginModalStateActive, setLoginModalStateActive] = useState(false)
   const [addButtonStateActive, setAddButtonStateActive] = useState(false)
   const [divCount, setDivCount] = useState(0)
   const [displayButtons, setDisplayButtons] = useState(false)
@@ -67,6 +69,7 @@ function App() {
   return (
     <div className="App">
       <div className="tools">
+        <Login setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
         <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} />
         {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}
