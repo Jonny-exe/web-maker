@@ -33,14 +33,18 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	// Before doing this you have to check if the token alredy exists
 	var req models.TokenAndObject
 	json.NewDecoder(r.Body).Decode(&req)
+
+	bytes, err := json.Marshal(req)
+	stringyfiedObject := string(bytes)
+
 	insert, err := db.Prepare("INSERT INTO token_object(token, object) VALUES(?, ?)")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	insert.Exec(req.Token, req.Object)
+	insert.Exec(req.Token, stringyfiedObject)
 	defer insert.Close()
-	json.NewEncoder(w).Encode(req)
+	json.NewEncoder(w).Encode(req.Object)
 }
 
 func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
@@ -68,6 +72,21 @@ func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(token)
 }
 
+func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
+	var req models.Token
+	var objectString string
+	var object interface{}
+	json.NewDecoder(r.Body).Decode(&req)
+	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
+	if err != nil {
+		panic(err.Error())
+	}
+	log.Println(objectString)
+	bytes := []byte(objectString)
+	json.Unmarshal(bytes, &object)
+	log.Println(reflect.TypeOf(object))
+	json.NewEncoder(w).Encode(object)
+}
 
 var db *sql.DB 
 func Connect() {

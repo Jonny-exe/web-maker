@@ -7,7 +7,7 @@ const ModalLogin = (props: any) => {
 	const textStyle = { fontSize: "150%" }
 	const [inputValue, setInputValue] = useState("")
 	const [sentCount, setSentCount] = useState(1)
-	var { response } = SaveProject({}, sentCount)
+	var { response } = SaveProject(props.content, sentCount)
 	console.log(response)
 
 	const handleLoginInput = (event: any) => {

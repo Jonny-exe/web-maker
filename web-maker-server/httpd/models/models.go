@@ -8,9 +8,13 @@ type TokenAndRecovery_key struct {
 
 type TokenAndObject struct {
 	Token string `json:"token"`
-	Object string `json:"object`
+	Object interface{} `json:"object"`
 }
 
 type Recovery_key struct {
 	Recovery_key string `json:"recovery_key"`
+}
+
+type Token struct {
+	Token string `json:"token"`
 }

@@ -27,6 +27,7 @@ func handleRequest() error {
 	myRouter.HandleFunc("/updateTokenObject", handler.UpdateTokenObject).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/insertTokenObject", handler.InsertTokenObject).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/getTokenFromRecovery", handler.GetTokenFromRecovery).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/getObjectFromToken", handler.GetObjectFromToken).Methods("POST", "OPTIONS")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
