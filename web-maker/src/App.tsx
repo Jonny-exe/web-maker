@@ -11,6 +11,7 @@ import Edit from './Edit'
 
 function App() {
   // const [inputValue, setInputValue] = useState("")
+  const [token, setToken] = useState("")
   const [modalStateActive, setModalStateActive] = useState(false)
   const [loginModalStateActive, setLoginModalStateActive] = useState(false)
   const [addButtonStateActive, setAddButtonStateActive] = useState(false)
@@ -69,7 +70,7 @@ function App() {
   return (
     <div className="App">
       <div className="tools">
-        <Login setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
+        <Login content={content} token={token} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
         <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} />
         {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}

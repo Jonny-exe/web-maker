@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 const url = "http://localhost:5000/"
 const headersContent = {}
 
-export const SaveProject = (content: object, sentCount: number) => {
+export const SaveProject = (token: string, content: object, sentCount: number) => {
 	const [state, setState] = useState({ response: "", loading: true })
 	const thisURL = url + "updateTokenObject"
 	useEffect(() => {
 		if (sentCount != 0) {
 			var bodyContent = {
-				token: "hi",
-				object: "tesFromReactyhqy"
+				token: token,
+				object: content
 			}
 			const requestOptions = {
 				method: 'POST',

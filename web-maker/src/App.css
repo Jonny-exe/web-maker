@@ -283,6 +283,11 @@ input[type=number] {
   color: aquamarine;
 }
 
+.loginModalContainer {
+  color: aquamarine;
+}
+
+
 .imageModalSelect {
   display: flex;
   flex-direction: column;

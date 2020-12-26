@@ -40,7 +40,7 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	insert, err := db.Prepare("INSERT INTO token_object(token, object) VALUES(?, ?)")
 	if err != nil {
 		panic(err.Error())
-	}
+	
 
 	insert.Exec(req.Token, stringyfiedObject)
 	defer insert.Close()
