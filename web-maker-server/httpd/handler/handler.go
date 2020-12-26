@@ -34,7 +34,7 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	var req models.TokenAndObject
 	json.NewDecoder(r.Body).Decode(&req)
 
-	bytes, err := json.Marshal(req)
+	bytes, err := json.Marshal(req.Object)
 	stringyfiedObject := string(bytes)
 
 	insert, err := db.Prepare("INSERT INTO token_object(token, object) VALUES(?, ?)")
