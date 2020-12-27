@@ -1,8 +1,9 @@
 package handler
 
 import (
+
 	// "go.mongodb.org/mongo-driver/bson"
-	"bytes"
+
 	"crypto/rand"
 	"database/sql"
 	"encoding/json"
@@ -10,11 +11,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"reflect"
+	"strconv"
+	"strings"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -160,7 +165,7 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	var objectString string
 	var object models.Content
 	var HTMLBegining string = "<!DOCTYPE html><html><body>"
-	var HTMLEnd string = "</html></body>"
+	var HTMLEnd string = "</body></html>"
 	// connectionKey := os.Getenv("BEAUTIFY_CODE")
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
@@ -174,35 +179,46 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	result := export.Export(object)
 	result = HTMLBegining + result + HTMLEnd
 	beautifiedResult := beautifyCode(result)
+	filecreator.ImportHTMLToFile(beautifiedResult)
+
 	json.NewEncoder(w).Encode(beautifiedResult)
 }
 
 func beautifyCode(htmlCode string) string {
-	var beautifiedCode string
-	reqBody, err := json.Marshal(map[string]string{
-		"code": htmlCode,
-	})
+	endpoint := "https://www.10bestdesign.com/dirtymarkup/api/html"
+	data := url.Values{}
+	data.Set("code", htmlCode)
+
+	client := &http.Client{}
+	r, err := http.NewRequest("POST", endpoint, strings.NewReader(data.Encode())) // URL-encoded payload
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	resp, err := http.Post("https://www.10bestdesign.com/dirtymarkup/api/html",
-		"application/json", bytes.NewBuffer(reqBody))
+	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	r.Header.Add("Content-Length", strconv.Itoa(len(data.Encode())))
+
+	res, err := client.Do(r)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	beautifiedCode = string(body)
-	type request struct {
+	log.Println(res.Status)
+	defer res.Body.Close()
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	stringBody := string(body)
+
+	type req struct {
 		Clean string `json:"clean"`
 	}
-	var object request
-	bytes := []byte(beautifiedCode)
-	json.Unmarshal(bytes, &object)
-	if err != nil {
-		panic(err)
-	}
-	return object.Clean
+
+	var result req
+
+	bytes := []byte(stringBody)
+	json.Unmarshal(bytes, &result)
+	log.Println(result)
+	return string(result.Clean)
 }
 
 // Test ...
