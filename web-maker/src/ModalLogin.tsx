@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import ModalImageSizeTabel from './ModalImageSizeTable'
-import { SaveProject, CreateProject, GetTokenFromRecovery, GetContentFromToken } from './requests'
+import { SaveProject, CreateProjectTokenRecovery, CreateProjectTokenObject, GetTokenFromRecovery, GetContentFromToken } from './requests'
 
 
 const ModalLogin = (props: any) => {
@@ -20,11 +20,13 @@ const ModalLogin = (props: any) => {
 	const [getContentCount, setGetContentCount] = useState(0)
 	const [recoverTokenCount, setRecoverTokenCount] = useState(0)
 	const [recoveryTooLong, setRecoveryTooLong] = useState(false)
-	var { response } = SaveProject(props.token, props.content, sentCount)
-	var { responseToken } = CreateProject(recoveryKeyInputValue, createCount)
+	const [saveClicked, setSaveClicked] = useState(false)
+	var { responseSavedStatus, loadingSaved } = SaveProject(sentCount, props.token, props.content)
+	var { responseToken } = CreateProjectTokenRecovery(recoveryKeyInputValue, createCount)
+	var { responseStatus } = CreateProjectTokenObject(props.content, props.token)
 	var { responseTokenFromRecovery } = GetTokenFromRecovery(tokenFromRecoveryKeyInputValue, recoverTokenCount)
 	var { responseContent } = GetContentFromToken(tokenInputValue, getContentCount)
-	console.log(response)
+	console.log(props.content)
 
 	useEffect(() => {
 		if (responseContent != null && responseContent != undefined && responseContent.length != null) {
@@ -33,12 +35,20 @@ const ModalLogin = (props: any) => {
 		}
 	}, [responseContent])
 
+
+	// useEffect(() => {
+	// 	if (responseToken != null && responseToken != undefined) {
+	// 		props.setToken(responseToken)
+	// 	}
+	// }, [responseToken])
+
 	const handleLoginInput = (event: any) => {
 		setInputValue(event.target.value)
 	}
 
 	const saveOnClick = () => {
 		setSentCount(sentCount + 1)
+		setSaveClicked(true)
 	}
 
 	const createProject = () => {
@@ -52,6 +62,7 @@ const ModalLogin = (props: any) => {
 
 	const importProject = () => {
 		setGetContentCount(getContentCount + 1)
+		props.setToken(tokenInputValue)
 		hideModal()
 	}
 
@@ -61,6 +72,7 @@ const ModalLogin = (props: any) => {
 	const hideModal = () => {
 		props.setLoginModalStateActive(false)
 		setRecoveryTooLong(false)
+		setSaveClicked(false)
 		setCreateProjectActivated(false)
 		setWaitingForToken(false)
 		props.setToken(responseToken)
@@ -88,13 +100,15 @@ const ModalLogin = (props: any) => {
 				</div>
 			</div>
 		);
-	} else if (props.token !== "") {
+	} else if (props.token !== "" && !waitingForToken) {
 		return (
 			<div className="loginModalContainer">
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span style={textStyle}> Save your current project </span>
-					<button onClick={saveOnClick} className="preview loginInput"> Save </button>
+					<button onClick={saveOnClick} className="preview loginInput loginButton"> Save </button>
+					<span className={`informationDiv ${responseSavedStatus == 200 && !loadingSaved && saveClicked? "unhide": "hide"}`}> Saved successfully </span>
+					<span className={`alertDiv ${responseSavedStatus == 500 && !loadingSaved && saveClicked? "unhide": "hide"}`}> Unsuccessfull save, please try again later </span>
 				</div>
 			</div>
 		);
@@ -119,7 +133,7 @@ const ModalLogin = (props: any) => {
 					<span style={textStyle}> This is your project token </span>
 					<span> {responseToken != null ? responseToken : ""} </span>
 					<div className={`informationDiv `}> Make sure you save this token. You will need the key to edit you project the next time you want to edit it.</div>
-					<button onClick={hideModal} className="preview"> Continue </button>
+					<button onClick={hideModal} className="preview loginButton" style={{ margin: "1%" }}> Continue </button>
 				</div>
 			</div>
 		)
@@ -161,7 +175,7 @@ const ModalLogin = (props: any) => {
 				</div>
 			</div>
 		)
-	} 
+	}
 	return (<></>)
 }
 

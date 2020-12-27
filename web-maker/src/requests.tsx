@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 const url = "http://localhost:5000/"
 const headersContent = {}
 
-export const SaveProject = (token: string, content: object, sentCount: number) => {
-	const [state, setState] = useState({ response: "", loading: true })
+export const SaveProject = (sentCount: number, token: string, content: object) => {
+	const [state, setState] = useState({ responseSavedStatus: 0, loadingSaved: true })
 	const thisURL = url + "updateTokenObject"
 	useEffect(() => {
 		if (sentCount != 0) {
@@ -18,21 +18,21 @@ export const SaveProject = (token: string, content: object, sentCount: number) =
 				// credentials: 'same-origin',
 				body: JSON.stringify(bodyContent)
 			}
-			setState(state => ({ response: state.response, loading: true }))
+			setState(state => ({ responseSavedStatus: state.responseSavedStatus, loadingSaved: true }))
 			const loadData = async () => {
 				const response = await fetch(thisURL, requestOptions)
-				var data: string = await response.json()
-				setState({ response: data, loading: false })
+				var data: number = await response.json()
+				setState({ responseSavedStatus: data, loadingSaved: false })
 			}
 			loadData()
 		} else {
-			setState({ response: "", loading: false })
+			setState({ responseSavedStatus: 0, loadingSaved: false })
 		}
 	}, [sentCount])
 	return state
 }
 
-export const CreateProject = (recoverykey: string, createCount: number) => {
+export const CreateProjectTokenRecovery = (recoverykey: string, createCount: number) => {
 	const [state, setState] = useState({ responseToken: "", loading: true })
 	const thisURL = url + "insertTokenRecovery"
 	useEffect(() => {
@@ -58,6 +58,35 @@ export const CreateProject = (recoverykey: string, createCount: number) => {
 			setState({ responseToken: "", loading: false })
 		}
 	}, [createCount])
+	return state
+}
+
+export const CreateProjectTokenObject = (content: any, token: string) => {
+	const [state, setState] = useState({ responseStatus: "", loading: true })
+	const thisURL = url + "insertTokenObject"
+	useEffect(() => {
+		if (token != "" && token != null && token != undefined) {
+			var bodyContent = {
+				content: content,
+				token: token
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: headersContent,
+				// credentials: 'same-origin',
+				body: JSON.stringify(bodyContent)
+			}
+			setState(state => ({ responseStatus: state.responseStatus, loading: true }))
+			const loadData = async () => {
+				const response = await fetch(thisURL, requestOptions)
+				var data: string = await response.json()
+				setState({ responseStatus: data, loading: false })
+			}
+			loadData()
+		} else {
+			setState({ responseStatus: "", loading: false })
+		}
+	}, [token])
 	return state
 }
 

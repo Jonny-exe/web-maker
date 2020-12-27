@@ -16,7 +16,7 @@ export const RenderContent = (props: any) => {
             style: x.style,
             contentEditable: "true",
 						placeholder: x.text,
-						text2: "",
+						conetent: "",
 						onClick: (e: any) => {
 							console.log(x)
 							// props.handleDiv(e.target.innerText, i, e) // this could be set to e.target.innerHTML to use " text "

@@ -55,7 +55,7 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 
 	insert.Exec(req.Token, stringyfiedObject)
 	defer insert.Close()
-	json.NewEncoder(w).Encode(req.Object)
+	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
 func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
@@ -71,14 +71,17 @@ func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 	update, err := db.Prepare("update token_object set object=? where token=?")
 	if err != nil {
 		panic("Update error: " +  err.Error())
+		json.NewEncoder(w).Encode(http.StatusInternalServerError)
 	}
 	res, err := update.Exec(stringyfiedObject, req.Token)
 	if err != nil {
 		panic(err.Error())
+		json.NewEncoder(w).Encode(http.StatusInternalServerError)
 	}
 	rowAffected, err := res.RowsAffected()
 	if err != nil {
 		panic("Row Affectd error: " + err.Error())
+		json.NewEncoder(w).Encode(http.StatusInternalServerError)
 	}
 
 	log.Println(rowAffected)
@@ -144,4 +147,19 @@ func Connect() {
 	// hanlder.Insert()
 }
 
+func ExportIntoHtml(w http.ResponseWriter, r *http.Request) {
+	var req models.Token
+	var objectString string
+	var object interface{}
+	json.NewDecoder(r.Body).Decode(&req)
+	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
+	if err != nil {
+		panic(err.Error())
+	}
+	log.Println(objectString)
+	bytes := []byte(objectString)
+	json.Unmarshal(bytes, &object)
+	log.Println(reflect.TypeOf(object))
+	json.NewEncoder(w).Encode(object)
+}
 

@@ -1,6 +1,7 @@
 export const title = {
     type: "h1",
     text: "Title",
+    content: "",
     style: {
         margin: "1%"
     },
@@ -10,6 +11,7 @@ export const title = {
 export const subTitle = {
     type: "h2",
     text: "SubTitle",
+    content: "",
     style: {
         margin: "1%"
     },
@@ -19,6 +21,7 @@ export const subTitle = {
 export const heading = {
     type: "h3",
     text: "Heading",
+    content: "",
     style: {
         margin: "1%"
     },
@@ -28,7 +31,7 @@ export const heading = {
 export const span = {
     type: "span",
     text: "Text",
-    html: "Text",
+    content: "",
     style: {
         margin: "1%"
     },
@@ -38,6 +41,7 @@ export const span = {
 export const div = {
     type: "div",
     text: "Text",
+    content: "",
     style: {
         margin: "1%"
     },
@@ -58,6 +62,7 @@ export const image = {
 export const item = {
     type: "",
     text: "",
+    content: "",
     style: {
         margin: "1%",
         maxWidth: "100%",
