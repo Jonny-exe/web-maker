@@ -16,7 +16,7 @@ export const RenderContent = (props: any) => {
             style: x.style,
             contentEditable: "true",
 						placeholder: x.text,
-						conetent: "",
+						content: "",
 						onClick: (e: any) => {
 							console.log(x)
 							// props.handleDiv(e.target.innerText, i, e) // this could be set to e.target.innerHTML to use " text "
@@ -29,7 +29,7 @@ export const RenderContent = (props: any) => {
 						onInput: (e: any) => {
 							console.log(e.target)
 							console.log(e.target.textContent)
-							x.text2 = e.target.textContent
+							x.content = e.target.textContent
 						},
 						focusout:  (e: any) => {
 							props.setDisplayButtons(false)

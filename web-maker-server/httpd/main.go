@@ -2,16 +2,17 @@ package main
 
 import (
 	_ "encoding/json"
-	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 	"log"
 	"net/http"
 	"os"
 	"path"
 	"strconv"
+
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func handleRequest() error {
@@ -28,6 +29,8 @@ func handleRequest() error {
 	myRouter.HandleFunc("/insertTokenObject", handler.InsertTokenObject).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/getTokenFromRecovery", handler.GetTokenFromRecovery).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/getObjectFromToken", handler.GetObjectFromToken).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/exportIntoHTML", handler.ExportIntoHTML).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/test", handler.Test).Methods("POST", "OPTIONS")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},

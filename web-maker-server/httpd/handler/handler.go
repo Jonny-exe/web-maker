@@ -1,20 +1,21 @@
 package handler
 
 import (
-	// "go.mongodb.org/mongo-driver/bson" 
+	// "go.mongodb.org/mongo-driver/bson"
 	"crypto/rand"
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"path"
+	"reflect"
+
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
-	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
-	"reflect"
-	"os"
-	"log"
-	"fmt"
-	"path"
-	"database/sql"
-	"net/http"
-	"encoding/json"
 )
 
 func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
@@ -71,7 +72,7 @@ func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 
 	update, err := db.Prepare("update token_object set object=? where token=?")
 	if err != nil {
-		panic("Update error: " +  err.Error())
+		panic("Update error: " + err.Error())
 		json.NewEncoder(w).Encode(http.StatusInternalServerError)
 	}
 	res, err := update.Exec(stringyfiedObject, req.Token)
@@ -118,7 +119,8 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(object)
 }
 
-var db *sql.DB 
+var db *sql.DB
+
 func Connect() {
 	var err error
 	ex, err := os.Executable()
@@ -148,10 +150,10 @@ func Connect() {
 	// hanlder.Insert()
 }
 
-func ExportIntoHtml(w http.ResponseWriter, r *http.Request) {
+func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	var req models.Token
 	var objectString string
-	var object interface{}
+	var object models.Content
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
 	if err != nil {
@@ -160,7 +162,17 @@ func ExportIntoHtml(w http.ResponseWriter, r *http.Request) {
 	log.Println(objectString)
 	bytes := []byte(objectString)
 	json.Unmarshal(bytes, &object)
-	log.Println(reflect.TypeOf(object))
-	json.NewEncoder(w).Encode(object)
+	export.Export(object)
+	log.Println("Object: ", objectString)
+
+	result := export.Export(object)
+	json.NewEncoder(w).Encode(result)
 }
 
+func Test(w http.ResponseWriter, r *http.Request) {
+	export.Test()
+}
+
+func main() {
+	log.Println(export.Test)
+}

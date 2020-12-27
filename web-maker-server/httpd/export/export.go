@@ -1,28 +1,48 @@
 package export
+
 import (
-	"fmt"
+	// "fmt"
+
+	"bytes"
 	"log"
 	"text/template"
+
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/itemmodels"
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
+	// "os"
 	// "html/template" // You coulld use html/template but. This makes everything safer but it creates machine code which is not pleasent to read
 )
 
-func Export(content: string) {
-	var finalHtml: string
+var h1, err = template.New("h1").Parse(`<h1> {{.Text}} </h1>`)
+
+// Export .
+func Export(content models.Content) string {
+	var finalHTML string
+	// var objectContent []interface{} = json
 	contentLength := len(content)
-	for  i = 0; i < contentLength; i++ {
-		content[i] 
+	for i := 0; i < contentLength; i++ {
+		HTMLItem := createHTMLItem(content[i])
+		finalHTML += HTMLItem
 	}
 
+	return finalHTML
+
 }
 
-func createHtmlItem(item: interface{}) string {
-	var resultItem: string
-	var output interface
-	t, err := template.New("foo").Parse(`{{define "T"}}Hello, {{.}}!{{end}}`)
-	if err != nil {panic(err)}
-	err = tmpl.Execute(output, "hi")
-	log.Println(output)
-	if err != nil {panic(err)}
-	return tmpl
+// Test ...
+func Test() {
 }
-createHtmlItem()
+
+func createHTMLItem(item models.ContentItem) string {
+	buf := new(bytes.Buffer)
+	log.Println(item)
+	inputs := item
+	var err error
+	err = itemmodels.Total.Execute(buf, inputs)
+
+	if err != nil {
+		panic(err)
+	}
+	log.Println(buf.String())
+	return buf.String()
+}

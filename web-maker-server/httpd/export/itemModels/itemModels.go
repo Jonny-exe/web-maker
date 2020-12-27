@@ -1,1 +1,0 @@
-temp := template.New("foo").Parse(`{{define "T"}}Hello, {{.}}!{{end}}`)
