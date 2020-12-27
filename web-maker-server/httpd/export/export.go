@@ -4,7 +4,6 @@ import (
 	// "fmt"
 
 	"bytes"
-	"log"
 	"text/template"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/itemmodels"
@@ -35,7 +34,6 @@ func Test() {
 
 func createHTMLItem(item models.ContentItem) string {
 	buf := new(bytes.Buffer)
-	log.Println(item)
 	inputs := item
 	var err error
 	err = itemmodels.Total.Execute(buf, inputs)
@@ -43,6 +41,5 @@ func createHTMLItem(item models.ContentItem) string {
 	if err != nil {
 		panic(err)
 	}
-	log.Println(buf.String())
 	return buf.String()
 }

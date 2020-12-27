@@ -2,10 +2,12 @@ package handler
 
 import (
 	// "go.mongodb.org/mongo-driver/bson"
+	"bytes"
 	"crypto/rand"
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -120,6 +122,7 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 }
 
 var db *sql.DB
+var beautifyCodeKey string
 
 func Connect() {
 	var err error
@@ -143,6 +146,7 @@ func Connect() {
 	fmt.Println(enverr)
 	fmt.Println("Connecting to MongoDB")
 	connectionKey := os.Getenv("DB_CONNECTION")
+	beautifyCodeKey = os.Getenv("DB_CONNECTION")
 	fmt.Println(connectionKey)
 
 	db, err = sql.Open("mysql", connectionKey)
@@ -150,29 +154,62 @@ func Connect() {
 	// hanlder.Insert()
 }
 
+// ExportIntoHTML ...
 func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	var req models.Token
 	var objectString string
 	var object models.Content
+	var HTMLBegining string = "<!DOCTYPE html><html><body>"
+	var HTMLEnd string = "</html></body>"
+	// connectionKey := os.Getenv("BEAUTIFY_CODE")
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
 	if err != nil {
 		panic(err.Error())
 	}
-	log.Println(objectString)
 	bytes := []byte(objectString)
 	json.Unmarshal(bytes, &object)
 	export.Export(object)
-	log.Println("Object: ", objectString)
 
 	result := export.Export(object)
-	json.NewEncoder(w).Encode(result)
+	result = HTMLBegining + result + HTMLEnd
+	beautifiedResult := beautifyCode(result)
+	json.NewEncoder(w).Encode(beautifiedResult)
 }
 
+func beautifyCode(htmlCode string) string {
+	var beautifiedCode string
+	reqBody, err := json.Marshal(map[string]string{
+		"code": htmlCode,
+	})
+	if err != nil {
+		panic(err)
+	}
+	resp, err := http.Post("https://www.10bestdesign.com/dirtymarkup/api/html",
+		"application/json", bytes.NewBuffer(reqBody))
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	beautifiedCode = string(body)
+	type request struct {
+		Clean string `json:"clean"`
+	}
+	var object request
+	bytes := []byte(beautifiedCode)
+	json.Unmarshal(bytes, &object)
+	if err != nil {
+		panic(err)
+	}
+	return object.Clean
+}
+
+// Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
 	export.Test()
 }
 
 func main() {
-	log.Println(export.Test)
+	// log.Println(export.Test)
 }
