@@ -114,18 +114,20 @@ func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
+// GetTokenFromRecovery ...
 func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	var req models.Recovery_key
 	var token string
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select token from token_recovery where recovery=?", req.Recovery_key).Scan(&token)
 	if err != nil {
-		log.Fatal(err)
+		// log.Fatal(err) not check
 	}
 	log.Println(token)
-	json.NewEncoder(w).Encode(token)
+	json.NewEncoder(w).Encode("Wrong recovery key")
 }
 
+// GetObjectFromToken ..
 func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 	var req models.Token
 	var objectString string
@@ -133,7 +135,7 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
 	if err != nil {
-		log.Fatal(err)
+		// log.Fatal(err) not check
 	}
 	log.Println(objectString)
 	bytes := []byte(objectString)
@@ -144,6 +146,7 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 
 var db *sql.DB
 
+// Connect ...
 func Connect() {
 	var err error
 	ex, err := os.Executable()

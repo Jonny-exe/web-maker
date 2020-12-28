@@ -35,7 +35,7 @@ export const RenderContent = (props: any) => {
 							props.setDisplayButtons(false)
 						}
 					},
-						x.children.length != 0 && x.children != undefined ? <RenderContent1 content={x.children} /> : x.text2,
+						x.children.length != 0 && x.children != undefined ? <RenderContent1 content={x.children} /> : x.content,
 					)
 				))
 			}

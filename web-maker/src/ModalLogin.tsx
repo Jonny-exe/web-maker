@@ -166,7 +166,7 @@ const ModalLogin = (props: any) => {
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span style={textStyle}> This is your project token </span>
-					<span> {responseToken != null ? responseToken : ""} </span>
+					<span>{responseToken != null ? responseToken : ""}</span>
 					<div className={`informationDiv `}> Make sure you save this token. You will need the key to edit you project the next time you want to edit it.</div>
 					<button onClick={hideModal} className="preview loginButton" style={{ margin: "1%" }}> Continue </button>
 				</div>
@@ -205,7 +205,7 @@ const ModalLogin = (props: any) => {
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span style={textStyle}> This is your project token </span>
-					<span> {responseTokenFromRecovery != null ? responseTokenFromRecovery : ""} </span>
+					<span>{responseTokenFromRecovery != null ? responseTokenFromRecovery : ""}</span>
 					<div className={`informationDiv`}> Make sure you save this token. You will need the key to edit you project the next time you want to edit it.</div>
 					<button onClick={hideModal} className="preview"> Continue </button>
 				</div>
