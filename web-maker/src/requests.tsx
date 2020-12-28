@@ -146,3 +146,59 @@ export const GetContentFromToken = (token: string, getContentCount: number) => {
 	}, [getContentCount])
 	return state
 }
+
+export const GetFile = (token: string, getFileCount: number) => {
+	const [state, setState] = useState({ getFileStatus: 0, loadingGetFile: true })
+	const thisURL = url + "exportIntoHTML"
+	useEffect(() => {
+		if (getFileCount > 0 && getFileCount != null && getFileCount != undefined) {
+			var bodyContent = {
+				token: token
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: headersContent,
+				// credentials: 'same-origin',
+				body: JSON.stringify(bodyContent)
+			}
+			setState(state => ({ getFileStatus: state.getFileStatus, loadingGetFile: true }))
+			const loadData = async () => {
+				const response = await fetch(thisURL, requestOptions)
+				var data: number = await response.json()
+				setState({ getFileStatus: data, loadingGetFile: false })
+			}
+			loadData()
+		} else {
+			setState({ getFileStatus: 500, loadingGetFile: false })
+		}
+	}, [getFileCount])
+	return state
+}
+
+export const RemoveFile = (token: string, removeFileCount: number) => {
+	const [state, setState] = useState({ removeFileStatus: 0, loadingRemoveFile: true })
+	const thisURL = url + "removeFile"
+	useEffect(() => {
+		if (removeFileCount > 0 && removeFileCount != null && removeFileCount != undefined) {
+			var bodyContent = {
+				token: token
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: headersContent,
+				// credentials: 'same-origin',
+				body: JSON.stringify(bodyContent)
+			}
+			setState(state => ({ removeFileStatus: state.removeFileStatus, loadingRemoveFile: true }))
+			const loadData = async () => {
+				const response = await fetch(thisURL, requestOptions)
+				var data: number = await response.json()
+				setState({ removeFileStatus: data, loadingRemoveFile: false })
+			}
+			loadData()
+		} else {
+			setState({ removeFileStatus: 500, loadingRemoveFile: false })
+		}
+	}, [removeFileCount])
+	return state
+}

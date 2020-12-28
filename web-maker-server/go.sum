@@ -2,6 +2,7 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/Jonny-exe/go-server v0.0.0-20201219092046-44b9fe9e0679 h1:hMzg2zs/M+JIP3t4fYJ2QmCSq7nQruXBxT+K5WnKOvo=
 github.com/Jonny-exe/go-server v0.0.0-20201219092046-44b9fe9e0679/go.mod h1:LhVcuedbxT1T7TG/q4F/QOk5+DxkdM8n5LsoLMFjXkA=
 github.com/Jonny-exe/web-maker v0.0.0-20201224142634-70c2c9cd5058 h1:6qJf1DI3aoW6LyArDIGdNMl9ADir7SL0MaJMWPyqdXA=
+github.com/Jonny-exe/web-maker v0.0.0-20201227162113-d06d5d786884 h1:Aw5N/cwLbUlyXjX3e1igXX7gG18L6Z+lVh8Kw4vpoiw=
 github.com/anthonynsimon/bild v0.13.0/go.mod h1:tpzzp0aYkAsMi1zmfhimaDyX1xjn2OUc1AJZK/TF0AE=
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
 github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=

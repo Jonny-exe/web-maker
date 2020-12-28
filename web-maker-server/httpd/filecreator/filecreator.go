@@ -6,9 +6,8 @@ import (
 )
 
 // ImportHTMLToFile ...
-func ImportHTMLToFile(code string) {
-
-	f, err := os.Create("temp.html")
+func ImportHTMLToFile(code string, token string) {
+	f, err := os.Create("/home/a/Documents/GitHub/web-maker/web-maker/public/" + token + ".html")
 	if err != nil {
 		log.Fatal("Error creating: ", err)
 	}
@@ -22,4 +21,14 @@ func ImportHTMLToFile(code string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+// RemoveFile ..
+func RemoveFile(token string) int {
+	err := os.Remove("/home/a/Documents/GitHub/web-maker/web-maker/public/" + token + ".html")
+	if err != nil {
+		return 500
+		log.Fatal("Error removing file", err)
+	}
+	return 200
 }

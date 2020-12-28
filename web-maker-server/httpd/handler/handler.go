@@ -179,9 +179,9 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	result := export.Export(object)
 	result = HTMLBegining + result + HTMLEnd
 	beautifiedResult := beautifyCode(result)
-	filecreator.ImportHTMLToFile(beautifiedResult)
+	filecreator.ImportHTMLToFile(beautifiedResult, req.Token)
 
-	json.NewEncoder(w).Encode(beautifiedResult)
+	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
 func beautifyCode(htmlCode string) string {
@@ -221,6 +221,14 @@ func beautifyCode(htmlCode string) string {
 	return string(result.Clean)
 }
 
+// RemoveFile ...
+func RemoveFile(w http.ResponseWriter, r *http.Request) {
+	var req models.Token
+	json.NewDecoder(r.Body).Decode(&req)
+	resultStatus := filecreator.RemoveFile(req.Token)
+	json.NewEncoder(w).Encode(resultStatus)
+}
+
 // Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
 	export.Test()
@@ -228,4 +236,8 @@ func Test(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// log.Println(export.Test)
+}
+
+func removeHTMLFile() {
+	//TODO: do this
 }

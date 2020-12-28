@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import ModalImageSizeTabel from './ModalImageSizeTable'
-import { SaveProject, CreateProjectTokenRecovery, CreateProjectTokenObject, GetTokenFromRecovery, GetContentFromToken } from './requests'
+import { SaveProject, CreateProjectTokenRecovery, CreateProjectTokenObject, GetTokenFromRecovery, GetContentFromToken, GetFile, RemoveFile } from './requests'
 
 
 const ModalLogin = (props: any) => {
 	const textStyle = { fontSize: "150%", margin: "1%" }
 	const [waitingForTokenFromRecoveryKey, setWaitingForTokenFromRecoveryKey] = useState(false)
+	const [getFileCount, setGetFileCount] = useState(0)
+	const [removeFileCount, setRemoveFileCount] = useState(0)
+	const [getFileActivated, setGetFileActivated] = useState(false)
+	const [removeFileActivated, setRemoveFileActivated] = useState(false)
 	const [waitingForToken, setWaitingForToken] = useState(false)
 	const [inputValue, setInputValue] = useState("")
 	const [recoveryKeyInputValue, setRecoveryKeyInputValue] = useState("")
@@ -25,6 +29,8 @@ const ModalLogin = (props: any) => {
 	var { responseToken } = CreateProjectTokenRecovery(recoveryKeyInputValue, createCount)
 	var { responseStatus } = CreateProjectTokenObject(props.content, props.token)
 	var { responseTokenFromRecovery } = GetTokenFromRecovery(tokenFromRecoveryKeyInputValue, recoverTokenCount)
+	var { getFileStatus, loadingGetFile } = GetFile(props.token, getFileCount)
+	var { removeFileStatus, loadingRemoveFile} = RemoveFile(props.token, removeFileCount)
 	var { responseContent } = GetContentFromToken(tokenInputValue, getContentCount)
 	console.log(props.content)
 
@@ -35,12 +41,7 @@ const ModalLogin = (props: any) => {
 		}
 	}, [responseContent])
 
-
-	// useEffect(() => {
-	// 	if (responseToken != null && responseToken != undefined) {
-	// 		props.setToken(responseToken)
-	// 	}
-	// }, [responseToken])
+	console.log(getFileStatus)
 
 	const handleLoginInput = (event: any) => {
 		setInputValue(event.target.value)
@@ -79,6 +80,17 @@ const ModalLogin = (props: any) => {
 		setWaitingForTokenFromRecoveryKey(false)
 		setImportProjectActivated(false)
 		setRecoverTokenActivated(false)
+		setGetFileActivated(false)
+		if (removeFileActivated) {
+			setRemoveFileCount(removeFileCount + 1)
+			setRemoveFileActivated(false)
+		}
+	}
+
+	const getFile = () => {
+		setGetFileActivated(true)
+		setGetFileCount(getFileCount + 1)
+		setRemoveFileActivated(true)
 	}
 
 	const recoverToken = () => {
@@ -100,18 +112,29 @@ const ModalLogin = (props: any) => {
 				</div>
 			</div>
 		);
-	} else if (props.token !== "" && !waitingForToken) {
+	} else if (props.token !== "" && !waitingForToken && !getFileActivated) {
 		return (
 			<div className="loginModalContainer">
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span style={textStyle}> Save your current project </span>
 					<button onClick={saveOnClick} className="preview loginInput loginButton"> Save </button>
-					<span className={`informationDiv ${responseSavedStatus == 200 && !loadingSaved && saveClicked? "unhide": "hide"}`}> Saved successfully </span>
-					<span className={`alertDiv ${responseSavedStatus == 500 && !loadingSaved && saveClicked? "unhide": "hide"}`}> Unsuccessfull save, please try again later </span>
+					<span className={`informationDiv ${responseSavedStatus == 200 && !loadingSaved && saveClicked ? "unhide" : "hide"}`}> Saved successfully </span>
+					<span className={`alertDiv ${responseSavedStatus == 500 && !loadingSaved && saveClicked ? "unhide" : "hide"}`}> Unsuccessfull save, please try again later </span>
+					<button onClick={getFile} className="preview loginInput loginButton"> Get html file </button>
 				</div>
 			</div>
 		);
+	} else if (props.token !== "" && !waitingForToken && getFileActivated) {
+		return (
+			<div className="loginModalContainer">
+				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
+				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
+					<span> {loadingGetFile ? "Loading file" : ""} </span>
+					<a href={`${props.token}.html`} className={`preview loginInput loginButton ${loadingGetFile ? "hide" : "unhide"}`} download > Download file </a>
+				</div>
+			</div>
+		)
 	} else if (props.token === "" && createProjectActivated && !waitingForToken) {
 		return (
 			<div className="loginModalContainer">
