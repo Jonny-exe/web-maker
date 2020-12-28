@@ -111,7 +111,8 @@ const ModalLogin = (props: any) => {
 			setRemoveFileActivated(false)
 		}
 	}
-
+	console.log("Get file activated", getFileActivated)
+	console.log("Waiting for token", getFileActivated)
 	const getFile = () => {
 		setGetFileActivated(true)
 		setGetFileCount(getFileCount + 1)
@@ -124,6 +125,7 @@ const ModalLogin = (props: any) => {
 	}
 
 	console.log("Token: ", props.token)
+	console.log(props.token === "" , createProjectActivated , waitingForToken)
 
 	if (props.token === "" && !createProjectActivated && !importProjectActivated) {
 		return (
@@ -174,7 +176,7 @@ const ModalLogin = (props: any) => {
 				</div>
 			</div>
 		)
-	} else if (props.token === "" && createProjectActivated && waitingForToken) {
+	} else if (createProjectActivated && waitingForToken) {
 		return (
 			<div className="loginModalContainer">
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
@@ -221,12 +223,12 @@ const ModalLogin = (props: any) => {
 					<span style={textStyle}> This is your project token </span>
 					<span>{responseTokenFromRecovery != null ? responseTokenFromRecovery == 500 ? "Wrong recovery key" : responseTokenFromRecovery : ""}</span>
 					<div className={`informationDiv`}> Make sure you save this token. You will need the key to edit you project the next time you want to edit it.</div>
-					<button onClick={hideModal} className="preview"> Continue </button>
+					<button onClick={hideModal} className="preview loginButton loginInput"> Continue </button>
 				</div>
 			</div>
 		)
 	}
-	return (<></>)
+	return (<>hi </>)
 }
 
 
