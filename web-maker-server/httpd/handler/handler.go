@@ -122,9 +122,10 @@ func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	err := db.QueryRow("select token from token_recovery where recovery=?", req.Recovery_key).Scan(&token)
 	if err != nil {
 		// log.Fatal(err) not check
+		json.NewEncoder(w).Encode(500)
 	}
 	log.Println(token)
-	json.NewEncoder(w).Encode("Wrong recovery key")
+	json.NewEncoder(w).Encode(token)
 }
 
 // GetObjectFromToken ..

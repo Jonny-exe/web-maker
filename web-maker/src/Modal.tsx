@@ -8,8 +8,6 @@ export const Modal = (props: any) => {
   //   props.setInput(event.target.value)
   //   props.savedInput.textContent = props.html
   // }
-  console.log(props.savedStyle)
-  console.log(props.html)
 
   return (
     <div className="inputContainer">

@@ -33,7 +33,7 @@ export const SaveProject = (sentCount: number, token: string, content: object) =
 }
 
 export const CreateProjectTokenRecovery = (recoverykey: string, createCount: number) => {
-	const [state, setState] = useState({ responseToken: "", loading: true })
+	const [state, setState] = useState({ responseToken: "", loadingResponseToken: true })
 	const thisURL = url + "insertTokenRecovery"
 	useEffect(() => {
 		console.log(createCount)
@@ -47,15 +47,15 @@ export const CreateProjectTokenRecovery = (recoverykey: string, createCount: num
 				// credentials: 'same-origin',
 				body: JSON.stringify(bodyContent)
 			}
-			setState(state => ({ responseToken: state.responseToken, loading: true }))
+			setState(state => ({ responseToken: state.responseToken, loadingResponseToken: true }))
 			const loadData = async () => {
 				const response = await fetch(thisURL, requestOptions)
 				var data: string = await response.json()
-				setState({ responseToken: data, loading: false })
+				setState({ responseToken: data, loadingResponseToken: false })
 			}
 			loadData()
 		} else {
-			setState({ responseToken: "", loading: false })
+			setState({ responseToken: "", loadingResponseToken: false })
 		}
 	}, [createCount])
 	return state
@@ -91,7 +91,7 @@ export const CreateProjectTokenObject = (content: any, token: string) => {
 }
 
 export const GetTokenFromRecovery = (recoverykey: string, recoveryCount: number) => {
-	const [state, setState] = useState({ responseTokenFromRecovery: "", loading: true })
+	const [state, setState] = useState({ responseTokenFromRecovery: null, loading: true })
 	const thisURL = url + "getTokenFromRecovery"
 	useEffect(() => {
 		if (recoveryCount > 0 && recoveryCount != null && recoveryCount != undefined) {
@@ -107,12 +107,12 @@ export const GetTokenFromRecovery = (recoverykey: string, recoveryCount: number)
 			setState(state => ({ responseTokenFromRecovery: state.responseTokenFromRecovery, loading: true }))
 			const loadData = async () => {
 				const response = await fetch(thisURL, requestOptions)
-				var data: string = await response.json()
+				var data: any = await response.json()
 				setState({ responseTokenFromRecovery: data, loading: false })
 			}
 			loadData()
 		} else {
-			setState({ responseTokenFromRecovery: "", loading: false })
+			setState({ responseTokenFromRecovery: null, loading: false })
 		}
 	}, [recoveryCount])
 	return state
