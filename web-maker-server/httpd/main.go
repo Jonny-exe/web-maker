@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"path"
 	"strconv"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
@@ -56,18 +54,9 @@ func init() {
 }
 
 func main() {
-	ex, err := os.Executable()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Print("Executable is ", ex)
-	dir := path.Dir(ex)
-	log.Print("Dir of executable is ", dir)
-	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
-	log.Println("Env variable GO_MESSAGES_DIR is:", os.Getenv("GO_MESSAGES_DIR"))
 	connect()
 	log.Println("Db connection sucessfull")
-	err = handleRequest()
+	err := handleRequest()
 	if err != nil {
 		log.Fatal(err)
 	}

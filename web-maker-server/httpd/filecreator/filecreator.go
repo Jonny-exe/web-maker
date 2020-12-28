@@ -7,6 +7,7 @@ import (
 
 // ImportHTMLToFile ...
 func ImportHTMLToFile(code string, token string) {
+	// Files have to be created there because they have to be in the same level or further than the main index.html which is in public directory
 	f, err := os.Create("/home/a/Documents/GitHub/web-maker/web-maker/public/" + token + ".html")
 	if err != nil {
 		log.Fatal("Error creating: ", err)

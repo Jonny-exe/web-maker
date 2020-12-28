@@ -81,9 +81,9 @@ function App() {
       </div>
       <Modal input={input} setInput={setInput} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
-      <ol contentEditable>
+      {/* <ol contentEditable>
         <li></li>
-      </ol>
+      </ol> */}
     </div>
   );
 }

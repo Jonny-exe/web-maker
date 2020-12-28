@@ -127,7 +127,6 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 }
 
 var db *sql.DB
-var beautifyCodeKey string
 
 func Connect() {
 	var err error
@@ -140,21 +139,44 @@ func Connect() {
 	log.Println("Dir of executable is ", "/homa/a/Documents/GitHub/web-maker/web-maker-server/httpd/")
 
 	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
-	dir = "/home/a/Documents/GitHub/web-maker/web-maker-server/httpd"
-	log.Println("Env variable GO_MESSAGES_DIR is: ", dir)
+	dir = os.Getenv("WEB_MAKER_ROOT")
+	// dir = "/home/a/Documents/GitHub/web-maker/web-maker-server/httpd"
+	log.Println("Env variable WEB_MAKER_ROOT is: ", dir)
 	if dir == "" {
-		log.Println("Error: GO_MESSAGES_DIR is not set.")
-		log.Println("Error: Set it like: export GO_MESSAGES_DIR=\"/home/user/Documents/GitHub/go-server/httpd\"")
+		log.Println("Error: WEB_MAKER_ROOT is not set.")
+		log.Println("Error: Set it like: export WEB_MAKER_ROOT=\"/home/user/Documents/GitHub/web-maker\"")
 	}
 
-	enverr := godotenv.Load(dir + "/.env")
+	enverr := godotenv.Load(dir + "/web-maker-server/httpd/.env")
 	fmt.Println(enverr)
 	fmt.Println("Connecting to MongoDB")
 	connectionKey := os.Getenv("DB_CONNECTION")
-	beautifyCodeKey = os.Getenv("DB_CONNECTION")
 	fmt.Println(connectionKey)
 
 	db, err = sql.Open("mysql", connectionKey)
+	if err != nil {
+		log.Fatal("Error login in mysql: ", err)
+	}
+
+	// defer db.Close()
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS web_maker")
+	if err != nil {
+		log.Fatal("Error creating database: ", err)
+	}
+	_, err = db.Exec("USE web_maker")
+	if err != nil {
+		log.Fatal("Error selecting database: ", err)
+	}
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS token_object ( token varchar(30), object longtext)")
+	if err != nil {
+		log.Fatal("Error creating token_object table: ", err)
+	}
+
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS token_recovery ( token varchar(30), recovery varchar(30))")
+	if err != nil {
+		log.Fatal("Error creating token_recovery table: ", err)
+	}
+
 	log.Println(reflect.TypeOf(db))
 	// hanlder.Insert()
 }
