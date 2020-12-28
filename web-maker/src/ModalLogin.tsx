@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import ModalImageSizeTabel from './ModalImageSizeTable'
-import { SaveProject, CreateProjectTokenRecovery, CreateProjectTokenObject, GetTokenFromRecovery, GetContentFromToken, GetFile, RemoveFile } from './requests'
+import { SaveProject, CreateProjectTokenRecovery, CreateProjectTokenObject, GetTokenFromRecovery, GetContentFromToken, GetFile, RemoveFile, CheckRecoveryKey } from './requests'
 
 
 const ModalLogin = (props: any) => {
@@ -23,8 +23,10 @@ const ModalLogin = (props: any) => {
 	const [createCount, setCreateCount] = useState(0)
 	const [getContentCount, setGetContentCount] = useState(0)
 	const [recoverTokenCount, setRecoverTokenCount] = useState(0)
+	const [checkRecoveryKeyCount, setCheckRecoveryKeyCount] = useState(0)
 	const [recoveryTooLong, setRecoveryTooLong] = useState(false)
 	const [saveClicked, setSaveClicked] = useState(false)
+	const [recoveryKeyValid, setRecoveryKeyValid] = useState(false)
 	var { responseSavedStatus, loadingSaved } = SaveProject(sentCount, props.token, props.content)
 	var { responseToken } = CreateProjectTokenRecovery(recoveryKeyInputValue, createCount)
 	var { responseStatus } = CreateProjectTokenObject(props.content, props.token)
@@ -32,7 +34,8 @@ const ModalLogin = (props: any) => {
 	var { getFileStatus, loadingGetFile } = GetFile(props.token, getFileCount)
 	var { removeFileStatus, loadingRemoveFile} = RemoveFile(props.token, removeFileCount)
 	var { responseContent } = GetContentFromToken(tokenInputValue, getContentCount)
-	console.log(props.content)
+	var { checkRecoveryKeyStatus, loadingCheckRecoveryKey } = CheckRecoveryKey(recoveryKeyInputValue, checkRecoveryKeyCount)
+	console.log(checkRecoveryKeyCount)
 
 	useEffect(() => {
 		if (responseContent != null && responseContent != undefined && responseContent.length != null) {
@@ -41,7 +44,13 @@ const ModalLogin = (props: any) => {
 		}
 	}, [responseContent])
 
-	console.log(getFileStatus)
+	useEffect(() => {
+		console.log(loadingCheckRecoveryKey, checkRecoveryKeyStatus)
+		if (!loadingCheckRecoveryKey && checkRecoveryKeyStatus == 200) {
+			setRecoveryKeyValid(true)
+			createProject()
+		}
+	}, [checkRecoveryKeyStatus, loadingCheckRecoveryKey	])
 
 	const handleLoginInput = (event: any) => {
 		setInputValue(event.target.value)
@@ -51,6 +60,7 @@ const ModalLogin = (props: any) => {
 		setSentCount(sentCount + 1)
 		setSaveClicked(true)
 	}
+
 
 	const createProject = () => {
 		if (recoveryKeyInputValue.length > 29) {
@@ -81,6 +91,7 @@ const ModalLogin = (props: any) => {
 		setImportProjectActivated(false)
 		setRecoverTokenActivated(false)
 		setGetFileActivated(false)
+		setRecoveryKeyValid(false)
 		if (removeFileActivated) {
 			setRemoveFileCount(removeFileCount + 1)
 			setRemoveFileActivated(false)
@@ -144,7 +155,8 @@ const ModalLogin = (props: any) => {
 					<input type="text" className="input loginInput" placeholder="Recovery key" value={recoveryKeyInputValue} onChange={(e: any) => setRecoveryKeyInputValue(e.target.value)}></input>
 					<div className="informationDiv recoveryTooLong"> Make sure you save this recovery key. You will need the key in case you forget your token.</div>
 					<div className={`informationDiv ${recoveryTooLong ? "alertDiv unhide" : "hide"}`}> You recovery key is too long, make sure its under 30 carachters </div>
-					<button onClick={createProject} className="preview loginInput loginButton"> Create </button>
+					<div className={`alertDiv ${checkRecoveryKeyStatus == 500 ? "unhide" : "hide"}`}> The recovery key is already taken </div>
+					<button onClick={() => setCheckRecoveryKeyCount(checkRecoveryKeyCount + 1)} className="preview loginInput loginButton"> Create </button>
 				</div>
 			</div>
 		)
@@ -181,6 +193,7 @@ const ModalLogin = (props: any) => {
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span style={textStyle}> Introduce recovery key to get your token </span>
+					<div className="informationDiv"> This recovery key has to be unique so try with a personal phrase or something like that. </div>
 					<input type="text" className="input loginInput" placeholder="Recovery key" value={tokenFromRecoveryKeyInputValue} onChange={(e: any) => setTokenFromRecoveryKeyInputValue(e.target.value)}></input>
 					<button onClick={recoverToken} className="preview loginInput loginButton"> Submit </button>
 				</div>

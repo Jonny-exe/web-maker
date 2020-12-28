@@ -32,7 +32,7 @@ func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
 	// insForm, err := db.Prepare("insert into token_recovery(token, recovery) values(?,?)")
 	insert, err := db.Prepare("INSERT INTO token_recovery(token, recovery) VALUES(?, ?)")
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	uuid := createUUID()
 
@@ -74,7 +74,7 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 
 	insert, err := db.Prepare("INSERT INTO token_object(token, object) VALUES(?, ?)")
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 
 	insert.Exec(req.Token, stringyfiedObject)
@@ -82,30 +82,31 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
+// UpdateTokenObject ..
 func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 	var req models.TokenAndObject
 	json.NewDecoder(r.Body).Decode(&req)
 
 	bytes, err := json.Marshal(req.Object)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	stringyfiedObject := string(bytes)
 
 	update, err := db.Prepare("update token_object set object=? where token=?")
 	if err != nil {
-		panic("Update error: " + err.Error())
 		json.NewEncoder(w).Encode(http.StatusInternalServerError)
+		log.Fatal("Update error: ", err)
 	}
 	res, err := update.Exec(stringyfiedObject, req.Token)
 	if err != nil {
-		panic(err.Error())
 		json.NewEncoder(w).Encode(http.StatusInternalServerError)
+		log.Fatal(err)
 	}
 	rowAffected, err := res.RowsAffected()
 	if err != nil {
-		panic("Row Affectd error: " + err.Error())
 		json.NewEncoder(w).Encode(http.StatusInternalServerError)
+		log.Fatal("Row Affectd error: ", err)
 	}
 
 	log.Println(rowAffected)
@@ -119,7 +120,7 @@ func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select token from token_recovery where recovery=?", req.Recovery_key).Scan(&token)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	log.Println(token)
 	json.NewEncoder(w).Encode(token)
@@ -132,7 +133,7 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	log.Println(objectString)
 	bytes := []byte(objectString)
@@ -207,7 +208,7 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	bytes := []byte(objectString)
 	json.Unmarshal(bytes, &object)
@@ -266,6 +267,25 @@ func RemoveFile(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resultStatus)
 }
 
+// DoesRecoveryKeyExist ..
+func DoesRecoveryKeyExist(w http.ResponseWriter, r *http.Request) {
+	var req models.Recovery_key
+	json.NewDecoder(r.Body).Decode(&req)
+	var checkResult interface{}
+	err := db.QueryRow("select token from token_recovery where recovery=?", req.Recovery_key).Scan(&checkResult)
+
+	log.Println(checkResult)
+	if err != nil {
+		// This is error will appear every time the recovery doesnt exist yet.
+	}
+	if checkResult != nil {
+		json.NewEncoder(w).Encode(500)
+		return
+	}
+
+	json.NewEncoder(w).Encode(http.StatusOK)
+}
+
 // Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
 	export.Test()
@@ -273,8 +293,4 @@ func Test(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// log.Println(export.Test)
-}
-
-func removeHTMLFile() {
-	//TODO: do this
 }

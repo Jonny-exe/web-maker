@@ -4,6 +4,7 @@ import (
 	// "fmt"
 
 	"bytes"
+	"log"
 	"text/template"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/itemmodels"
@@ -39,7 +40,7 @@ func createHTMLItem(item models.ContentItem) string {
 	err = itemmodels.Total.Execute(buf, inputs)
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return buf.String()
 }

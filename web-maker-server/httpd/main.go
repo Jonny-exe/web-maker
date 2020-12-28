@@ -29,6 +29,7 @@ func handleRequest() error {
 	myRouter.HandleFunc("/getObjectFromToken", handler.GetObjectFromToken).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/exportIntoHTML", handler.ExportIntoHTML).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/removeFile", handler.RemoveFile).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/doesRecoveryKeyExist", handler.DoesRecoveryKeyExist).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/test", handler.Test).Methods("POST", "OPTIONS")
 
 	c := cors.New(cors.Options{

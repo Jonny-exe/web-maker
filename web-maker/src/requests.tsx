@@ -202,3 +202,32 @@ export const RemoveFile = (token: string, removeFileCount: number) => {
 	}, [removeFileCount])
 	return state
 }
+
+
+export const CheckRecoveryKey = (recoveryKey: string, checkRecoveryKeyCount: number) => {
+	const [state, setState] = useState({ checkRecoveryKeyStatus: 0, loadingCheckRecoveryKey: true })
+	const thisURL = url + "doesRecoveryKeyExist"
+	useEffect(() => {
+		if (checkRecoveryKeyCount > 0 && checkRecoveryKeyCount != null && checkRecoveryKeyCount != undefined) {
+			var bodyContent = {
+				recovery_key: recoveryKey
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: headersContent,
+				// credentials: 'same-origin',
+				body: JSON.stringify(bodyContent)
+			}
+			setState(state => ({ checkRecoveryKeyStatus: state.checkRecoveryKeyStatus, loadingCheckRecoveryKey: true }))
+			const loadData = async () => {
+				const response = await fetch(thisURL, requestOptions)
+				var data: number = await response.json()
+				setState({ checkRecoveryKeyStatus: data, loadingCheckRecoveryKey: false })
+			}
+			loadData()
+		} else {
+			setState({ checkRecoveryKeyStatus: 0, loadingCheckRecoveryKey: false })
+		}
+	}, [checkRecoveryKeyCount])
+	return state
+}
