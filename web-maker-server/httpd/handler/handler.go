@@ -123,6 +123,7 @@ func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		// log.Fatal(err) not check
 		json.NewEncoder(w).Encode(500)
+		return
 	}
 	log.Println(token)
 	json.NewEncoder(w).Encode(token)
@@ -172,6 +173,7 @@ func Connect() {
 	fmt.Println("Connecting to MongoDB")
 	connectionKey := os.Getenv("DB_CONNECTION")
 	fmt.Println(connectionKey)
+	sql.Register("mysql", &MySQLDriver{})
 
 	db, err = sql.Open("mysql", connectionKey)
 	if err != nil {
