@@ -51,10 +51,8 @@ func handleRequest() error {
 	return nil
 }
 
-func init() {
-}
-
 func main() {
+
 	connect()
 	log.Println("Db connection sucessfull")
 	err := handleRequest()

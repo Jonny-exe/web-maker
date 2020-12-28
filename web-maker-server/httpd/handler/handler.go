@@ -21,12 +21,14 @@ import (
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" // Blank
 	"github.com/joho/godotenv"
 )
 
 // InsertTokenRecovery ..
 func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.Recovery_key
 	json.NewDecoder(r.Body).Decode(&req)
 	// insForm, err := db.Prepare("insert into token_recovery(token, recovery) values(?,?)")
@@ -41,9 +43,12 @@ func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
 	insert.Exec(uuid, req.Recovery_key)
 	defer insert.Close()
 	json.NewEncoder(w).Encode(uuid)
+	return
 }
 
 func createUUID() string {
+	db := getConnection()
+	defer db.Close()
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
 
@@ -65,6 +70,8 @@ func createUUID() string {
 
 // InsertTokenObject ...
 func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	// Before doing this you have to check if the token alredy exists
 	var req models.TokenAndObject
 	json.NewDecoder(r.Body).Decode(&req)
@@ -80,13 +87,21 @@ func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	insert.Exec(req.Token, stringyfiedObject)
 	defer insert.Close()
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return
 }
 
 // UpdateTokenObject ..
 func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.TokenAndObject
 	json.NewDecoder(r.Body).Decode(&req)
 
+	err := db.Ping()
+	log.Println("Ping: ", db.Ping())
+	if err != nil {
+		log.Fatal("Ping failed: ", err)
+	}
 	bytes, err := json.Marshal(req.Object)
 	if err != nil {
 		log.Fatal(err)
@@ -94,6 +109,7 @@ func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 	stringyfiedObject := string(bytes)
 
 	update, err := db.Prepare("update token_object set object=? where token=?")
+	defer update.Close()
 	if err != nil {
 		json.NewEncoder(w).Encode(http.StatusInternalServerError)
 		log.Fatal("Update error: ", err)
@@ -110,12 +126,14 @@ func UpdateTokenObject(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println(rowAffected)
-	defer update.Close()
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return
 }
 
 // GetTokenFromRecovery ...
 func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.Recovery_key
 	var token string
 	json.NewDecoder(r.Body).Decode(&req)
@@ -127,10 +145,13 @@ func GetTokenFromRecovery(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println(token)
 	json.NewEncoder(w).Encode(token)
+	return
 }
 
 // GetObjectFromToken ..
 func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.Token
 	var objectString string
 	var object interface{}
@@ -144,9 +165,11 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(bytes, &object)
 	log.Println(reflect.TypeOf(object))
 	json.NewEncoder(w).Encode(object)
+	return
 }
 
-var db *sql.DB
+// var db *sql.DB
+var connectionKey string
 
 // Connect ...
 func Connect() {
@@ -158,6 +181,11 @@ func Connect() {
 	log.Print("Executable is ", ex)
 	dir := path.Dir(ex)
 	log.Println("Dir of executable is ", "/homa/a/Documents/GitHub/web-maker/web-maker-server/httpd/")
+
+	if err != nil {
+		log.Fatal("Error connecting to db: ", err)
+	}
+	log.Println("Passed ping")
 
 	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
 	dir = os.Getenv("WEB_MAKER_ROOT")
@@ -171,16 +199,23 @@ func Connect() {
 	enverr := godotenv.Load(dir + "/web-maker-server/httpd/.env")
 	fmt.Println(enverr)
 	fmt.Println("Connecting to MongoDB")
-	connectionKey := os.Getenv("DB_CONNECTION")
+	connectionKey = os.Getenv("DB_CONNECTION")
 	fmt.Println(connectionKey)
-	sql.Register("mysql", &MySQLDriver{})
+	// sql.Register("mysql", &MySQLDriver{})
 
-	db, err = sql.Open("mysql", connectionKey)
+	// db, err = sql.Register("mysql")
+	db, err := sql.Open("mysql", connectionKey)
+
 	if err != nil {
 		log.Fatal("Error login in mysql: ", err)
 	}
+	defer db.Close()
+	err = db.Ping()
+	log.Println("Ping: ", db.Ping())
+	if err != nil {
+		log.Fatal("Ping failed: ", err)
+	}
 
-	// defer db.Close()
 	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS web_maker")
 	if err != nil {
 		log.Fatal("Error creating database: ", err)
@@ -201,10 +236,24 @@ func Connect() {
 
 	log.Println(reflect.TypeOf(db))
 	// hanlder.Insert()
+	return
+}
+
+func getConnection() *sql.DB {
+	var db *sql.DB
+	db, err := sql.Open("mysql", connectionKey)
+
+	if err != nil {
+		log.Fatal("Error login in mysql: ", err)
+	}
+	_, err = db.Exec("USE web_maker")
+	return db
 }
 
 // ExportIntoHTML ...
 func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.Token
 	var objectString string
 	var object models.Content
@@ -226,6 +275,7 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	filecreator.ImportHTMLToFile(beautifiedResult, req.Token)
 
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return
 }
 
 func beautifyCode(htmlCode string) string {
@@ -275,6 +325,8 @@ func RemoveFile(w http.ResponseWriter, r *http.Request) {
 
 // DoesRecoveryKeyExist ..
 func DoesRecoveryKeyExist(w http.ResponseWriter, r *http.Request) {
+	db := getConnection()
+	defer db.Close()
 	var req models.Recovery_key
 	json.NewDecoder(r.Body).Decode(&req)
 	var checkResult interface{}
@@ -290,6 +342,7 @@ func DoesRecoveryKeyExist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return
 }
 
 // Test ...
