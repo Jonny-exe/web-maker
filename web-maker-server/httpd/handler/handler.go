@@ -25,22 +25,16 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// InsertTokenRecovery ..
 func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
 	var req models.Recovery_key
 	json.NewDecoder(r.Body).Decode(&req)
-	b := make([]byte, 16)
-	_, err := rand.Read(b)
-	if err != nil {
-		log.Fatal(err)
-	}
-	uuid := fmt.Sprintf("%x-%x-%x-%x-%x",
-		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
-	fmt.Println(uuid)
 	// insForm, err := db.Prepare("insert into token_recovery(token, recovery) values(?,?)")
 	insert, err := db.Prepare("INSERT INTO token_recovery(token, recovery) VALUES(?, ?)")
 	if err != nil {
 		panic(err.Error())
 	}
+	uuid := createUUID()
 
 	uuid = uuid[0:29] // This has to be cut because mysql char(30)
 	log.Println(reflect.TypeOf(uuid))
@@ -49,6 +43,27 @@ func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(uuid)
 }
 
+func createUUID() string {
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	uuid := fmt.Sprintf("%x-%x-%x-%x-%x",
+		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+
+	var uuidResult interface{}
+
+	err = db.QueryRow("select token from token_recovery where token=?", uuid).Scan(&uuidResult)
+	log.Println(uuidResult)
+	if uuidResult != nil {
+		createUUID()
+	}
+	return uuid
+}
+
+// InsertTokenObject ...
 func InsertTokenObject(w http.ResponseWriter, r *http.Request) {
 	// Before doing this you have to check if the token alredy exists
 	var req models.TokenAndObject
