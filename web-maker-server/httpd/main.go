@@ -2,10 +2,13 @@ package main
 
 import (
 	_ "encoding/json"
-	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
+	"time"
+
+	_ "github.com/joho/godotenv/autoload"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
@@ -45,15 +48,20 @@ func handleRequest() error {
 		Debug: false,
 	})
 
-	var PORT int = 5000
+	var port string = os.Getenv("SERVE_PORT")
+	PORT, err := strconv.Atoi(port)
+	if err != nil {
+		log.Fatal("Error converting string to number: ", err)
+	}
 	corsHandler := c.Handler(myRouter)
-	fmt.Println("Listening on port: ", PORT)
+	log.Println("Listening on port: ", PORT)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT), corsHandler))
 	return nil
 }
 
 func main() {
 
+	go tempFilesWipe()
 	connect()
 	log.Println("Db connection sucessfull")
 	err := handleRequest()
@@ -63,7 +71,27 @@ func main() {
 }
 
 func connect() {
-	handler.GetDirs()
 	filecreator.GetTempFilesDir()
+	handler.GetDirs()
 	handler.Connect()
+}
+
+// tempFilesWipe is used to remove all the files that arent used and have not been removed because the user closed the browser
+func tempFilesWipe() {
+	frequency := os.Getenv("WIPE_INTERVAL")
+	frequencyNum, err := strconv.Atoi(frequency)
+	if err != nil {
+		log.Fatal("Error converting string to int: ", err)
+	}
+	ticker := time.NewTicker(time.Duration(frequencyNum) * time.Second)
+	log.Println("Interval to remove temp files created. Called each", frequency, "s")
+
+	// for every `tick` that our `ticker`
+	// emits, we print `tock`
+	var wipeMap map[string]bool = make(map[string]bool)
+	var wipe bool = false
+	for range ticker.C {
+		filecreator.RemoveAllFiles(wipe, wipeMap)
+		wipe = !wipe
+	}
 }

@@ -361,4 +361,5 @@ func GetDirs() {
 
 	// TempFilesDir = os.Getenv("TEMP_FILES_DIR")
 	// log.Println("TEMP_FILES_DIR: ", TempFilesDir)
+	// filecreator.RemoveAllFiles()
 }

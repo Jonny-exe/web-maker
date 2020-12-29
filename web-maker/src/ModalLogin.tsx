@@ -159,7 +159,7 @@ const ModalLogin = (props: any) => {
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span> {loadingGetFile ? "Loading file" : ""} </span>
-					<a href={`${props.token}.html`} className={`preview loginInput loginButton ${loadingGetFile ? "hide" : "unhide"}`} download > Download file </a>
+					<a href={`temp-${props.token}.html`} className={`preview loginInput loginButton ${loadingGetFile ? "hide" : "unhide"}`} download="index.html" > Download file </a>
 				</div>
 			</div>
 		)
