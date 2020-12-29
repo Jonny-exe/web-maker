@@ -2,18 +2,18 @@ package main
 
 import (
 	_ "encoding/json"
+
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 
-	_ "github.com/joho/godotenv/autoload"
-
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
 
@@ -49,6 +49,17 @@ func handleRequest() error {
 	})
 
 	var port string = os.Getenv("SERVE_PORT")
+	dir := os.Getenv("WEB_MAKER_ROOT")
+	log.Println("Env variable GO_MESSAGES_DIR is: ", dir)
+	if dir == "" {
+		log.Println("Error: GO_MESSAGES_DIR is not set.")
+		log.Println("Error: Set it like: export GO_MESSAGES_DIR=\"/home/user/Documents/GitHub/go-server/httpd\"")
+	}
+
+	enverr := godotenv.Load(dir + "/.env")
+	if enverr != nil {
+		log.Println("Error loading .env file: ", enverr)
+	}
 	PORT, err := strconv.Atoi(port)
 	if err != nil {
 		log.Fatal("Error converting string to number: ", err)
@@ -78,6 +89,17 @@ func connect() {
 
 // tempFilesWipe is used to remove all the files that arent used and have not been removed because the user closed the browser
 func tempFilesWipe() {
+	dir := os.Getenv("WEB_MAKER_ROOT")
+	log.Println("Env variable GO_MESSAGES_DIR is: ", dir)
+	if dir == "" {
+		log.Println("Error: GO_MESSAGES_DIR is not set.")
+		log.Println("Error: Set it like: export GO_MESSAGES_DIR=\"/home/user/Documents/GitHub/go-server/httpd\"")
+	}
+
+	enverr := godotenv.Load(dir + "/.env")
+	if enverr != nil {
+		log.Println("Error loading .env file: ", enverr)
+	}
 	frequency := os.Getenv("WIPE_INTERVAL")
 	frequencyNum, err := strconv.Atoi(frequency)
 	if err != nil {

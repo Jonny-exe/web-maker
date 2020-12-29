@@ -18,7 +18,7 @@ import (
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models" // "go.mongodb.org/mongo-driver/bson"
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/joho/godotenv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -343,6 +343,17 @@ func GetDirs() {
 		log.Fatal("Error connecting to db: ", err)
 	}
 	log.Println("Passed ping")
+	dir = os.Getenv("WEB_MAKER_ROOT")
+	log.Println("Env variable GO_MESSAGES_DIR is: ", dir)
+	if dir == "" {
+		log.Println("Error: GO_MESSAGES_DIR is not set.")
+		log.Println("Error: Set it like: export GO_MESSAGES_DIR=\"/home/user/Documents/GitHub/go-server/httpd\"")
+	}
+
+	enverr := godotenv.Load(dir + "/.env")
+	if enverr != nil {
+		log.Println("Error loading .env file: ", enverr)
+	}
 
 	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
 	dir = os.Getenv("WEB_MAKER_ROOT")
