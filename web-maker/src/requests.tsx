@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const port = process.env.REACT_APP_PORT
-const url = `http://localhost:${port}/`
+const url = process.env.REACT_APP_REQUEST_URL
 const headersContent = {}
 console.log(process.env)
 
