@@ -7,6 +7,11 @@ node_modules
 ./web-maker/node_modules/*
 ./web-maker/node_modules
 ./web-maker/public/*
-./web-maker/build/
-./web-maker/build/*
-./web-maker/build
+
+web-maker/node_modules/
+web-maker/node_modules/*
+web-maker/node_modules
+
+web-maker/build/
+web-maker/build/*
+web-maker/build
