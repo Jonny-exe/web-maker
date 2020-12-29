@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/handler"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -62,5 +63,7 @@ func main() {
 }
 
 func connect() {
+	handler.GetDirs()
+	filecreator.GetTempFilesDir()
 	handler.Connect()
 }

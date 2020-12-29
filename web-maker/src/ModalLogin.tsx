@@ -46,9 +46,10 @@ const ModalLogin = (props: any) => {
 	}, [responseContent])
 
 	useEffect(() => {
-		console.log(loadingCheckRecoveryKey, checkRecoveryKeyStatus)
+		console.log("LoadingCheckRecoveryKey: ", loadingCheckRecoveryKey, "CheckrecoveryKeyStatus: ", checkRecoveryKeyStatus)
 		if (!loadingCheckRecoveryKey && checkRecoveryKeyStatus == 200) {
 			setRecoveryKeyValid(true)
+			console.log("Cretae project")
 			createProject()
 		}
 	}, [checkRecoveryKeyStatus, loadingCheckRecoveryKey	])
@@ -125,7 +126,7 @@ const ModalLogin = (props: any) => {
 	}
 
 	console.log("Token: ", props.token)
-	console.log(props.token === "" , createProjectActivated , waitingForToken)
+	console.log(props.token !== "" , !waitingForToken , getFileActivated)
 
 	if (props.token === "" && !createProjectActivated && !importProjectActivated) {
 		return (
@@ -148,7 +149,7 @@ const ModalLogin = (props: any) => {
 					<button onClick={saveOnClick} className="preview loginInput loginButton"> Save </button>
 					<span className={`informationDiv ${responseSavedStatus == 200 && !loadingSaved && saveClicked ? "unhide" : "hide"}`}> Saved successfully </span>
 					<span className={`alertDiv ${responseSavedStatus == 500 && !loadingSaved && saveClicked ? "unhide" : "hide"}`}> Unsuccessfull save, please try again later </span>
-					<button onClick={getFile} className="preview loginInput loginButton"> Get html file </button>
+					<button type="button" onClick={getFile} className="preview loginInput loginButton"> Get html file </button>
 				</div>
 			</div>
 		);
@@ -158,7 +159,7 @@ const ModalLogin = (props: any) => {
 				<div className={`overlay ${props.loginModalStateActive ? "overlayActive" : ""}`} onClick={hideModal}></div>
 				<div className={`loginModal editModal ${props.loginModalStateActive ? "editModalActive" : ""}`}>
 					<span> {loadingGetFile ? "Loading file" : ""} </span>
-					<a href={`${props.token}.html`} className={`preview loginInput loginButton ${loadingGetFile ? "hide" : "unhide"}`} download="index.html" > Download file </a>
+					<a href={`${props.token}.html`} className={`preview loginInput loginButton ${loadingGetFile ? "hide" : "unhide"}`} download > Download file </a>
 				</div>
 			</div>
 		)

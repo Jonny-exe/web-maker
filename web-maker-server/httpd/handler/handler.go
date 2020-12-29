@@ -1,9 +1,6 @@
 package handler
 
 import (
-
-	// "go.mongodb.org/mongo-driver/bson"
-
 	"crypto/rand"
 	"database/sql"
 	"encoding/json"
@@ -20,10 +17,13 @@ import (
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/export"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/filecreator"
-	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
-	_ "github.com/go-sql-driver/mysql" // Blank
-	"github.com/joho/godotenv"
+	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models" // "go.mongodb.org/mongo-driver/bson"
+	_ "github.com/joho/godotenv/autoload"
+
+	_ "github.com/go-sql-driver/mysql"
 )
+
+// Blank
 
 // InsertTokenRecovery ..
 func InsertTokenRecovery(w http.ResponseWriter, r *http.Request) {
@@ -171,36 +171,14 @@ func GetObjectFromToken(w http.ResponseWriter, r *http.Request) {
 // var db *sql.DB
 var connectionKey string
 
+// EnvDir is the .env directory path
+var EnvDir string
+
+// TempFilesDir is the directory for creating temp files
+// var TempFilesDir string
+
 // Connect ...
 func Connect() {
-	var err error
-	ex, err := os.Executable()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Print("Executable is ", ex)
-	dir := path.Dir(ex)
-	log.Println("Dir of executable is ", "/homa/a/Documents/GitHub/web-maker/web-maker-server/httpd/")
-
-	if err != nil {
-		log.Fatal("Error connecting to db: ", err)
-	}
-	log.Println("Passed ping")
-
-	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
-	dir = os.Getenv("WEB_MAKER_ROOT")
-	// dir = "/home/a/Documents/GitHub/web-maker/web-maker-server/httpd"
-	log.Println("Env variable WEB_MAKER_ROOT is: ", dir)
-	if dir == "" {
-		log.Println("Error: WEB_MAKER_ROOT is not set.")
-		log.Println("Error: Set it like: export WEB_MAKER_ROOT=\"/home/user/Documents/GitHub/web-maker\"")
-	}
-
-	enverr := godotenv.Load(dir + "/web-maker-server/httpd/.env")
-	fmt.Println(enverr)
-	fmt.Println("Connecting to MongoDB")
-	connectionKey = os.Getenv("DB_CONNECTION")
-	fmt.Println(connectionKey)
 	// sql.Register("mysql", &MySQLDriver{})
 
 	// db, err = sql.Register("mysql")
@@ -350,6 +328,37 @@ func Test(w http.ResponseWriter, r *http.Request) {
 	export.Test()
 }
 
-func main() {
-	// log.Println(export.Test)
+// GetDirs ..
+func GetDirs() {
+	var err error
+	ex, err := os.Executable()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Print("Executable is ", ex)
+	dir := path.Dir(ex)
+	log.Println("Dir of executable is ", "/homa/a/Documents/GitHub/web-maker/web-maker-server/httpd/")
+
+	if err != nil {
+		log.Fatal("Error connecting to db: ", err)
+	}
+	log.Println("Passed ping")
+
+	// e.g.: export GO_MESSAGES_DIR="/home/a/Documents/GitHub/go-server/httpd"
+	dir = os.Getenv("WEB_MAKER_ROOT")
+	// dir = "/home/a/Documents/GitHub/web-maker/web-maker-server/httpd"
+	log.Println("Env variable WEB_MAKER_ROOT is: ", dir)
+	if dir == "" {
+		log.Println("Error: WEB_MAKER_ROOT is not set.")
+		log.Println("Error: Set it like: export WEB_MAKER_ROOT=\"/home/user/Documents/GitHub/web-maker\"")
+	}
+
+	// enverr := godotenv.Load()
+	// log.Fatal("Error loading env file", enverr)
+	log.Println("Connecting to MongoDB")
+	connectionKey = os.Getenv("DB_CONNECTION")
+	log.Println("DB_CONNECTION: ", connectionKey)
+
+	// TempFilesDir = os.Getenv("TEMP_FILES_DIR")
+	// log.Println("TEMP_FILES_DIR: ", TempFilesDir)
 }
