@@ -6,4 +6,5 @@ node_modules
 ./web-maker-sever/.env
 ./web-maker/node_modules/*
 ./web-maker/node_modules
-./web-maker/public/*
+./web-maker/build
+./web-maker/build/*
