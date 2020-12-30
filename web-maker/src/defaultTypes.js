@@ -1,3 +1,5 @@
+import { faAlignCenter } from "@fortawesome/free-solid-svg-icons"
+
 export const title = {
     type: "h1",
     text: "Title",
@@ -56,6 +58,20 @@ export const image = {
         margin: "1%",
         width: "",
         height: ""
+    },
+}
+
+export const table = {
+    type: "table",
+    text: "Table",
+    children: [],
+    style: {
+        textAlign: "center",
+        tableLayout: "fixed",
+        width: "98%",
+        wordWrap: "break-word",
+        margin: "1%",
+        border: "1px solid"
     },
 }
 

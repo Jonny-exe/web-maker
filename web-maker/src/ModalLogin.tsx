@@ -36,7 +36,6 @@ const ModalLogin = (props: any) => {
 	var { removeFileStatus, loadingRemoveFile} = RemoveFile(props.token, removeFileCount)
 	var { responseContent } = GetContentFromToken(tokenInputValue, getContentCount)
 	var { checkRecoveryKeyStatus, loadingCheckRecoveryKey } = CheckRecoveryKey(recoveryKeyInputValue, checkRecoveryKeyCount)
-	console.log(checkRecoveryKeyCount)
 
 	useEffect(() => {
 		if (responseContent != null && responseContent != undefined && responseContent.length != null) {

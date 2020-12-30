@@ -16,7 +16,7 @@ const ModalImage = (props: any) => {
 				</div>
 				<button className="preview addImageModalButton" onClick={() => {
 					props.setAddImageOverlayActive(false)
-					props.setApplyCount(props.applyCount + 1)
+					props.setApplyImageCount(props.applyCount + 1)
 				}}> Apply </button>
 			</div>
 		</div>

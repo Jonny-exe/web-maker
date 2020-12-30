@@ -354,3 +354,23 @@ input[type=number] {
   transition-duration: 0.5s;
   transform: scaleY(1)
 }
+
+.tableSizesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 3%;
+}
+
+.tableSizesInput {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 10%;
+}
+
+.render {
+  text-align: center;
+}

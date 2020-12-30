@@ -69,7 +69,7 @@ function App() {
   }
 
 
-  console.log(content)
+  console.log("Content: ", content)
   return (
     <div className="App">
       <div className="tools">
@@ -80,7 +80,9 @@ function App() {
         <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
       <Modal input={input} setInput={setInput} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
-      <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+      <div className="render">
+        <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+      </div>
       {/* <ol contentEditable>
         <li></li>
       </ol> */}

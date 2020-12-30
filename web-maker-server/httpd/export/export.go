@@ -24,7 +24,7 @@ func Export(content models.Content) string {
 		HTMLItem := createHTMLItem(content[i])
 		finalHTML += HTMLItem
 	}
-
+	log.Println("Final html", finalHTML)
 	return finalHTML
 
 }
@@ -36,6 +36,13 @@ func Test() {
 func createHTMLItem(item models.ContentItem) string {
 	buf := new(bytes.Buffer)
 	inputs := item
+	var children string
+	if len(inputs.Children) > 0 {
+		children = Export(inputs.Children)
+		inputs.Content = children
+		log.Println("Children: ", children)
+	}
+	log.Println(inputs)
 	var err error
 	err = itemmodels.Total.Execute(buf, inputs)
 
