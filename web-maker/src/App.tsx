@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Preview from './Preview'
+import Alerts from './Alerts'
 import AddButton from './AddButton'
 import Modal from './Modal'
 import DropdownMenu from './DropdownMenu'
@@ -79,6 +80,7 @@ function App() {
         {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}
         <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
+      <Alerts  />
       <Modal input={input} setInput={setInput} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <div className="render">
         <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />

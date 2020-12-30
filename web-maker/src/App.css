@@ -374,3 +374,15 @@ input[type=number] {
 .render {
   text-align: center;
 }
+
+.alert {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%) scaleY(1);
+  transition-duration: 0.5s;
+}
+
+.hideAlert {
+  transform: translate(-50%, -50%) scaleY(0);
+}
