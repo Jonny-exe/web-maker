@@ -81,7 +81,6 @@ export const item = {
     content: "",
     style: {
         margin: "1%",
-        borderStyle: "",
         maxWidth: "100%",
         wordWrap: "break-word"
     },

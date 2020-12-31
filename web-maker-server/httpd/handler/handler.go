@@ -261,7 +261,7 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 
 func joinCSSandHTML(HTML string, CSS string) string {
 	index := strings.Index(HTML, "<head>")
-	result := HTML[:index+6] + "<style>" + CSS + "</style>" + HTML[index+6:] // maybe add '\n' between html and style
+	result := HTML[:index+6] + "\n<style>\nbody {\n\t\ttext-align: center;\n}\n" + CSS + "\n\n</style>" + HTML[index+6:] // maybe add '\n' between html and style
 	return result
 }
 

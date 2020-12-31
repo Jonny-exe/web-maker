@@ -7,6 +7,8 @@ import (
 // Total ..
 var Total = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
 
+// var  = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
+
 // CSSKeyValue ..
 var CSSKeyValue = template.Must(template.New("h3").Parse(`{{.Key}}: {{.Value}};`))
 var hTMLBegining string = "<!DOCTYPE html><html><body>"

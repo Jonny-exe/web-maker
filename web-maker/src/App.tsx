@@ -84,7 +84,7 @@ function App() {
       <Alerts  />
       <Modal input={input} setInput={setInput} setSavedStyle={setSavedStyle} savedCSSStyle={savedCSSStyle} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <div className="render">
-        <RenderContent index={0} setDisplayButtons={setDisplayButtons} setSavedCSSStyle={setSavedCSSStyle} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+        <RenderContent setDisplayButtons={setDisplayButtons} setSavedCSSStyle={setSavedCSSStyle} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
       </div>
       {/* <ol contentEditable>
         <li></li>
