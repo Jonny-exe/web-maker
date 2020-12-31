@@ -7,6 +7,7 @@ const ModalTable = (props: any) => {
 		<div className="imageModalContainer">
 			<div className={`overlay addImageOverlay ${props.addTableOverlayActive ? "overlayActive addImageOverlayActive" : ""}`} onClick={() => props.setAddTableOverlayActive(false)}></div>
 			<div className={`addImageModal tableSizesContainer editModal ${props.addTableOverlayActive ? "editModalActive" : ""}`}>
+				<h1 style={{fontWeight: "normal"}}> Create table </h1>
 				<input type="number" placeholder="Height" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.width = e.target.value}></input>
 				<input type="number" placeholder="Width" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.height = e.target.value}></input>
 				<button className="preview addImageModalButton" onClick={() => {

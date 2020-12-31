@@ -8,7 +8,7 @@ const ModalImage = (props: any) => {
 		<div className="imageModalContainer">
 			<div className={`overlay addImageOverlay ${props.addImageOverlayActive ? "overlayActive addImageOverlayActive" : ""}`} onClick={() => props.setAddImageOverlayActive(false)}></div>
 			<div className={`addImageModal editModal ${props.addImageOverlayActive ? "editModalActive" : ""}`}>
-				<h2 className="addImageModalHeader"> Add your image url </h2>
+				<h2 className="addImageModalHeader" style={{margin: "1%"}}> Add your image url </h2>
 				<input type="text" className={`input ${props.previewMode ? "previewMode" : ""}`} value={props.imageSrc} placeholder="https:you-image-url" onChange={(e: any) => props.setImageSrc(e.target.value)}  ></input>
 				<div className="informationDiv"> Select your image messurement, if you image is already good leave everything blank</div>
 				<div className="imageModalSizeInputContainer">

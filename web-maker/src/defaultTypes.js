@@ -87,3 +87,37 @@ export const item = {
     children: []
 }
 
+
+export const columnItem = {
+    type: "div",
+    text: "Columns",
+    content: "",
+    style: {
+        margin: "1%",
+        maxWidth: "100%",
+        wordWrap: "break-word",
+        display: "flex",
+    },
+    children: [{
+        type: "p",
+        text: "Text",
+        content: "",
+        style: {
+            margin: "1%",
+            width: "48%",
+            maxWidth: "100%",
+            wordWrap: "break-word",
+        },
+    },
+    {
+        type: "p",
+        text: "Text",
+        content: "",
+        style: {
+            margin: "1%",
+            maxWidth: "100%",
+            width: "48%",
+            wordWrap: "break-word",
+        }
+    }]
+}

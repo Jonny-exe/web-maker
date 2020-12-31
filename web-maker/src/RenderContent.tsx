@@ -3,6 +3,7 @@ import RenderContent1 from './RenderContent1'
 import App from "./App"
 
 export const RenderContent = (props: any) => {
+	const [notEditable, setNotEditable] = useState(["table", "tr", "div"])
 
 	console.log("Content: ", props.content)
 	return (
@@ -13,7 +14,7 @@ export const RenderContent = (props: any) => {
 					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img> :
 						React.createElement(x.type, {
 							style: x.style,
-							contentEditable: x.type != "table" && x.type != "tr" ? "true" : "false", // this is has to be like this because if not it doesnt detect the td only the table
+							contentEditable: notEditable.includes(x.type) ? "false" : "true", // this is has to be like this because if not it doesnt detect the td only the table
 							placeholder: x.text,
 							content: "",
 							onClick: (e: any) => {

@@ -326,7 +326,7 @@ input[type=number] {
 
 .informationDiv {
   /* border-bottom: solid 1px; */
-  position: absolute;
+  /* position: absolute; */
   background-color: aquamarine;
   color: var(--secondaryColor);
   margin: 1%;
@@ -388,5 +388,6 @@ input[type=number] {
 }
 
 .hideAlert {
+  position: absolute;
   transform: translate(-50%, -50%) scaleY(0);
 }

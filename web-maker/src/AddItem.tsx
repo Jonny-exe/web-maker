@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { item } from './defaultTypes.js'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddItem = (props: any) => {
 	const addTitle = () => {
@@ -15,7 +16,9 @@ const AddItem = (props: any) => {
 	}
 	return (
 		<div onClick={addTitle} className="dropdown">
-			Add {props.text}
+			<div style={{scale: `${props.size}`}}>
+			<FontAwesomeIcon size={"2x"} icon={props.icon}  />
+			</div>
 		</div>
 	)
 }

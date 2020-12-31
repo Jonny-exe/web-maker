@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { table } from './defaultTypes.js'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddTable = (props: any) => {
 	const addTable = () => {
@@ -50,7 +51,7 @@ const AddTable = (props: any) => {
 	return (
 		<>
 			<div onClick={addTable} className="dropdown">
-				Add {props.text}
+				<FontAwesomeIcon size={"2x"} icon={props.icon}  />
 			</div>
 		</>
 	)

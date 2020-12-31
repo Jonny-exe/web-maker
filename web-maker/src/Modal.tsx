@@ -3,12 +3,6 @@ import StylesTextAlign from './StylesTextAlign'
 import StylesToggle from './StylesToggle'
 
 export const Modal = (props: any) => {
-
-  // const handleInput = (event: any) => {
-  //   props.setInput(event.target.value)
-  //   props.savedInput.textContent = props.html
-  // }
-
   return (
     <div className="inputContainer">
       <div className={`editModal ${props.modalStateActive ? "editModalActive" : ""}`}>
