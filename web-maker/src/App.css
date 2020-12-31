@@ -1,9 +1,13 @@
 .App {
   text-align: center;
   --speed: 500ms;
-  --secondaryColor: #c9ffed;
+  --secondaryColor: #ccffee;
+  --primaryColor: rgb(43, 255, 184);
   width: 100%;
   overflow: hidden;
+}
+:focus {
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,
@@ -46,7 +50,7 @@ input[type=number] {
 .preview {
   margin-top: auto;
   margin-bottom: auto;
-  color: aquamarine;
+  color: var(--primaryColor);
   /* text-shadow: 1px 1px 1px white; */
   font-size: 125%;
   border: none;
@@ -70,7 +74,7 @@ input[type=number] {
 
 .dropdown {
   /* transform: translate(-45%); */
-  background-color: aquamarine;
+  background-color: var(--primaryColor);
   padding: 1rem;
   overflow: hidden;
   transition-duration: 0.2s;
@@ -110,7 +114,7 @@ input[type=number] {
 }
 
 .addButton {
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .addButtonContainer {
@@ -119,7 +123,7 @@ input[type=number] {
 
 .input {
   border: none;
-  border-bottom: 1px solid aquamarine;
+  border-bottom: 1px solid var(--primaryColor);
   background-color: rgba(0,0,0,0);
   margin-top: 3%;
   margin-bottom: auto;
@@ -137,7 +141,7 @@ input[type=number] {
 }
 
 .loginInput[placeholder] {
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .editModal {
@@ -200,7 +204,7 @@ input[type=number] {
 }
 
 .addImageModalHeader {
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .addImageModalButton:hover {
@@ -236,7 +240,7 @@ input[type=number] {
 }
 
 .checkbox:checked ~ .checkboxFill {
-  background: aquamarine;
+  background: var(--primaryColor);
 }
 
 .checkboxFill::after {
@@ -267,7 +271,7 @@ input[type=number] {
 }
 
 .textAlignContainer {
-  color: aquamarine;
+  color: var(--primaryColor);
   display: flex;
   justify-content: space-evenly;
 }
@@ -277,7 +281,7 @@ input[type=number] {
   margin: 1%;
   padding: 1%;
   justify-content: center;
-  color: aquamarine;
+  color: var(--primaryColor);
   margin-bottom: 3%;
   margin-top: 3%;
 }
@@ -289,27 +293,27 @@ input[type=number] {
 }
 
 .imageModalContainer {
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .loginModalContainer {
   /* display: none; */
   position: absolute;
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .loginButton {
-  background-color: aquamarine;
+  background-color: var(--primaryColor);
   color: var(--secondaryColor);
   padding: 1%;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
-  border: 1px solid aquamarine;
+  border: 1px solid var(--primaryColor);
 }
 
 .loginButton:hover {
   background-color: var(--secondaryColor);
-  color: aquamarine;
+  color: var(--primaryColor);
 }
 
 .imageModalSelect {
@@ -327,7 +331,7 @@ input[type=number] {
 .informationDiv {
   /* border-bottom: solid 1px; */
   /* position: absolute; */
-  background-color: aquamarine;
+  background-color: var(--primaryColor);
   color: var(--secondaryColor);
   margin: 1%;
   margin-left: 0;

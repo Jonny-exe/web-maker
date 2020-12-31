@@ -18,7 +18,7 @@ export const DropdownItems = (props: any) => {
 			<AddItem type={"h2"} text={"SubTitle"} content={props.content} size={0.9} icon={faHeading} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
 			<AddItem type={"h3"} text={"Heading"} content={props.content} size={0.8} icon={faHeading} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
 			<AddItem type={"p"} text={"Text"} content={props.content} icon={faParagraph} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
-			<AddImage type={"img"} text={"Image"} imageSizes={props.imageSizes} icon={faImage} src={props.imageSrc} applyCount={props.applyCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={props.setAddImageOverlayActive} />
+			<AddImage type={"img"} text={"Image"} imageSizes={props.imageSizes} icon={faImage} src={props.imageSrc} applyImageCount={props.applyImageCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={props.setAddImageOverlayActive} />
 			<AddTable type={"table"} text={"Table"} tableSizes={props.tableSizes} icon={faTable} applyTableCount={props.applyTableCount} setApplyTableCount={props.setApplyTableCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddTableOverlayActive={props.setAddTableOverlayActive} />
 			<AddTextCollumns content={props.content} setEditCount={props.setEditCount} icon={faColumns} />
 		</div>

@@ -12,7 +12,7 @@ const AddButton = (props: any) => {
   const [menuState, setMenuState] = useState(false)
   const [addImageOverlayActive, setAddImageOverlayActive] = useState(false)
   const [addTableOverlayActive, setAddTableOverlayActive] = useState(false)
-  const [applyImagesCount, setApplyImageCount] = useState(0)
+  const [applyImageCount, setApplyImageCount] = useState(0)
   const [applyTableCount, setApplyTableCount] = useState(0)
   const [imageSizes, setImageSizes] = useState({ width: 1, height: 1, magnitude: "" })
   const [tableSizes, setTableSizes] = useState({ width: 2, height: 2})
@@ -26,9 +26,9 @@ const AddButton = (props: any) => {
       <div className="">
         <FontAwesomeIcon size={"2x"} icon={faPlus} className={`addButton ${props.previewMode ? "previewMode" : ""}`} onClick={handleClick} />
       </div>
-      <DropdownItems imageSrc={imageSrc} imageSizes={imageSizes} tableSizes={tableSizes} setApplyTableCount={setApplyTableCount} applyImagesCount={applyImagesCount} applyTableCount={applyTableCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={setAddImageOverlayActive} setAddTableOverlayActive={setAddTableOverlayActive} menuState={menuState} />
+      <DropdownItems imageSrc={imageSrc} imageSizes={imageSizes} tableSizes={tableSizes} setApplyTableCount={setApplyTableCount} applyImageCount={applyImageCount} applyTableCount={applyTableCount} content={props.content} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} setAddImageOverlayActive={setAddImageOverlayActive} setAddTableOverlayActive={setAddTableOverlayActive} menuState={menuState} />
       <div className={`overlay addButtonOverlay ${menuState ? "overlayActive addButtonOverlayActive" : ""}`} onClick={() => setMenuState(false)}></div>
-      <ModalImage imageSrc={imageSrc} setImageSrc={setImageSrc} imageSizes={imageSizes} setImageSizes={setImageSizes} setApplyImageCount={setApplyImageCount} applyCount={applyImagesCount} addImageOverlayActive={addImageOverlayActive} setAddImageOverlayActive={setAddImageOverlayActive} setApplyTableCount={setApplyTableCount} />
+      <ModalImage imageSrc={imageSrc} setImageSrc={setImageSrc} imageSizes={imageSizes} setImageSizes={setImageSizes} setApplyImageCount={setApplyImageCount} applyCount={applyImageCount} addImageOverlayActive={addImageOverlayActive} setAddImageOverlayActive={setAddImageOverlayActive} setApplyTableCount={setApplyTableCount} />
       <ModalTable tableSizes={tableSizes} setTableSizes={setTableSizes} setApplyTableCount={setApplyTableCount} applyTableCount={applyTableCount} addTableOverlayActive={addTableOverlayActive} setAddTableOverlayActive={setAddTableOverlayActive} />
     </div>
   );
