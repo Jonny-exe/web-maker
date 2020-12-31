@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <div className="tools">
-        <Login content={content} setContent={setContent} token={token} setToken={setToken} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
+        <Login content={content} setContent={setContent} token={token} previewMode={previewMode} setToken={setToken} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
         {/* <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} /> */}
         <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
@@ -66,11 +66,8 @@ function App() {
       <Alerts  />
       <Modal input={input} setInput={setInput} setSavedStyle={setSavedStyle} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <div className="render">
-        <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+        <RenderContent setDisplayButtons={setDisplayButtons} previewMode={previewMode} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
       </div>
-      {/* <ol contentEditable>
-        <li></li>
-      </ol> */}
     </div>
   );
 }

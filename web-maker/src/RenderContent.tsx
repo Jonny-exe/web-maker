@@ -14,7 +14,7 @@ export const RenderContent = (props: any) => {
 					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img> :
 						React.createElement(x.type, {
 							style: x.style,
-							contentEditable: notEditable.includes(x.type) ? "false" : "true", // this is has to be like this because if not it doesnt detect the td only the table
+							contentEditable: notEditable.includes(x.type) || props.previewMode ? "false" : "true", // this is has to be like this because if not it doesnt detect the td only the table
 							placeholder: x.text,
 							content: "",
 							onClick: (e: any) => {

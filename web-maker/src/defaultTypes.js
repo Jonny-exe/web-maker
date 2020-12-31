@@ -95,6 +95,7 @@ export const columnItem = {
     style: {
         margin: "1%",
         maxWidth: "100%",
+        padding: "2%",
         wordWrap: "break-word",
         display: "flex",
     },
