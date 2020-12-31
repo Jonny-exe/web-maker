@@ -13,6 +13,11 @@ export const StylesToggle = (props: any) => {
 		}
 	}
 
+	useEffect(() => {
+		props.savedCSSStyle[props.propertyToToggle] = props.on
+		console.log("savedCSSStle changed")
+	}, [props.savedStyle[props.propertyToToggle]])
+
 
 	useEffect(() => {
 		if (props.modalStateActive) {

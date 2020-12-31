@@ -53,7 +53,7 @@ export const div = {
 export const image = {
     type: "img",
     text: "Image",
-    src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.whYid2jKN-8c3BUhtIoSTgHaEK%26pid%3DApi&f=1",
+    src: "",
     style: {
         margin: "1%",
         width: "",
@@ -81,6 +81,7 @@ export const item = {
     content: "",
     style: {
         margin: "1%",
+        borderStyle: "",
         maxWidth: "100%",
         wordWrap: "break-word"
     },

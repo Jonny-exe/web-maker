@@ -4,22 +4,14 @@ import (
 	"text/template"
 )
 
-var H1 = template.Must(template.New("h1").Parse(`<h1> {{.Text}} </h1>`))
-var H2 = template.Must(template.New("h2").Parse(`<h2> {{.Text}} </h2>`))
-var H3 = template.Must(template.New("h3").Parse(`<h3> {{.Text}} </h3>`))
+// Total ..
+var Total = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
 
-// var H3 = template.Must(template.New("h3").Parse(`<h3> {{.Text}} </h3>`))
-var Total = template.Must(template.New("h3").Parse(`<{{.Type}}> {{.Content}} </{{.Type}}>`))
+// CSSKeyValue ..
+var CSSKeyValue = template.Must(template.New("h3").Parse(`{{.Key}}: {{.Value}};`))
+var hTMLBegining string = "<!DOCTYPE html><html><body>"
+var hTMLEnd string = "</body></html>"
+var sTYLEBegingin string = "<steel"
 
-// var H1, err = template.New("h1").Parse(`<h1> {{.Text}} </h1>`)
-// var H1, err = template.New("h1").Parse(`<h1> {{.Text}} </h1>`)
-
-// type types struct {
-// 	H1 *template.Template `json:"h1"`
-// 	H2 *template.Template `json:"h1"`
-// 	H3 *template.Template `json:"h1"`
-// }
-
-// var TypesObject types = types{H1: template.Must(template.New("h1").Parse(`<h1> {{.Text}} </h1>`))}
-
-// H1 ...
+// JoinHTMLandCSS ..
+var JoinHTMLandCSS = template.Must(template.New("join").Parse(`<!DOCTYPE html><html><style>{{.CSS}}</style><body>{{.HTML}}</body></html>`))

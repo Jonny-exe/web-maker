@@ -24,6 +24,7 @@ function App() {
   const [savedInput, setSavedInput] = useState({ textContent: "" })
   const [savedIndex, setSavedIndex] = useState(1)
   const [savedStyle, setSavedStyle] = useState({ textAlign: "", borderStyle: "" })
+  const [savedCSSStyle, setSavedCSSStyle] = useState({ textAlign: "", borderStyle: "" })
   const [editCount, setEditCount] = useState(0)
   const [previewMode, setPreviewMode] = useState(false)
   const [content, setContent] = useState([])
@@ -70,20 +71,20 @@ function App() {
   }
 
 
+	console.log("savedCSSStyle: ", savedCSSStyle)
   console.log("Content: ", content)
   return (
     <div className="App">
       <div className="tools">
         <Login content={content} setContent={setContent} token={token} setToken={setToken} setLoginModalStateActive={setLoginModalStateActive} loginModalStateActive={loginModalStateActive} />
         <Preview previewMode={previewMode} handlePreview={setPreviewMode} />
-        <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} />
-        {/* <Styles previewMode={previewMode} displayButtons={displayButtons} /> */}
+        {/* <Edit previewMode={previewMode} savedStyle={savedStyle} setModalStateActive={setModalStateActive} displayButtons={displayButtons} /> */}
         <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
       <Alerts  />
-      <Modal input={input} setInput={setInput} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
+      <Modal input={input} setInput={setInput} setSavedStyle={setSavedStyle} savedCSSStyle={savedCSSStyle} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <div className="render">
-        <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+        <RenderContent index={0} setDisplayButtons={setDisplayButtons} setSavedCSSStyle={setSavedCSSStyle} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
       </div>
       {/* <ol contentEditable>
         <li></li>

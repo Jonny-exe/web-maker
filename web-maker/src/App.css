@@ -293,6 +293,8 @@ input[type=number] {
 }
 
 .loginModalContainer {
+  /* display: none; */
+  position: absolute;
   color: aquamarine;
 }
 

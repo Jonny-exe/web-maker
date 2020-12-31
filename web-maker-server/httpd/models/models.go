@@ -27,9 +27,10 @@ type Content []ContentItem
 
 // ContentItem ...
 type ContentItem struct {
-	Type     string        `json:"type"`
-	Text     string        `json:"text"`
-	Content  string        `json:"content"`
-	Style    interface{}   `json:"style"`
-	Children []ContentItem `json:"children"`
+	Type       string            `json:"type"`
+	Text       string            `json:"text"`
+	Content    string            `json:"content"`
+	Style      map[string]string `json:"style"`
+	Children   []ContentItem     `json:"children"`
+	ClassIndex int               `json:"classindex"`
 }

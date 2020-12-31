@@ -235,8 +235,6 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	var req models.Token
 	var objectString string
 	var object models.Content
-	var HTMLBegining string = "<!DOCTYPE html><html><body>"
-	var HTMLEnd string = "</body></html>"
 	// connectionKey := os.Getenv("BEAUTIFY_CODE")
 	json.NewDecoder(r.Body).Decode(&req)
 	err := db.QueryRow("select object from token_object where token=? ", req.Token).Scan(&objectString)
@@ -245,21 +243,69 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	}
 	bytes := []byte(objectString)
 	json.Unmarshal(bytes, &object)
-	export.Export(object)
 
-	result := export.Export(object)
-	result = HTMLBegining + result + HTMLEnd
-	beautifiedResult := beautifyCode(result)
-	filecreator.ImportHTMLToFile(beautifiedResult, req.Token)
+	// export.ClassIndex = 0
+	HTMLResult, CSSResult := export.Export(object, 0)
+	// result = HTMLBegining + result + HTMLEnd
+
+	beautifiedHTMLResult := beautifyHTMLCode(HTMLResult)
+	beautifiedCSSResult := beautifyCSSCode(CSSResult)
+
+	result := joinCSSandHTML(beautifiedHTMLResult, beautifiedCSSResult)
+	log.Println("Final result", result)
+	filecreator.ImportHTMLToFile(result, req.Token)
 
 	json.NewEncoder(w).Encode(http.StatusOK)
 	return
 }
 
-func beautifyCode(htmlCode string) string {
+func joinCSSandHTML(HTML string, CSS string) string {
+	index := strings.Index(HTML, "<head>")
+	result := HTML[:index+6] + "<style>" + CSS + "</style>" + HTML[index+6:] // maybe add '\n' between html and style
+	return result
+}
+
+func beautifyHTMLCode(htmlCode string) string {
 	endpoint := "https://www.10bestdesign.com/dirtymarkup/api/html"
 	data := url.Values{}
 	data.Set("code", htmlCode)
+
+	client := &http.Client{}
+	r, err := http.NewRequest("POST", endpoint, strings.NewReader(data.Encode())) // URL-encoded payload
+	if err != nil {
+		log.Fatal(err)
+	}
+	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	r.Header.Add("Content-Length", strconv.Itoa(len(data.Encode())))
+
+	res, err := client.Do(r)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(res.Status)
+	defer res.Body.Close()
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	stringBody := string(body)
+
+	type req struct {
+		Clean string `json:"clean"`
+	}
+
+	var result req
+
+	bytes := []byte(stringBody)
+	json.Unmarshal(bytes, &result)
+	log.Println(result)
+	return string(result.Clean)
+}
+
+func beautifyCSSCode(CSSCode string) string {
+	endpoint := "https://www.10bestdesign.com/dirtymarkup/api/css"
+	data := url.Values{}
+	data.Set("code", CSSCode)
 
 	client := &http.Client{}
 	r, err := http.NewRequest("POST", endpoint, strings.NewReader(data.Encode())) // URL-encoded payload
