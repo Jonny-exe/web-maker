@@ -33,4 +33,5 @@ type ContentItem struct {
 	Style      map[string]string `json:"style"`
 	Children   []ContentItem     `json:"children"`
 	ClassIndex int               `json:"classindex"`
+	Src        string            `json:"src"`
 }

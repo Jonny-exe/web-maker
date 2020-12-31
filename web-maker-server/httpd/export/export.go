@@ -66,10 +66,16 @@ func createHTMLItem(item models.ContentItem, index int) (string, string) {
 	var err error
 
 	// Create parent
-	err = itemmodels.Total.Execute(buf, inputs)
-
-	if err != nil {
-		log.Fatal(err)
+	if item.Type != "img" {
+		err = itemmodels.Item.Execute(buf, inputs)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		err = itemmodels.Image.Execute(buf, inputs)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 	return buf.String(), childrenStyle
 }
@@ -98,7 +104,7 @@ func createCSSItem(item map[string]string, index int) string {
 	}
 
 	log.Println("ClassIndex CSS: ", index)
-	result = "a" + strconv.Itoa(index) + CSSBegining + result + CSSEnd // "a" is added because css styles cant begin with a number
+	result = ".a" + strconv.Itoa(index) + CSSBegining + result + CSSEnd // "a" is added because css styles cant begin with a number
 	return result
 }
 

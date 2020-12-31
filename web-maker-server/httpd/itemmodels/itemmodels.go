@@ -4,8 +4,11 @@ import (
 	"text/template"
 )
 
-// Total ..
-var Total = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
+// Item ..
+var Item = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
+
+// Image is for images because they must be done separtatly
+var Image = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}" src="{{.Src}}" ></{{.Type}}>`))
 
 // var  = template.Must(template.New("h3").Parse(`<{{.Type}} class="a{{.ClassIndex}}"> {{.Content}} </{{.Type}}>`))
 
