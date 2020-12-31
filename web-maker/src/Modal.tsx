@@ -11,10 +11,8 @@ export const Modal = (props: any) => {
 
   return (
     <div className="inputContainer">
-      {/* <input type="text" value={props.input} className={`input ${props.previewMode ? "previewMode" : ""}`}></input> */}
-      {/* <button onClick={() => props.setModalStateActive(true)}> modal </button> */}
       <div className={`editModal ${props.modalStateActive ? "editModalActive" : ""}`}>
-        <StylesToggle modalStateActive={props.modalStateActive} on="solid" off="none"  savedCSSStyle={props.savedCSSStyle} setSavedStyle={props.setSavedStyle} savedStyle={props.savedStyle} propertyToToggle={"borderStyle"} nameOfStyle={"Border"} />
+        <StylesToggle modalStateActive={props.modalStateActive} on="solid" off="none" setSavedStyle={props.setSavedStyle} savedStyle={props.savedStyle} propertyToToggle={"borderStyle"} nameOfStyle={"Border"} />
         <StylesTextAlign savedStyle={props.savedStyle} modalStateActive={props.modalStateActive} />
       </div>
       <div className={`overlay editOverlay ${props.modalStateActive ? "overlayActive" : ""}`} onClick={() => props.setModalStateActive(false)}></div>

@@ -22,7 +22,6 @@ export const RenderContent = (props: any) => {
 								// props.savedStyle.borderStyle = ""
 								// e.target.style.border = "2px solid red"
 								// e.target.style.borderRadius = "5px"
-								props.setSavedCSSStyle(x.style)
 								props.setSavedStyle(e.target.style)
 								console.log(x.style)
 							},

@@ -24,7 +24,6 @@ function App() {
   const [savedInput, setSavedInput] = useState({ textContent: "" })
   const [savedIndex, setSavedIndex] = useState(1)
   const [savedStyle, setSavedStyle] = useState({ textAlign: "", borderStyle: "" })
-  const [savedCSSStyle, setSavedCSSStyle] = useState({ textAlign: "", borderStyle: "" })
   const [editCount, setEditCount] = useState(0)
   const [previewMode, setPreviewMode] = useState(false)
   const [content, setContent] = useState([])
@@ -37,11 +36,6 @@ function App() {
     setArray(newArray)
   }
 
-  // const handleInput = (event: any) => {
-  //   setInput(event.target.value)
-  //   savedInput.textContent = event.target.value
-  // }
-
   const handleDiv = (content: string, index: number, event: any) => {
     setInput(content)
     setSavedIndex(index)
@@ -49,17 +43,6 @@ function App() {
     setSavedInput(event.target)
     setDisplayButtons(true)
   }
-
-  // const editDiv = () => {
-  //   var newArray = array
-  //   newArray[savedIndex] = input
-  //   setArray(newArray)
-  //   setEditCount(editCount + 1)
-  //   setDisplayButtons(false)
-  //   savedStyle.borderStyle = "none"
-  //   setSavedInput({textContent: ""}) // This cant be done savedInput.textContent because it is a reference to event.target.textContent
-  //   setInput("")
-  // }
 
 
   const logStyle = (e: any) => {
@@ -71,7 +54,6 @@ function App() {
   }
 
 
-	console.log("savedCSSStyle: ", savedCSSStyle)
   console.log("Content: ", content)
   return (
     <div className="App">
@@ -82,9 +64,9 @@ function App() {
         <AddButton content={content} setContent={setContent} addButtonStateActive={addButtonStateActive} setAddButtonStateActive={setAddButtonStateActive} editCount={editCount} setEditCount={setEditCount} previewMode={previewMode} addToDivCount={addToDivCount} />
       </div>
       <Alerts  />
-      <Modal input={input} setInput={setInput} setSavedStyle={setSavedStyle} savedCSSStyle={savedCSSStyle} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
+      <Modal input={input} setInput={setInput} setSavedStyle={setSavedStyle} savedStyle={savedStyle} savedInput={savedInput} previewMode={previewMode} modalStateActive={modalStateActive} setModalStateActive={setModalStateActive} />
       <div className="render">
-        <RenderContent setDisplayButtons={setDisplayButtons} setSavedCSSStyle={setSavedCSSStyle} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
+        <RenderContent setDisplayButtons={setDisplayButtons} setSavedStyle={setSavedStyle} savedStyle={savedStyle} content={content} />
       </div>
       {/* <ol contentEditable>
         <li></li>
