@@ -19,8 +19,8 @@ const AddImage = (props: any) => {
 		itemCopy.text = props.text
 		itemCopy.type = props.type
 		itemCopy.src = props.src
-		console.log(props.imageSizes.width)
-		itemCopy.style = {width: props.imageSizes.width + props.imageSizes.magnitude, height: props.imageSizes.width + props.imageSizes.magnitude}
+		itemCopy.style = {width: props.imageSizes.width + props.imageSizes.magnitude, height: props.imageSizes.width + props.imageSizes.magnitude, margin: "1%"}
+		console.log(itemCopy.style)
 		console.log(itemCopy.style)
 		// itemCopy.style.width = props.imageSizes.width + props.imageSizes.magnitude
 		// itemCopy.style.height = props.imageSizes.height + props.imageSizes.magnitude
