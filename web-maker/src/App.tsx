@@ -7,8 +7,8 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/create" component={AppMain}/>
-        <Route path="/" component={AppLandingPage}/>
+        <Route path="/web-maker/create" component={AppMain}/>
+        <Route path="/web-maker" component={AppLandingPage}/>
       </Switch>
     </Router>
   )
