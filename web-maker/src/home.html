@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This is thought to use as main page, but because I use everything in a subdomain I cant do it with react-dom-routes -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .landingPage {
+        --secondaryColor: #ccffee;
+        --primaryColor: rgb(43, 255, 184);
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        overflow: auto;
+        color: var(--primaryColor);
+        background-color: var(--secondaryColor);
+    }
+
+    .mainHeader {
+        font-size: 5vmax;
+    }
+
+    .seccondaryHeader {
+        font-size: 2vmax;
+    }
+
+    .explication {
+        font-size: 1.5vmax;
+    }
+
+    .button {
+        border: 1vmax solid var(--secondaryColor);
+        font-size: 10vmax;
+        background: var(--primaryColor);
+        color: var(--secondaryColor);
+        /* height: 10vmax; */
+        width: 26vmax;
+    }
+
+    .button:hover {
+        background: var(--secondaryColor);
+        color: var(--primaryColor);
+        border: 1vmax solid var(--primaryColor)
+    }
+
+    .line {
+        border: solid 1px;
+        margin: 2%;
+    }
+</style>
+
+<body>
+    <div className="landingPage">
+        <p className="mainHeader"> Hi, this is web-maker</p>
+        <div class="line">
+            <p className="seccondaryHeader"> Web-maker is a tool to create simple web applications with zero coding
+                skills </p>
+        </div>
+        <p className="seccondaryHeader"> Make you own web in three easy steps </p>
+        <p className="explication">
+            1. Creat a project
+        </p>
+        <p className="explication">
+            2. Add all the items you need
+        </p>
+        <p className="explication">
+            3. Export it into a finished HTML file
+        </p>
+        <p className="seccondaryHeader">
+            Your new web is on a click of a button
+        </p>
+        <a href="/web-maker">
+            <button className="button"> Start </button>
+        </a>
+        <p className="seccondaryHeader">
+            Good luck on your jouney
+        </p>
+    </div>
+</body>
+
+</html>
