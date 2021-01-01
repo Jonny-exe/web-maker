@@ -20,7 +20,7 @@ const AppLandingPage = () => {
 			<p className="seccondaryHeader">
 				Your new web is on a click of a button
 			</p>
-			<a href="/web-maker">
+			<a href="/create">
 				<button className="button"> Start </button>
 			</a>
 			<p className="seccondaryHeader">
