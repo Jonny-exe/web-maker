@@ -13,8 +13,7 @@ const AddImage = (props: any) => {
 		}
 		console.log(props.content)
 		// var content = props.content
-		var itemCopy: any = {}
-		Object.assign(itemCopy, image)
+		var itemCopy = JSON.parse(JSON.stringify(image));
 		console.log(props)
 		itemCopy.text = props.text
 		itemCopy.type = props.type

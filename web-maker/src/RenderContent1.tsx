@@ -14,9 +14,9 @@ export const RenderContent1 = (props: any) => {
 					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img> :
 						React.createElement(x.type, {
 							style: x.style,
-							key: i * 10,
-							contentEditable: notEditable.includes(x.type) || props.previewMode ? "true" : "false", // this is has to be like this because if not it doesnt detect the td only the table
-							placeholder: x.text,
+							key: i * 100,
+							contentEditable: notEditable.includes(x.type) || props.previewMode ? "false" : "true", // this is has to be like this because if not it doesnt detect the td only the table
+							placeholder: notEditable.includes(x.type) && x.type != "div" || !props.previewMode ? x.text : "",
 							content: "hi",
 							onClick: (e: any) => {
 								props.setSavedStyle(e.target.style)

@@ -11,8 +11,8 @@ const AddTable = (props: any) => {
 		if (props.applyTableCount == 0) {
 			return
 		}
-		var itemCopy: any = {}
-		Object.assign(itemCopy, table)
+		var itemCopy = JSON.parse(JSON.stringify(table)); //You cant use Object.assign because its not a deep copy
+		
 		console.log("TableSizes: ", props.tableSizes)
 		for (let i = 0; i < props.tableSizes.height; i++) {
 			itemCopy.children.push({
@@ -24,6 +24,7 @@ const AddTable = (props: any) => {
 				},
 				children: []
 			})
+			
 			for (let n = 0; n < props.tableSizes.width; n++) {
 				itemCopy.children[i].children.push({
 					type: "td",
@@ -44,14 +45,15 @@ const AddTable = (props: any) => {
 		// itemCopy.style.height = props.imageSizes.height + props.imageSizes.magnitude
 		console.log("itemcopy: ", itemCopy)
 		props.content.push(itemCopy)
+		
 		props.setEditCount(props.editCount + 1)
 	}, [props.applyTableCount])
-	console.log("apply table count", props.applyTableCount)
+	console.log("AddTable props.applyTableCount:", props.applyTableCount)
 
 	return (
 		<>
 			<div onClick={addTable} className="dropdown">
-				<FontAwesomeIcon size={"2x"} icon={props.icon}  />
+				<FontAwesomeIcon size={"2x"} icon={props.icon} />
 			</div>
 		</>
 	)

@@ -6,8 +6,7 @@ const AddItem = (props: any) => {
 	const addTitle = () => {
 		console.log(props.content)
 		// var content = props.content
-		var itemCopy: any = {}
-		Object.assign(itemCopy, item)
+		var itemCopy = JSON.parse(JSON.stringify(item));
 		console.log(props)
 		itemCopy.text = props.text
 		itemCopy.type = props.type

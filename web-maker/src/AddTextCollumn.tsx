@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AddTextCollumns = (props: any) => {
 	const addTitle = () => {
 		var itemCopy: any = {}
-		Object.assign(itemCopy, columnItem)
+		var itemCopy = JSON.parse(JSON.stringify(columnItem));
 		props.content.push(itemCopy)
 		props.setEditCount(props.editCount + 1)
 	}
