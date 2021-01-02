@@ -26,7 +26,7 @@ export const StylesToggle = (props: any) => {
 	return (
 		<div className="stylesBorderContainer">
 			<label className="checkboxContainer">
-				<input onClick={(e: any) => handleCheckbox(e)} type="checkbox" checked={checkbox} className="checkbox"></input>
+				<input onClick={(e: any) => handleCheckbox(e)} onChange={() => console.log("toggled")} type="checkbox" checked={checkbox} className="checkbox" ></input>
 				<div className="checkboxFill"></div>
 			</label>
 			<span> {props.nameOfStyle} </span>

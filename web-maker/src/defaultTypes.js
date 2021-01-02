@@ -82,7 +82,8 @@ export const item = {
     style: {
         margin: "1%",
         maxWidth: "100%",
-        wordWrap: "break-word"
+        wordWrap: "break-word",
+        // opacity: 1
     },
     children: []
 }

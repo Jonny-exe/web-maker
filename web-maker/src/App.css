@@ -131,8 +131,6 @@ input[type=number] {
   white-space: pre-wrap;  /* <-- THIS PRESERVES THE LINE BREAKS */
 }
 
-
-
 .loginInput {
   margin-bottom: 2%;
   margin-top: 2%;
@@ -145,21 +143,28 @@ input[type=number] {
   color: var(--primaryColor);
 }
 
-.editModal {
+.modal {
+  /* text-align: center; */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   background-color:  var(--secondaryColor);
   transition-duration: 200ms;
+  color: var(--primaryColor);
   z-index: 10;
   width: 60%;
   height: 40%;
+  overflow: auto;
 }
 
-.editModalActive {
+.modalActive {
   position: fixed;
   transform: translate(-50%, -50%) scale(1);
+}
+
+.modalEditPlacement {
+  height: 65%;
 }
 
 .loginModal {
@@ -395,4 +400,18 @@ input[type=number] {
 .hideAlert {
   position: absolute;
   transform: translate(-50%, -50%) scaleY(0);
+}
+
+.separator {
+  margin: 1%;
+  margin-left: 3%;
+  margin-right: 3%;
+  background-color: var(--primaryColor);
+  height: 0.7vmax;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.separator:hover {
+  height: 1.2vmax;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RenderContent from './RenderContent'
 import App from "./App"
+import { notEditable } from './exceptionItems'
 
 export const RenderContent1 = (props: any) => {
 	return (
@@ -13,25 +14,18 @@ export const RenderContent1 = (props: any) => {
 					x.type == "img" ? <img style={x.style} src={x.src} alt="Image"></img> :
 						React.createElement(x.type, {
 							style: x.style,
-							contentEditable: x.type != "table" && x.type != "tr" ? "true" : "false", // this is has to be like this because if not it doesnt detect the td only the table
+							key: i * 10,
+							contentEditable: notEditable.includes(x.type) || props.previewMode ? "true" : "false", // this is has to be like this because if not it doesnt detect the td only the table
 							placeholder: x.text,
 							content: "hi",
 							onClick: (e: any) => {
-								console.log(x)
-								// props.handleDiv(e.target.innerText, i, e) // this could be set to e.target.innerHTML to use " text "
-								props.setDisplayButtons(true)
 								props.setSavedStyle(e.target.style)
 							},
 							onInput: (e: any) => {
-								// if (x.type != "table" && x.type != "tr") {
 								x.content = e.target.textContent
-								// }
 							},
-							focusout: (e: any) => {
-								props.setDisplayButtons(false)
-							}
 						},
-							x.children != undefined && x.children.length != 0 ? <RenderContent setDisplayButtons={props.setDisplayButtons} setSavedStyle={props.setSavedStyle} savedStyle={props.savedStyle} content={x.children} /> : x.content,
+							x.children != undefined && x.children.length != 0 ? <RenderContent setSavedStyle={props.setSavedStyle} savedStyle={props.savedStyle} setModalEditPlacementActive={props.setModalEditPlacementActive} setItemIndex={props.setItemIndex}l itemIndex={props.itemIndex} content={x.children} /> : x.content,
 						)
 				))
 			}

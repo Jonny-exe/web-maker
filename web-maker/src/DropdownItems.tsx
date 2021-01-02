@@ -12,6 +12,7 @@ import { faTable } from "@fortawesome/free-solid-svg-icons";
 // import types from "./types.js"
 
 export const DropdownItems = (props: any) => {
+  	console.log(props.applyTableCount)
 	return (
 		<div className={`dropdownMenuItems ${props.menuState ? "showDropdownItems" : "notShowDropdownItems"}`}>
 			<AddItem type={"h1"} text={"Title"} content={props.content} size={1} icon={faHeading} setContent={props.setContent} editCount={props.editCount} setEditCount={props.setEditCount} />
