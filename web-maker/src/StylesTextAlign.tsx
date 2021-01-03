@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
 import TextAlignCheckbox from './TextAlignCheckbox'
 

@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const ModalImageSizeTable = (props: any) => {
-	const [numberInputValue, setNumberInputValue] = useState({ input1: "", input2: "" })
-	const handleNumberInput1 = (event: any) => {
-		setNumberInputValue(event.target.value)
-		props.imageSizes.width = 1
-	}
 
 	return (
 		<table className="imageModalTable">
@@ -27,7 +22,7 @@ const ModalImageSizeTable = (props: any) => {
 						<span> Width </span>
 					</td>
 					<td>
-						<input type="number" onChange={(e: any) => props.imageSizes.width = e.target.value} placeholder="Desired Image width" className="preview"></input>
+						<input type="number" onChange={(e: any) => props.imageSizes.width = e.target.value} placeholder="Desired Image width" className="preview" />
 					</td>
 				</tr>
 				<tr>
@@ -35,7 +30,7 @@ const ModalImageSizeTable = (props: any) => {
 						<span> Height </span>
 					</td>
 					<td>
-						<input type="number" placeholder="Desired Image width" onChange={(e: any) => props.imageSizes.height = e.target.value} className="preview"></input>
+						<input type="number" placeholder="Desired Image width" onChange={(e: any) => props.imageSizes.height = e.target.value} className="preview" />
 					</td>
 				</tr>
 			</tbody>

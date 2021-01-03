@@ -1,5 +1,3 @@
-import { faAlignCenter } from "@fortawesome/free-solid-svg-icons"
-
 export const title = {
     type: "h1",
     text: "Title",
@@ -52,13 +50,14 @@ export const div = {
 
 export const image = {
     type: "img",
-    text: "Image",
-    src: "",
+    // text: "Image",
+    src: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.ndtv.com%2Ftech%2Fimages%2Fgoogle_logo_redesign_2015_newest1.jpg&f=1&nofb=1",
     style: {
         margin: "1%",
         width: "",
         height: ""
     },
+    children: null
 }
 
 export const table = {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { table } from './defaultTypes.js'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -8,7 +8,7 @@ const AddTable = (props: any) => {
 	}
 
 	useEffect(() => {
-		if (props.applyTableCount == 0) {
+		if (props.applyTableCount === 0) {
 			return
 		}
 		var itemCopy = JSON.parse(JSON.stringify(table)); //You cant use Object.assign because its not a deep copy

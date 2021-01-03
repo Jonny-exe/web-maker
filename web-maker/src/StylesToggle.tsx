@@ -15,7 +15,7 @@ export const StylesToggle = (props: any) => {
 
 	useEffect(() => {
 		if (props.modalStateActive) {
-			if (props.savedStyle[props.propertyToToggle] == props.on) {
+			if (props.savedStyle[props.propertyToToggle] === props.on) {
 				setCheckbox(true)
 			} else {
 				setCheckbox(false)

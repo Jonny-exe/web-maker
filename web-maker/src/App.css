@@ -209,16 +209,15 @@ input[type=number] {
   padding: 3%;
 }
 
+.modalImageButton {
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+
 .addImageModalHeader {
   color: var(--primaryColor);
-}
-
-.addImageModalButton:hover {
-  color: white;
-}
-
-.addImageModalButton {
-  cursor: pointer;
 }
 
 .checkboxContainer {

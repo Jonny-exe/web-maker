@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { columnItem } from './defaultTypes.js'
 import { faColumns } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddTextCollumns = (props: any) => {
 	const addTitle = () => {
-		var itemCopy: any = {}
 		var itemCopy = JSON.parse(JSON.stringify(columnItem));
 		props.content.push(itemCopy)
 		props.setEditCount(props.editCount + 1)

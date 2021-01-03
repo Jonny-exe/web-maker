@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { exceptionToRender } from '../exceptionItems'
 
 
 const ModalEditPlacement = (props: any) => {
-	const moveItem = (newIndex: number, replace: boolean) => {
+	const moveItem = (newIndex: number) => {
 		const itemToMove = props.content[props.itemIndex]
 		props.content.splice(props.itemIndex, 1)
 		if (props.itemIndex < newIndex) {
@@ -23,23 +23,23 @@ const ModalEditPlacement = (props: any) => {
 			<div className={`overlay editOverlay ${props.modalEditPlacementActive ? "overlayActive" : ""}`} onClick={() => props.setModalEditPlacementActive(false)}></div>
 			<div className={`modal modalEditPlacement ${props.modalEditPlacementActive ? "modalActive" : ""}`}>
 				<h1 style={{ margin: "1%" }}> Add your image url </h1>
-				<h2> Your selected item: {props.content[props.indexItem] != undefined && props.itemIndex != -1 ? props.content[props.itemIndex].text : ""}</h2>
+				<h2> Your selected item: {props.content[props.indexItem] !== undefined && props.itemIndex !== -1 ? props.content[props.itemIndex].text : ""}</h2>
 				<div className="informationDiv" style={{ marginLeft: "3%", marginRight: "3%" }}> Click the on your new desired position </div>
 				<div className="smallRenderContainer">
 					{
 						props.content.map((item: any, index: number) => (
 							<>
-								<div className="separator" onClick={() => moveItem(index, true)}></div>
+								<div className="separator" onClick={() => moveItem(index)}></div>
 								{
-									exceptionToRender.includes(item.type) ? <span>{item.type == "div" ? "columns" : item.type}</span> : React.createElement(item.type, {
+									exceptionToRender.includes(item.type) ? <span>{item.type === "div" ? "columns" : item.text}</span> : React.createElement(item.type, {
 										style: {
 											margin: "0%",
 										}
 									},
 										item.text)
 								}
-								{props.content.length == index + 1 ? (
-									<div className="separator" onClick={() => moveItem(index + 1, true)}></div>) : ""}
+								{props.content.length === index + 1 ? (
+									<div className="separator" onClick={() => moveItem(index + 1)}></div>) : ""}
 							</>
 						))
 					}

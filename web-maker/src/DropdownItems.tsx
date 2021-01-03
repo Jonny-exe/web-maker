@@ -1,5 +1,4 @@
 import React from 'react'
-import DropdownItem from './DropdownItem'
 import AddItem from './AddItem'
 import AddImage from './AddImage'
 import AddTable from './AddTable'

@@ -8,7 +8,7 @@ export const SaveProject = (sentCount: number, token: string, content: object) =
 	const [state, setState] = useState({ responseSavedStatus: 0, loadingSaved: true })
 	const thisURL = url + "updateTokenObject"
 	useEffect(() => {
-		if (sentCount != 0) {
+		if (sentCount !== 0) {
 			var bodyContent = {
 				token: token,
 				object: content
@@ -38,7 +38,7 @@ export const CreateProjectTokenRecovery = (recoverykey: string, createCount: num
 	const thisURL = url + "insertTokenRecovery"
 	useEffect(() => {
 		console.log(createCount)
-		if (createCount > 0 && createCount != null && createCount != undefined) {
+		if (createCount > 0 && createCount !== null && createCount !== undefined) {
 			var bodyContent = {
 				recovery_key: recoverykey
 			}
@@ -66,7 +66,7 @@ export const CreateProjectTokenObject = (content: any, token: string) => {
 	const [state, setState] = useState({ responseStatus: "", loading: true })
 	const thisURL = url + "insertTokenObject"
 	useEffect(() => {
-		if (token != "" && token != null && token != undefined) {
+		if (token !== "" && token !== null && token !== undefined) {
 			var bodyContent = {
 				content: content,
 				token: token
@@ -95,7 +95,7 @@ export const GetTokenFromRecovery = (recoverykey: string, recoveryCount: number)
 	const [state, setState] = useState({ responseTokenFromRecovery: null, loading: true })
 	const thisURL = url + "getTokenFromRecovery"
 	useEffect(() => {
-		if (recoveryCount > 0 && recoveryCount != null && recoveryCount != undefined) {
+		if (recoveryCount > 0 && recoveryCount !== null && recoveryCount !== undefined) {
 			var bodyContent = {
 				recovery_key: recoverykey
 			}
@@ -124,7 +124,7 @@ export const GetContentFromToken = (token: string, getContentCount: number) => {
 	const [state, setState] = useState({ responseContent: [], loading: true })
 	const thisURL = url + "getObjectFromToken"
 	useEffect(() => {
-		if (getContentCount > 0 && getContentCount != null && getContentCount != undefined) {
+		if (getContentCount > 0 && getContentCount !== null && getContentCount !== undefined) {
 			var bodyContent = {
 				token: token
 			}
@@ -152,7 +152,7 @@ export const GetFile = (token: string, getFileCount: number) => {
 	const [state, setState] = useState({ getFileStatus: 0, loadingGetFile: true })
 	const thisURL = url + "exportIntoHTML"
 	useEffect(() => {
-		if (getFileCount > 0 && getFileCount != null && getFileCount != undefined) {
+		if (getFileCount > 0 && getFileCount !== null && getFileCount !== undefined) {
 			var bodyContent = {
 				token: token
 			}
@@ -180,7 +180,7 @@ export const RemoveFile = (token: string, removeFileCount: number) => {
 	const [state, setState] = useState({ removeFileStatus: 0, loadingRemoveFile: true })
 	const thisURL = url + "removeFile"
 	useEffect(() => {
-		if (removeFileCount > 0 && removeFileCount != null && removeFileCount != undefined) {
+		if (removeFileCount > 0 && removeFileCount !== null && removeFileCount !== undefined) {
 			var bodyContent = {
 				token: token
 			}
@@ -209,7 +209,7 @@ export const CheckRecoveryKey = (recoveryKey: string, checkRecoveryKeyCount: num
 	const [state, setState] = useState({ checkRecoveryKeyStatus: 0, loadingCheckRecoveryKey: true })
 	const thisURL = url + "doesRecoveryKeyExist"
 	useEffect(() => {
-		if (checkRecoveryKeyCount > 0 && checkRecoveryKeyCount != null && checkRecoveryKeyCount != undefined) {
+		if (checkRecoveryKeyCount > 0 && checkRecoveryKeyCount !== null && checkRecoveryKeyCount !== undefined) {
 			var bodyContent = {
 				recovery_key: recoveryKey
 			}

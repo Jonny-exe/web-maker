@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
-/* <FontAwesomeIcon icon={faPlusSquare} style={{ width: "" }} onClick={props.addToDivCount} className={props.previewMode ? "previewMode" : ""} /> */
 const ModalTable = (props: any) => {
 	return (
 		<div className="imageModalContainer">
 			<div className={`overlay addImageOverlay ${props.addTableOverlayActive ? "overlayActive addImageOverlayActive" : ""}`} onClick={() => props.setAddTableOverlayActive(false)}></div>
 			<div className={`addImageModal tableSizesContainer modal ${props.addTableOverlayActive ? "modalActive" : ""}`}>
 				<h1 style={{ fontWeight: "normal" }}> Create table </h1>
-				<input type="number" placeholder="Height" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.width = e.target.value}></input>
-				<input type="number" placeholder="Width" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.height = e.target.value}></input>
-				<button className="preview loginButton addImageModalButton" onClick={() => {
+				<input type="number" placeholder="Height" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.width = e.target.value} />
+				<input type="number" placeholder="Width" className="loginInput input tableSizesInput" onChange={(e: any) => props.tableSizes.height = e.target.value} />
+				<button className="preview loginButton" onClick={() => {
 					props.setAddTableOverlayActive(false)
 					
 					props.setApplyTableCount(props.applyTableCount + 1)
