@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react"
 
 const DropdownItem = (props: any) => {
-  return <div className="dropdown">añslkdfjañsld</div>;
-};
+	return <div className="dropdown">añslkdfjañsld</div>
+}
 
-export default DropdownItem;
+export default DropdownItem
