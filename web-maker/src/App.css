@@ -10,7 +10,6 @@
   outline: none;
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -18,21 +17,20 @@ input::-webkit-inner-spin-button {
 }
 
 select {
-
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
 }
 
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
 [placeholder]:empty:before {
   content: attr(placeholder);
   color: lightgrey;
-  cursor: text; 
+  cursor: text;
 }
 
 .displayButtons {
@@ -55,7 +53,7 @@ input[type=number] {
   /* text-shadow: 1px 1px 1px white; */
   font-size: 125%;
   border: none;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .editing {
@@ -125,10 +123,10 @@ input[type=number] {
 .input {
   border: none;
   border-bottom: 1px solid var(--primaryColor);
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   margin-top: 3%;
   margin-bottom: auto;
-  white-space: pre-wrap;  /* <-- THIS PRESERVES THE LINE BREAKS */
+  white-space: pre-wrap; /* <-- THIS PRESERVES THE LINE BREAKS */
 }
 
 .loginInput {
@@ -149,7 +147,7 @@ input[type=number] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  background-color:  var(--secondaryColor);
+  background-color: var(--secondaryColor);
   transition-duration: 200ms;
   color: var(--primaryColor);
   z-index: 10;
@@ -171,7 +169,7 @@ input[type=number] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   padding: 1%;
   width: 80%;
   height: 80%;
@@ -184,7 +182,7 @@ input[type=number] {
   right: 0;
   opacity: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 5;
   pointer-events: none;
 }
@@ -214,7 +212,6 @@ input[type=number] {
   margin-top: 2%;
   margin-bottom: 2%;
 }
-
 
 .addImageModalHeader {
   color: var(--primaryColor);
@@ -249,26 +246,26 @@ input[type=number] {
 }
 
 .checkboxFill::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   height: var(--checkboxHeight);
   width: var(--checkboxHeight);
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   border-radius: var(--border-radius);
   transition: transform 0.2s;
 }
 
 .checkbox:checked ~ .checkboxFill::after {
-  transform: translateX(var(--checkboxHeight))
+  transform: translateX(var(--checkboxHeight));
 }
 
 .textAlignIcon {
   margin: 1%;
   border-radius: 0;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .checkbox:checked ~ .textAlignIcon {
@@ -338,14 +335,14 @@ input[type=number] {
   /* position: absolute; */
   background-color: var(--primaryColor);
   /* color: var(--secondaryColor); */
-  color: white; 
+  color: white;
   margin: 1%;
   margin-left: 0;
   margin-right: 0;
   padding: 1%;
 }
 
-.alertDiv  {
+.alertDiv {
   position: relative;
   background-color: red;
   color: white;
@@ -361,12 +358,12 @@ input[type=number] {
 
 .hide {
   transition-duration: 0.5s;
-  transform: scaleY(0)
+  transform: scaleY(0);
 }
 
 .unhide {
   transition-duration: 0.5s;
-  transform: scaleY(1)
+  transform: scaleY(1);
 }
 
 .tableSizesContainer {
