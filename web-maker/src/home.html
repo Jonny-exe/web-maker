@@ -9,10 +9,21 @@
     <title>Document</title>
 </head>
 <style>
-    body  {
-        font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         margin: 0%;
+        font-weight: bold;
     }
+
+    @keyframes hello {
+        from {
+            transform: translateX(-100%)
+        }
+        to {
+            transform: translateX(0)
+        }
+    }
+
     .landingPage {
         --secondaryColor: #ccffee;
         --primaryColor: rgb(43, 255, 184);
@@ -22,6 +33,12 @@
         overflow: auto;
         color: var(--primaryColor);
         background-color: var(--secondaryColor);
+        /* filter: invert(100%) */
+    }
+
+    p {
+        animation-duration: 2s;
+        animation: hello 1s;
     }
 
     .mainHeader {
@@ -56,15 +73,23 @@
         border-bottom: solid 1px;
         margin: 2%;
     }
+
+    img {
+        width: 10vmax;
+    }
 </style>
 
 <body>
     <div class="landingPage">
-        <p class="mainHeader"> Hi, this is web-maker</p>
+        <p class="mainHeader"> Hi, this is web-maker </p>
         <div class="line">
             <p class="seccondaryHeader"> Web-maker is a tool to create simple web applications with zero coding
-                skills </p>
+                skills  </p>
         </div>
+        <a href="/web-maker">
+            <button class="button"> Start </button>
+        </a>
+        <p> </p>
         <p class="seccondaryHeader"> Make you own web in three easy steps </p>
         <p class="explication">
             1. Creat a project
@@ -75,12 +100,6 @@
         <p class="explication">
             3. Export it into a finished HTML file
         </p>
-        <p class="seccondaryHeader">
-            Your new web is on a click of a button
-        </p>
-        <a href="/web-maker">
-            <button class="button"> Start </button>
-        </a>
         <p class="seccondaryHeader">
             Good luck on your jouney
         </p>
