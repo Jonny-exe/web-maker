@@ -31,7 +31,7 @@ export const RenderContent = (props: any) => {
 	console.log(props.content[0] != undefined ? props.content[0].type === "img" : "empty")
 	return (
 		<>{
-			props.content.map((x: any, i: number) => (x.type === "img" ? <img src={x.src} style={x.style} alt="Image" /> : React.createElement(x.type == "img" ? "" : x.type, {
+			props.content.map((x: any, i: number) => (x.type === "img" ? <img src={x.src} style={x.style} alt="Image" /> : React.createElement(x.type, {
 				style: x.style,
 				contentEditable: notEditable.includes(x.type) || props.previewMode ? "false" : "true", // this is has to be like this because if not it doesnt detect the td only the table
 				key: i,

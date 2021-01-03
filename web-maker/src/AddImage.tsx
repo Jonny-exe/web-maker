@@ -17,9 +17,8 @@ const AddImage = (props: any) => {
 		itemCopy.type = props.type
 		itemCopy.src = props.src
 		itemCopy.style = { width: props.imageSizes.width + props.imageSizes.magnitude, height: props.imageSizes.width + props.imageSizes.magnitude, margin: "1%" }
-		debugger
 		props.content.push(itemCopy)
-		// props.setEditCount(props.editCount + 1)
+		props.setEditCount(props.editCount + 1)
 	}, [props.applyImageCount])
 
 	return (
