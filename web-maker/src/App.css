@@ -338,7 +338,8 @@ input[type=number] {
   /* border-bottom: solid 1px; */
   /* position: absolute; */
   background-color: var(--primaryColor);
-  color: var(--secondaryColor);
+  /* color: var(--secondaryColor); */
+  color: white; 
   margin: 1%;
   margin-left: 0;
   margin-right: 0;
@@ -346,7 +347,7 @@ input[type=number] {
 }
 
 .alertDiv  {
-  position: absolute;
+  position: relative;
   background-color: red;
   color: white;
   padding: 1%;
@@ -414,4 +415,25 @@ input[type=number] {
 
 .separator:hover {
   height: 1.2vmax;
+}
+
+.deleteItemButton {
+  color: white;
+  background-color: red;
+  margin: 3%;
+  border: none;
+  transition-duration: 0.5s;
+  /* display: flex;
+  align-items: center; */
+  height: 1.7vmax;
+  width: 50%;
+}
+
+.deleteItemButton:hover {
+  height: 2.2vmax;
+  cursor: pointer;
+}
+
+.smallRenderContainer {
+  overflow: auto;
 }

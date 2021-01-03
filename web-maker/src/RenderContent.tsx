@@ -9,7 +9,7 @@ export const RenderContent = (props: any) => {
 		if (props.itemIndex != -1 && holdCounter != -1) {
 			if (!cancelHover) {
 				if (holdCounter < 4) {
-					var timer = setTimeout(increaseHoldIndex, 250)
+					var timer = setTimeout(increaseHoldIndex, 75)
 				} else {
 					setHoldCounter(-1)
 					props.setModalEditPlacementActive(true)
