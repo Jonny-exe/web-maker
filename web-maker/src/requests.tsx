@@ -157,7 +157,7 @@ export const GetContentFromToken = (token: string, getContentCount: number) => {
   const thisURL = url + "getObjectFromToken"
   useEffect(() => {
     if (
-      getContentCount > 0 &&
+      (getContentCount > 0 || (token != "" && token != null)) &&
       getContentCount !== null &&
       getContentCount !== undefined
     ) {

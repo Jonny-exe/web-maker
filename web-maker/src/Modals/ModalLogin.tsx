@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { textStyle } from "../exceptionItems"
 import {
   SaveProject,
   CreateProjectTokenRecovery,
@@ -9,9 +10,16 @@ import {
   RemoveFile,
   CheckRecoveryKey,
 } from "../requests"
+import CreateOrImportProject from "./ModalLoginComponents/CreateOrImportProject"
+import DownloadProject from "./ModalLoginComponents/DownloadProject"
+import GiveNewProjectToken from "./ModalLoginComponents/GiveNewProjectToken"
+import GiveNewProjectTokenFromRecoveryKey from "./ModalLoginComponents/GiveNewProjectTokenFromRecoveryKey"
+import ImportProject from "./ModalLoginComponents/ImportProject"
+import InsertRecoveryKey from "./ModalLoginComponents/InsertRecoveryKey"
+import InsertRecoveryKeyToGetToken from "./ModalLoginComponents/InsertRecoveryKeyToGetToken"
+import SaveOrExportProject from "./ModalLoginComponents/SaveOrExportProject"
 
 const ModalLogin = (props: any) => {
-  const textStyle = { fontSize: "150%", margin: "1%" }
   const [
     waitingForTokenFromRecoveryKey,
     setWaitingForTokenFromRecoveryKey,
@@ -26,7 +34,7 @@ const ModalLogin = (props: any) => {
     tokenFromRecoveryKeyInputValue,
     setTokenFromRecoveryKeyInputValue,
   ] = useState("")
-  const [tokenInputValue, setTokenInputValue] = useState("")
+  const [tokenInputValue, setTokenInputValue] = useState(props.token)
   const [createProjectActivated, setCreateProjectActivated] = useState(false)
   const [recoverTokenActivated, setRecoverTokenActivated] = useState(false)
   const [importProjectActivated, setImportProjectActivated] = useState(false)
@@ -141,12 +149,6 @@ const ModalLogin = (props: any) => {
     setRemoveFileActivated(true)
   }
 
-  const logOut = () => {
-    props.setToken("")
-    localStorage.removeItem("web-maker-token")
-    hideModal()
-  }
-
   const recoverToken = () => {
     setRecoverTokenCount(recoverTokenCount + 1)
     setWaitingForTokenFromRecoveryKey(true)
@@ -158,212 +160,56 @@ const ModalLogin = (props: any) => {
     !importProjectActivated
   ) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}> Create new project </span>
-          <button
-            className="preview loginInput loginButton"
-            onClick={() => setCreateProjectActivated(true)}
-          >
-            {" "}
-            Create{" "}
-          </button>
-          <span style={textStyle}> Import existing project </span>
-          <button
-            className="preview loginInput loginButton"
-            onClick={() => setImportProjectActivated(true)}
-          >
-            {" "}
-            Import{" "}
-          </button>
-        </div>
-      </div>
+      <CreateOrImportProject
+        hideModal={hideModal}
+        loginModalStateActive={props.loginModalStateActive}
+        setCreateProjectActivated={setCreateProjectActivated}
+        setImportProjectActivated={setImportProjectActivated}
+      />
     )
   } else if (props.token !== "" && !waitingForToken && !getFileActivated) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}> Save your current project </span>
-          <button
-            onClick={saveOnClick}
-            className="preview loginInput loginButton"
-          >
-            {" "}
-            Save{" "}
-          </button>
-          <span
-            className={`informationDiv ${
-              responseSavedStatus === 200 && !loadingSaved && saveClicked
-                ? "unhide"
-                : "hide"
-            }`}
-          >
-            {" "}
-            Saved successfully{" "}
-          </span>
-          <span
-            className={`alertDiv ${
-              responseSavedStatus === 500 && !loadingSaved && saveClicked
-                ? "unhide"
-                : "hide"
-            }`}
-          >
-            {" "}
-            Unsuccessfull save, please try again later{" "}
-          </span>
-          <button
-            type="button"
-            onClick={getFile}
-            className="preview loginInput loginButton"
-          >
-            {" "}
-            Get html file{" "}
-          </button>
-          <button
-            type="button"
-            onClick={logOut}
-            className="preview loginInput loginButton"
-          >
-            Log out
-          </button>
-        </div>
-      </div>
+      <SaveOrExportProject
+        hideModal={hideModal}
+        setContent={props.setContent}
+        loginModalStateActive={props.loginModalStateActive}
+        saveOnClick={saveOnClick}
+        getFile={getFile}
+        loadingSaved={loadingSaved}
+        responseSavedStatus={responseSavedStatus}
+        saveClicked={saveClicked}
+        setToken={props.setToken}
+      />
     )
   } else if (props.token !== "" && !waitingForToken && getFileActivated) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span> {loadingGetFile ? "Loading file" : ""} </span>
-          <a
-            href={`temp-${props.token}.html`}
-            className={`preview loginInput loginButton ${
-              loadingGetFile ? "hide" : "unhide"
-            }`}
-            download="index.html"
-          >
-            {" "}
-            Download file{" "}
-          </a>
-        </div>
-      </div>
+      <DownloadProject
+        hideModal={hideModal}
+        loadingGetFile={loadingGetFile}
+        token={props.token}
+        loginModalStateActive={props.loginModalStateActive}
+      />
     )
   } else if (props.token === "" && createProjectActivated && !waitingForToken) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}>
-            {" "}
-            Insert recovery key in case you forget your token{" "}
-          </span>
-          <input
-            type="text"
-            className="input loginInput"
-            placeholder="Recovery key"
-            value={recoveryKeyInputValue}
-            onChange={(e: any) => setRecoveryKeyInputValue(e.target.value)}
-          />
-          <div className="informationDiv recoveryTooLong">
-            {" "}
-            Make sure you save this recovery key. You will need the key in case
-            you forget your token.
-          </div>
-          <div
-            className={`informationDiv ${
-              recoveryTooLong ? "alertDiv unhide" : "hide"
-            }`}
-          >
-            {" "}
-            You recovery key is too long, make sure its under 30 carachters{" "}
-          </div>
-          <div
-            className={`alertDiv ${
-              checkRecoveryKeyStatus === 500 ? "unhide" : "hide"
-            }`}
-          >
-            {" "}
-            The recovery key is already taken{" "}
-          </div>
-          <button
-            onClick={() => setCheckRecoveryKeyCount(checkRecoveryKeyCount + 1)}
-            className="preview loginInput loginButton"
-          >
-            {" "}
-            Create{" "}
-          </button>
-        </div>
-      </div>
+      <InsertRecoveryKey
+        checkRecoveryKeyCount={checkRecoveryKeyCount}
+        checkRecoveryKeyStatus={checkRecoveryKeyStatus}
+        hideModal={hideModal}
+        loginModalStateActive={props.loginModalStateActive}
+        recoveryKeyInputValue={recoveryKeyInputValue}
+        recoveryTooLong={recoveryTooLong}
+        setCheckRecoveryKeyCount={setCheckRecoveryKeyCount}
+        setRecoveryKeyInputValue={setRecoveryKeyInputValue}
+      />
     )
   } else if (createProjectActivated && waitingForToken) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}> This is your project token </span>
-          <span>{responseToken != null ? responseToken : ""}</span>
-          <div className={`informationDiv `}>
-            {" "}
-            Make sure you save this token. You will need the key to edit you
-            project the next time you want to edit it.
-          </div>
-          <button
-            onClick={hideModal}
-            className="preview loginButton"
-            style={{ margin: "1%" }}
-          >
-            {" "}
-            Continue{" "}
-          </button>
-        </div>
-      </div>
+      <GiveNewProjectToken
+        hideModal={hideModal}
+        loginModalStateActive={props.loginModalStateActive}
+        responseToken={responseToken}
+      />
     )
   } else if (
     props.token === "" &&
@@ -371,54 +217,14 @@ const ModalLogin = (props: any) => {
     !recoverTokenActivated
   ) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}>
-            {" "}
-            Import your project with your project token{" "}
-          </span>
-          <div className={`informationDiv `}>
-            {" "}
-            If you cant remember your token click recover token. You will be
-            able to recover your token with your recovery key
-          </div>
-          <input
-            type="text"
-            className="input loginInput"
-            placeholder="Token"
-            value={tokenInputValue}
-            onChange={(e: any) => setTokenInputValue(e.target.value)}
-          />
-          <div
-            style={{ display: "flex", width: "50%", justifyContent: "center" }}
-          >
-            <button
-              onClick={() => setRecoverTokenActivated(true)}
-              className="preview loginInput loginButton"
-            >
-              {" "}
-              Recovery{" "}
-            </button>
-            <button
-              onClick={importProject}
-              className="preview loginInput loginButton"
-            >
-              {" "}
-              Import{" "}
-            </button>
-          </div>
-        </div>
-      </div>
+      <ImportProject
+        hideModal={hideModal}
+        importProject={importProject}
+        loginModalStateActive={props.loginModalStateActive}
+        setRecoverTokenActivated={setRecoverTokenActivated}
+        setTokenInputValue={setTokenInputValue}
+        tokenInputValue={tokenInputValue}
+      />
     )
   } else if (
     props.token === "" &&
@@ -427,45 +233,13 @@ const ModalLogin = (props: any) => {
     !waitingForTokenFromRecoveryKey
   ) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}>
-            {" "}
-            Introduce recovery key to get your token{" "}
-          </span>
-          <div className="informationDiv">
-            {" "}
-            This recovery key has to be unique so try with a personal phrase or
-            something like that.{" "}
-          </div>
-          <input
-            type="text"
-            className="input loginInput"
-            placeholder="Recovery key"
-            value={tokenFromRecoveryKeyInputValue}
-            onChange={(e: any) =>
-              setTokenFromRecoveryKeyInputValue(e.target.value)
-            }
-          />
-          <button
-            onClick={recoverToken}
-            className="preview loginInput loginButton"
-          >
-            {" "}
-            Submit{" "}
-          </button>
-        </div>
-      </div>
+      <InsertRecoveryKeyToGetToken
+        hideModal={hideModal}
+        loginModalStateActive={props.loginModalStateActive}
+        recoverToken={recoverToken}
+        setTokenFromRecoveryKeyInputValue={setTokenFromRecoveryKeyInputValue}
+        tokenFromRecoveryKeyInputValue={tokenFromRecoveryKeyInputValue}
+      />
     )
   } else if (
     props.token === "" &&
@@ -474,40 +248,11 @@ const ModalLogin = (props: any) => {
     waitingForTokenFromRecoveryKey
   ) {
     return (
-      <div className="loginModalContainer">
-        <div
-          className={`overlay ${
-            props.loginModalStateActive ? "overlayActive" : ""
-          }`}
-          onClick={hideModal}
-        ></div>
-        <div
-          className={`loginModal modal ${
-            props.loginModalStateActive ? "modalActive" : ""
-          }`}
-        >
-          <span style={textStyle}> This is your project token </span>
-          <span>
-            {responseTokenFromRecovery !== null
-              ? responseTokenFromRecovery == 500
-                ? "Wrong recovery key"
-                : responseTokenFromRecovery
-              : ""}
-          </span>
-          <div className={`informationDiv`}>
-            {" "}
-            Make sure you save this token. You will need the key to edit you
-            project the next time you want to edit it.
-          </div>
-          <button
-            onClick={hideModal}
-            className="preview loginButton loginInput"
-          >
-            {" "}
-            Continue{" "}
-          </button>
-        </div>
-      </div>
+      <GiveNewProjectTokenFromRecoveryKey
+        hideModal={hideModal}
+        loginModalStateActive={props.loginModalStateActive}
+        responseTokenFromRecovery={responseTokenFromRecovery}
+      />
     )
   }
   return <>hi </>
