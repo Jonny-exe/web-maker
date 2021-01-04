@@ -1,5 +1,5 @@
 import React from "react"
-import { exceptionToRender } from "../exceptionItems"
+import { exceptionToRender } from "../constants/exceptionItems"
 
 const ModalEditPlacement = (props: any) => {
 	const moveItem = (newIndex: number) => {
@@ -23,13 +23,11 @@ const ModalEditPlacement = (props: any) => {
 				className={`overlay editOverlay ${
 					props.modalEditPlacementActive ? "overlayActive" : ""
 				}`}
-				onClick={() => props.setModalEditPlacementActive(false)}
-			></div>
+				onClick={() => props.setModalEditPlacementActive(false)}></div>
 			<div
 				className={`modal modalEditPlacement ${
 					props.modalEditPlacementActive ? "modalActive" : ""
-				}`}
-			>
+				}`}>
 				<h1 style={{ margin: "1%" }}> Add your image url </h1>
 				<h2>
 					{" "}
@@ -41,8 +39,7 @@ const ModalEditPlacement = (props: any) => {
 				</h2>
 				<div
 					className="informationDiv"
-					style={{ marginLeft: "3%", marginRight: "3%" }}
-				>
+					style={{ marginLeft: "3%", marginRight: "3%" }}>
 					{" "}
 					Click the on your new desired position{" "}
 				</div>
@@ -60,14 +57,13 @@ const ModalEditPlacement = (props: any) => {
 											margin: "0%",
 										},
 									},
-									item.text,
+									item.text
 								)
 							)}
 							{props.content.length === index + 1 ? (
 								<div
 									className="separator"
-									onClick={() => moveItem(index + 1)}
-								></div>
+									onClick={() => moveItem(index + 1)}></div>
 							) : (
 								""
 							)}

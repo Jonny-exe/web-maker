@@ -1,8 +1,8 @@
 import React from "react"
-import AddItem from "./AddItem"
-import AddImage from "./AddImage"
-import AddTable from "./AddTable"
-import AddTextCollumns from "./AddTextCollumn"
+import AddItem from "./AddComponents/AddItem"
+import AddImage from "./AddComponents/AddImage"
+import AddTable from "./AddComponents/AddTable"
+import AddTextCollumns from "./AddComponents/AddTextCollumn"
 import { faParagraph } from "@fortawesome/free-solid-svg-icons"
 import { faHeading } from "@fortawesome/free-solid-svg-icons"
 import { faImage } from "@fortawesome/free-solid-svg-icons"
@@ -15,8 +15,7 @@ export const DropdownItems = (props: any) => {
 		<div
 			className={`dropdownMenuItems ${
 				props.menuState ? "showDropdownItems" : "notShowDropdownItems"
-			}`}
-		>
+			}`}>
 			<AddItem
 				type={"h1"}
 				text={"Title"}

@@ -1,6 +1,6 @@
 import React from "react"
 import RenderContent from "./RenderContent"
-import { notEditable } from "./exceptionItems"
+import { notEditable } from "./constants/exceptionItems"
 
 export const RenderContent1 = (props: any) => {
 	return (
@@ -44,9 +44,9 @@ export const RenderContent1 = (props: any) => {
 							/>
 						) : (
 							x.content
-						),
+						)
 					)
-				),
+				)
 			)}
 		</>
 	)
