@@ -8,7 +8,6 @@ import { faHeading } from "@fortawesome/free-solid-svg-icons"
 import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { faColumns } from "@fortawesome/free-solid-svg-icons"
 import { faTable } from "@fortawesome/free-solid-svg-icons"
-// import types from "./types.js"
 
 export const DropdownItems = (props: any) => {
 	return (

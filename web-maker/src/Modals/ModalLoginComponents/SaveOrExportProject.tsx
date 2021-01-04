@@ -25,7 +25,6 @@ const SaveOrExportProject: React.FC<Props> = ({
 	saveOnClick,
 }) => {
 	const logOut = () => {
-		debugger
 		setToken("")
 		localStorage.removeItem("web-maker-token")
 		hideModal()

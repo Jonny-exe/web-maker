@@ -1,4 +1,4 @@
-export const title: object = {
+export const title = {
 	type: "h1",
 	text: "Title",
 	content: "",
@@ -8,7 +8,7 @@ export const title: object = {
 	children: [],
 }
 
-export const subTitle: object = {
+export const subTitle = {
 	type: "h2",
 	text: "SubTitle",
 	content: "",
@@ -18,7 +18,7 @@ export const subTitle: object = {
 	children: [],
 }
 
-export const heading: object = {
+export const heading = {
 	type: "h3",
 	text: "Heading",
 	content: "",
@@ -28,7 +28,7 @@ export const heading: object = {
 	children: [],
 }
 
-export const span: object = {
+export const span = {
 	type: "span",
 	text: "Text",
 	content: "",
@@ -38,7 +38,7 @@ export const span: object = {
 	children: [],
 }
 
-export const div: object = {
+export const div = {
 	type: "div",
 	text: "Text",
 	content: "",
@@ -48,7 +48,7 @@ export const div: object = {
 	children: [],
 }
 
-export const image: object = {
+export const image = {
 	type: "img",
 	// text: "Image",
 	src:
@@ -61,7 +61,7 @@ export const image: object = {
 	children: null,
 }
 
-export const table: object = {
+export const table = {
 	type: "table",
 	text: "Table",
 	children: [],
@@ -75,7 +75,7 @@ export const table: object = {
 	},
 }
 
-export const item: object = {
+export const item = {
 	type: "",
 	text: "",
 	content: "",
@@ -88,7 +88,7 @@ export const item: object = {
 	children: [],
 }
 
-export const columnItem: object = {
+export const columnItem = {
 	type: "div",
 	text: "Columns",
 	content: "",
