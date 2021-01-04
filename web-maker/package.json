@@ -41,9 +41,10 @@
       "last 1 safari version"
     ]
   },
-  "eslintconfig": {
+  "eslintConfig": {
     "extends": [
-      "./node_modules/cod-scripts/eslint.js"
+      "react-app",
+      "react-app/jest"
     ]
   },
   "husky": {
