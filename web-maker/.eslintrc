@@ -7,18 +7,16 @@
     "node": true
   },
   "plugins": ["react"],
-  "extends": [
-    "plugin:prettier/recommended",
-    "plugin:react/recommended",
-    "eslint:recommended"
-  ],
+  "extends": ["plugin:prettier/recommended", "plugin:react/recommended", "eslint:recommended"],
   "rules": {
     "quotes": [1, "double", "avoid-escape"],
+    "semi": ["error", "never"],
     "react/prop-types": 0,
     "no-console": 0,
     "no-unused-vars": 1,
     "no-func-assign": 2,
     "no-const-assign": 2,
+    "no-tabs": ["error", { "allowIndentationTabs": true }],
     "no-var": 2,
     "react/react-in-jsx-scope": 0
   }
