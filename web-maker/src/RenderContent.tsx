@@ -64,7 +64,6 @@ export const RenderContent = (props: any) => {
               content: "",
               onInput: (e: any) => {
                 item.content = e.target.textContent
-                console.log("ONINPUT")
               },
               onClick: (e: any) => {
                 props.setSavedStyle(e.target.style)
@@ -91,9 +90,9 @@ export const RenderContent = (props: any) => {
               />
             ) : (
               item.content
-            ),
+            )
           )
-        ),
+        )
       )}
     </>
   )

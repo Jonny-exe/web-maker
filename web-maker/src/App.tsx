@@ -1,32 +1,34 @@
-import React, {useState} from 'react';
-import './App.css';
-import Preview from './Preview';
-import Alerts from './Alerts';
-import AddButton from './AddButton';
-import Modal from './Modals/Modal';
-import RenderContent from './RenderContent';
-import Login from './Login';
-// import Styles from './StylesTextAlign'
-import ModalEditPlacement from './Modals/ModalEditPlacement';
+import React, { useState } from "react"
+import "./App.css"
+import Preview from "./Preview"
+import Alerts from "./Alerts"
+import AddButton from "./AddButton"
+import Modal from "./Modals/Modal"
+import RenderContent from "./RenderContent"
+import Login from "./Login"
+import ModalEditPlacement from "./Modals/ModalEditPlacement"
 
 function AppMain() {
-  const [itemIndex, setItemIndex] = useState(-1);
+  const [itemIndex, setItemIndex] = useState(-1)
   const [modalEditPlacementActive, setModalEditPlacementActive] = useState(
-    false,
-  );
-  const [token, setToken] = useState('');
-  const [modalStateActive, setModalStateActive] = useState(false);
-  const [loginModalStateActive, setLoginModalStateActive] = useState(false);
-  const [addButtonStateActive, setAddButtonStateActive] = useState(false);
+    false
+  )
+  const [token, setToken] = useState(
+    localStorage.getItem("web-maker-token") != null
+      ? localStorage.getItem("web-maker-token")
+      : ""
+  )
+  const [modalStateActive, setModalStateActive] = useState(false)
+  const [loginModalStateActive, setLoginModalStateActive] = useState(false)
+  const [addButtonStateActive, setAddButtonStateActive] = useState(false)
   const [savedStyle, setSavedStyle] = useState({
-    textAlign: '',
-    borderStyle: '',
-  });
-  const [editCount, setEditCount] = useState(0);
-  const [previewMode, setPreviewMode] = useState(false);
-  const [content, setContent] = useState([]);
+    textAlign: "",
+    borderStyle: "",
+  })
+  const [editCount, setEditCount] = useState(0)
+  const [previewMode, setPreviewMode] = useState(false)
+  const [content, setContent] = useState([])
 
-  console.log('Content: ', content);
   return (
     <div className="App">
       <div className="tools">
@@ -78,7 +80,7 @@ function AppMain() {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default AppMain;
+export default AppMain

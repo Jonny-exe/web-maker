@@ -20,10 +20,10 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: '';
+  text-overflow: "";
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -246,7 +246,7 @@ input[type='number'] {
 }
 
 .checkboxFill::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -357,6 +357,7 @@ input[type='number'] {
 } */
 
 .hide {
+  position: absolute;
   transition-duration: 0.5s;
   transform: scaleY(0);
 }
