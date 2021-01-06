@@ -35,7 +35,7 @@ const ImportProject: React.FC<Props> = ({
 				</div>
 				<input
 					type="text"
-					className=" defaultInput"
+					className="defaultInput"
 					placeholder="Token"
 					value={tokenInputValue}
 					onChange={(e: any) => setTokenInputValue(e.target.value)}
@@ -44,12 +44,10 @@ const ImportProject: React.FC<Props> = ({
 					style={{ display: "flex", width: "50%", justifyContent: "center" }}>
 					<button
 						onClick={() => setRecoverTokenActivated(true)}
-						className="preview defaultInput defaultButton">
+						className="defaultButton">
 						Recovery
 					</button>
-					<button
-						onClick={importProject}
-						className="preview defaultInput defaultButton">
+					<button onClick={importProject} className="defaultButton">
 						Import
 					</button>
 				</div>

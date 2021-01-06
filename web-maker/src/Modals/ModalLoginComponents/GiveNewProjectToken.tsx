@@ -23,13 +23,13 @@ const GiveNewProjectToken: React.FC<Props> = ({
 					}`}>
 					<span style={textStyle}> This is your project token </span>
 					<span>{responseToken != null ? responseToken : ""}</span>
-					<div className={`informationDiv `}>
+					<div className="informationDiv">
 						Make sure you save this token. You will need the key to edit you
 						project the next time you want to edit it.
 					</div>
 					<button
 						onClick={hideModal}
-						className="preview defaultButton"
+						className="defaultButton"
 						style={{ margin: "1%" }}>
 						Continue
 					</button>

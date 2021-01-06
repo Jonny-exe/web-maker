@@ -41,9 +41,7 @@ const SaveOrExportProject: React.FC<Props> = ({
 					loginModalStateActive ? "modalActive" : ""
 				}`}>
 				<span style={textStyle}> Save your current project </span>
-				<button
-					onClick={saveOnClick}
-					className="preview defaultInput defaultButton">
+				<button onClick={saveOnClick} className="defaultButton">
 					Save
 				</button>
 				<span
@@ -62,16 +60,10 @@ const SaveOrExportProject: React.FC<Props> = ({
 					}`}>
 					Unsuccessfull save, please try again later
 				</span>
-				<button
-					type="button"
-					onClick={getFile}
-					className="preview defaultInput defaultButton">
+				<button type="button" onClick={getFile} className="defaultButton">
 					Get html file
 				</button>
-				<button
-					type="button"
-					onClick={logOut}
-					className="preview defaultInput defaultButton">
+				<button type="button" onClick={logOut} className="defaultButton">
 					Log out
 				</button>
 			</div>

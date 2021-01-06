@@ -157,7 +157,9 @@ export const GetContentFromToken = (token: string, getContentCount: number) => {
 	const thisURL = url + "getObjectFromToken"
 	useEffect(() => {
 		if (
-			(getContentCount > 0 || (token != "" && token != null)) &&
+			getContentCount > 0 &&
+			token != "" &&
+			token != null &&
 			getContentCount !== null &&
 			getContentCount !== undefined
 		) {
@@ -197,14 +199,16 @@ export const GetFile = (token: string, getFileCount: number) => {
 		if (
 			getFileCount > 0 &&
 			getFileCount !== null &&
-			getFileCount !== undefined
+			getFileCount !== undefined &&
+			token != "" &&
+			token != null
 		) {
 			var bodyContent = {
 				token: token,
 			}
 			const requestOptions = {
 				method: "POST",
-				headers: headersContent,
+				headers: { "Content-Type": "application/json" },
 				// credentials: 'same-origin',
 				body: JSON.stringify(bodyContent),
 			}
@@ -213,7 +217,9 @@ export const GetFile = (token: string, getFileCount: number) => {
 				loadingGetFile: true,
 			}))
 			const loadData = async () => {
+				debugger
 				const response = await fetch(thisURL, requestOptions)
+				debugger
 				var data: number = await response.json()
 				setState({ getFileStatus: 200, loadingGetFile: false })
 			}

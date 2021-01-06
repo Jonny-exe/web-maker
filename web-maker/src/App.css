@@ -6,6 +6,12 @@
 	width: 100%;
 	overflow: hidden;
 }
+
+.App.dark {
+	--secondaryColor: #292c35;
+	--primaryColor: rgb(43, 255, 184);
+}
+
 :focus {
 	outline: none;
 }
@@ -311,6 +317,7 @@ input[type="number"] {
 }
 
 .defaultButton {
+	margin: 1%;
 	font-size: 125%;
 	background-color: var(--primaryColor);
 	color: var(--secondaryColor);
@@ -449,8 +456,8 @@ input[type="number"] {
 	right: 5%;
 	float: right;
 	padding: 1%;
-	background-color: var(--primaryColor);
-	color: var(--secondaryColor);
+	background-color: var(--secondaryColor);
+	color: var(--primaryColor);
 }
 
 .settingsStylesPairsContainer {
@@ -475,4 +482,12 @@ input[type="number"] {
 
 .settingsStyleInput {
 	width: 20%;
+}
+
+.notDisplay {
+	display: none;
+}
+
+.display {
+	display: initial;
 }

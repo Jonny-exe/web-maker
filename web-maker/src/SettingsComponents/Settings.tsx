@@ -2,13 +2,15 @@ import React, { useState } from "react"
 import { bodyObjectType } from "../constants/defaultTypes"
 import SettingsButton from "./SettingsButton"
 import SettingsModal from "./SettingsModal"
+import ToggleDarkMode from "./ToggleDarkMode"
 
 interface Props {
 	previewMode: boolean
 	content: any[] // Had to use because objecdt[] | bodyContentType[] doesnt work
-	setContent: (newContent: { [key: string]: string }[]) => void
 	editCount: number
 	setEditCount: (editCount: number) => void
+	setDarkModeActive: (darkMode: boolean) => void
+	darkModeActive: boolean
 }
 
 const Settings: React.FC<Props> = ({
@@ -16,7 +18,8 @@ const Settings: React.FC<Props> = ({
 	editCount,
 	content,
 	previewMode,
-	setContent,
+	setDarkModeActive,
+	darkModeActive,
 }) => {
 	const [settingsModalActive, setSettingsModalActive] = useState(false)
 
@@ -30,10 +33,11 @@ const Settings: React.FC<Props> = ({
 				setEditCount={setEditCount}
 				editCount={editCount}
 				content={content}
-				setContent={setContent}
 				contentBody={content[0]}
 				setSettingsModalActive={setSettingsModalActive}
 				settingsModalActive={settingsModalActive}
+				setDarkModeActive={setDarkModeActive}
+				darkModeActive={darkModeActive}
 			/>
 		</div>
 	)

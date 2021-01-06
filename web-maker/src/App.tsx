@@ -30,10 +30,16 @@ const App = () => {
 	const [editCount, setEditCount] = useState(0)
 	const [previewMode, setPreviewMode] = useState(false)
 	const [content, setContent] = useState([bodyObject])
-	console.log(content)
+	const [darkModeActive, setDarkModeActive] = useState(
+		localStorage.getItem("dark-mode") != null
+			? localStorage.getItem("dark-mode") == "true"
+				? true
+				: false
+			: false
+	)
 
 	return (
-		<div className="App">
+		<div className={`App ${darkModeActive ? "dark" : ""}`}>
 			<div className="tools">
 				<Login
 					content={content}
@@ -84,9 +90,10 @@ const App = () => {
 			<Settings
 				setEditCount={setEditCount}
 				editCount={editCount}
-				setContent={setContent}
 				previewMode={previewMode}
 				content={content}
+				darkModeActive={darkModeActive}
+				setDarkModeActive={setDarkModeActive}
 			/>
 		</div>
 	)

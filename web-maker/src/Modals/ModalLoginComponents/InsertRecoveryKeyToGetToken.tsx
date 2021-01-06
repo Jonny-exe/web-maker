@@ -32,16 +32,14 @@ const InsertRecoveryKeyToGetToken: React.FC<Props> = ({
 				</div>
 				<input
 					type="text"
-					className=" defaultInput"
+					className="defaultInput"
 					placeholder="Recovery key"
 					value={tokenFromRecoveryKeyInputValue}
 					onChange={(e: any) =>
 						setTokenFromRecoveryKeyInputValue(e.target.value)
 					}
 				/>
-				<button
-					onClick={recoverToken}
-					className="preview defaultInput defaultButton">
+				<button onClick={recoverToken} className="defaultButton">
 					Submit
 				</button>
 			</div>

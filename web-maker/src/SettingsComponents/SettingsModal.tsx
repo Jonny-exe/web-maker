@@ -1,24 +1,27 @@
 import React, { useState } from "react"
 import { bodyObject, bodyObjectType } from "../constants/defaultTypes"
 import SettingsStylesModal from "./SettingsStylesModal"
+import ToggleDarkMode from "./ToggleDarkMode"
 
 interface Props {
 	setSettingsModalActive: (settingsStatus: boolean) => void
 	settingsModalActive: boolean
 	contentBody: bodyObjectType
 	content: object[] // I separte them so I am able to asing types to only content[0]
-	setContent: (newContent: { [key: string]: string }[]) => void
 	editCount: number
 	setEditCount: (editCount: number) => void
+	setDarkModeActive: (darkMode: boolean) => void
+	darkModeActive: boolean
 }
 
 const SettingsModal: React.FC<Props> = ({
 	content,
-	setContent,
 	contentBody,
 	setSettingsModalActive,
 	settingsModalActive,
 	editCount,
+	setDarkModeActive,
+	darkModeActive,
 	setEditCount,
 }) => {
 	const [newTitleValue, setNewTitleValue] = useState("")
@@ -61,7 +64,14 @@ const SettingsModal: React.FC<Props> = ({
 				className={`modal settingsModal ${
 					settingsModalActive ? "modalActive" : ""
 				}`}>
-				<h2> Settings </h2>
+				<h2>
+					{" "}
+					Settings{" "}
+					<ToggleDarkMode
+						setDarkModeActive={setDarkModeActive}
+						darkModeActive={darkModeActive}
+					/>{" "}
+				</h2>
 				<input
 					className="defaultInput"
 					style={{ display: "inline-block" }}
