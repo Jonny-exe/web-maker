@@ -1,355 +1,362 @@
 .App {
-  text-align: center;
-  --speed: 500ms;
-  --secondaryColor: #ccffee;
-  --primaryColor: rgb(43, 255, 184);
-  width: 100%;
-  overflow: hidden;
+	text-align: center;
+	--speed: 500ms;
+	--secondaryColor: #ccffee;
+	--primaryColor: rgb(43, 255, 184);
+	width: 100%;
+	overflow: hidden;
 }
 :focus {
-  outline: none;
+	outline: none;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-indent: 1px;
-  text-overflow: "";
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: "";
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
 
 [placeholder]:empty:before {
-  content: attr(placeholder);
-  color: lightgrey;
-  cursor: text;
+	content: attr(placeholder);
+	color: lightgrey;
+	cursor: text;
 }
 
 .displayButtons {
-  display: initial;
+	display: initial;
 }
 
 .notDisplayButtons {
-  display: none;
+	display: none;
 }
 
 .previewMode {
-  display: none;
-  color: var(--secondaryColor);
+	display: none;
+	color: var(--secondaryColor);
 }
 
 .preview {
-  margin-top: auto;
-  margin-bottom: auto;
-  color: var(--primaryColor);
-  /* text-shadow: 1px 1px 1px white; */
-  font-size: 125%;
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
+	margin-top: auto;
+	margin-bottom: auto;
+	color: var(--primaryColor);
+	/* text-shadow: 1px 1px 1px white; */
+	font-size: 125%;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .editing {
-  display: initial;
+	display: initial;
 }
 
 .notEditing {
-  display: none;
+	display: none;
 }
 
 .tools {
-  display: flex;
-  padding: 1%;
-  justify-content: space-between;
-  background-color: var(--secondaryColor);
+	display: flex;
+	padding: 1%;
+	justify-content: space-between;
+	background-color: var(--secondaryColor);
 }
 
 .dropdown {
-  /* transform: translate(-45%); */
-  background-color: var(--primaryColor);
-  padding: 1rem;
-  overflow: hidden;
-  transition-duration: 0.2s;
+	/* transform: translate(-45%); */
+	background-color: var(--primaryColor);
+	padding: 1rem;
+	overflow: hidden;
+	transition-duration: 0.2s;
 }
 
 .dropdownItemsContainer {
-  border-radius: 20px;
-  position: float;
+	border-radius: 20px;
+	position: float;
 }
 
 .dropdown:hover {
-  /* transform: translate(-45%); */
-  background-color: var(--secondaryColor);
+	/* transform: translate(-45%); */
+	background-color: var(--secondaryColor);
 }
 
 .menuItem {
-  display: flex;
-  align-items: center;
-  border-radius: 20%;
-  padding: 0.5rem;
+	display: flex;
+	align-items: center;
+	border-radius: 20%;
+	padding: 0.5rem;
 }
 
 .dropdownMenuItems {
-  z-index: 10;
-  position: absolute;
+	z-index: 10;
+	position: absolute;
 }
 
 .showDropdownItems {
-  transform: scaleY(1) translate(-76%);
-  transition-duration: 500ms;
+	transform: scaleY(1) translate(-76%);
+	transition-duration: 500ms;
 }
 
 .notShowDropdownItems {
-  transform-origin: top;
-  transform: scaleY(0) translate(-76%);
-  transition-duration: 500ms;
+	transform-origin: top;
+	transform: scaleY(0) translate(-76%);
+	transition-duration: 500ms;
 }
 
 .addButton {
-  color: var(--primaryColor);
+	color: var(--primaryColor);
 }
 
 .addButtonContainer {
-  background-color: var(--secondaryColor);
+	background-color: var(--secondaryColor);
 }
 
-.input {
-  border: none;
-  border-bottom: 1px solid var(--primaryColor);
-  background-color: rgba(0, 0, 0, 0);
-  margin-top: 3%;
-  margin-bottom: auto;
-  white-space: pre-wrap; /* <-- THIS PRESERVES THE LINE BREAKS */
+.defaultInput {
+	width: 90%;
+	border: none;
+	border-bottom: 1px solid var(--primaryColor);
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 3%;
+	margin-bottom: auto;
+	white-space: pre-wrap; /* <-- THIS PRESERVES THE LINE BREAKS */
+	margin-bottom: 2%;
+	margin-top: 2%;
+	margin-left: 1%;
+	margin-right: 1%;
+	scale: 110%;
 }
 
-.loginInput {
-  margin-bottom: 2%;
-  margin-top: 2%;
-  margin-left: 1%;
-  margin-right: 1%;
-  scale: 110%;
-}
-
-.loginInput[placeholder] {
-  color: var(--primaryColor);
+.defaultInput[placeholder] {
+	color: var(--primaryColor);
 }
 
 .modal {
-  /* text-align: center; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-color: var(--secondaryColor);
-  transition-duration: 200ms;
-  color: var(--primaryColor);
-  z-index: 10;
-  width: 60%;
-  height: 40%;
-  overflow: auto;
+	/* text-align: center; */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	background-color: var(--secondaryColor);
+	transition-duration: 200ms;
+	color: var(--primaryColor);
+	z-index: 10;
+	width: 60%;
+	height: 40%;
+	overflow: auto;
 }
 
 .modalActive {
-  position: fixed;
-  transform: translate(-50%, -50%) scale(1);
+	position: fixed;
+	transform: translate(-50%, -50%) scale(1);
 }
 
 .modalEditPlacement {
-  height: 65%;
+	height: 65%;
+}
+
+.settingsModal {
+	padding: 3%;
+	height: 60%;
+	/* width: 70%; */
+	/* display: flex;
+  flex-direction: column; */
 }
 
 .loginModal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1%;
-  width: 80%;
-  height: 80%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1%;
+	width: 80%;
+	height: 80%;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5;
-  pointer-events: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 5;
+	pointer-events: none;
 }
 
 .overlayActive {
-  opacity: 1;
-  pointer-events: all;
+	opacity: 1;
+	pointer-events: all;
 }
 
 .addButtonOverlayActive {
-  opacity: 0;
+	opacity: 0;
 }
 
 .addImageOverlay {
-  z-index: 11;
+	z-index: 11;
 }
 
 .addImageModal {
-  z-index: 12;
-  display: flex;
-  flex-direction: column;
-  padding: 3%;
+	z-index: 12;
+	display: flex;
+	flex-direction: column;
+	padding: 3%;
 }
 
 .modalImageButton {
-  margin: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
+	margin: auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }
 
 .addImageModalHeader {
-  color: var(--primaryColor);
+	color: var(--primaryColor);
 }
 
 .checkboxContainer {
-  --checkboxWidth: 40px;
-  --checkboxHeight: calc(var(--checkboxWidth) / 2);
-  --border-radius: calc(var(--checkboxHeight) / 2);
-  width: 10%;
-  display: block;
-  cursor: pointer;
-  /* margin: 1%;
+	--checkboxWidth: 40px;
+	--checkboxHeight: calc(var(--checkboxWidth) / 2);
+	--border-radius: calc(var(--checkboxHeight) / 2);
+	width: 10%;
+	display: block;
+	cursor: pointer;
+	/* margin: 1%;
   padding: 1%; */
 }
 
 .checkbox {
-  display: none;
+	display: none;
 }
 
 .checkboxFill {
-  position: relative;
-  width: var(--checkboxWidth);
-  height: var(--checkboxHeight);
-  border-radius: var(--border-radius);
-  background-color: white;
-  transition: background 0.2s;
+	position: relative;
+	width: var(--checkboxWidth);
+	height: var(--checkboxHeight);
+	border-radius: var(--border-radius);
+	background-color: white;
+	transition: background 0.2s;
 }
 
 .checkbox:checked ~ .checkboxFill {
-  background: var(--primaryColor);
+	background: var(--primaryColor);
 }
 
 .checkboxFill::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: var(--checkboxHeight);
-  width: var(--checkboxHeight);
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  border-radius: var(--border-radius);
-  transition: transform 0.2s;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: var(--checkboxHeight);
+	width: var(--checkboxHeight);
+	background: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	border-radius: var(--border-radius);
+	transition: transform 0.2s;
 }
 
 .checkbox:checked ~ .checkboxFill::after {
-  transform: translateX(var(--checkboxHeight));
+	transform: translateX(var(--checkboxHeight));
 }
 
 .textAlignIcon {
-  margin: 1%;
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0);
+	margin: 1%;
+	border-radius: 0;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .checkbox:checked ~ .textAlignIcon {
-  color: white;
+	color: white;
 }
 
 .textAlignContainer {
-  color: var(--primaryColor);
-  display: flex;
-  justify-content: space-evenly;
+	color: var(--primaryColor);
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .stylesBorderContainer {
-  display: flex;
-  margin: 1%;
-  padding: 1%;
-  justify-content: center;
-  color: var(--primaryColor);
-  margin-bottom: 3%;
-  margin-top: 3%;
+	display: flex;
+	margin: 1%;
+	padding: 1%;
+	justify-content: center;
+	color: var(--primaryColor);
+	margin-bottom: 3%;
+	margin-top: 3%;
 }
 
 .imageModalSizeInputContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .imageModalContainer {
-  color: var(--primaryColor);
+	color: var(--primaryColor);
 }
 
 .loginModalContainer {
-  /* display: none; */
-  position: absolute;
-  color: var(--primaryColor);
+	/* display: none; */
+	position: absolute;
+	color: var(--primaryColor);
 }
 
-.loginButton {
-  background-color: var(--primaryColor);
-  color: var(--secondaryColor);
-  padding: 1%;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  border: 1px solid var(--primaryColor);
+.defaultButton {
+	font-size: 125%;
+	background-color: var(--primaryColor);
+	color: var(--secondaryColor);
+	padding: 1%;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+	border: 1px solid var(--primaryColor);
 }
 
-.loginButton:hover {
-  background-color: var(--secondaryColor);
-  color: var(--primaryColor);
-}
-
-.imageModalSelect {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.defaultButton:hover {
+	background-color: var(--secondaryColor);
+	color: var(--primaryColor);
 }
 
 .imageModalSelect {
-  cursor: pointer;
-  border-bottom: 1px solid;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.imageModalSelect {
+	cursor: pointer;
+	border-bottom: 1px solid;
 }
 
 .informationDiv {
-  /* border-bottom: solid 1px; */
-  /* position: absolute; */
-  background-color: var(--primaryColor);
-  /* color: var(--secondaryColor); */
-  color: white;
-  margin: 1%;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 1%;
+	/* border-bottom: solid 1px; */
+	/* position: absolute; */
+	background-color: var(--primaryColor);
+	/* color: var(--secondaryColor); */
+	color: white;
+	margin: 1%;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 1%;
 }
 
 .alertDiv {
-  position: relative;
-  background-color: red;
-  color: white;
-  padding: 1%;
-  margin: 1%;
-  margin-left: 0;
-  margin-right: 0;
+	position: relative;
+	background-color: red;
+	color: white;
+	padding: 1%;
+	margin: 1%;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 /* .imageModalTable {
@@ -357,80 +364,115 @@ input[type="number"] {
 } */
 
 .hide {
-  position: absolute;
-  transition-duration: 0.5s;
-  transform: scaleY(0);
+	position: absolute;
+	transition-duration: 0.5s;
+	transform: scaleY(0);
 }
 
 .unhide {
-  transition-duration: 0.5s;
-  transform: scaleY(1);
+	transition-duration: 0.5s;
+	transform: scaleY(1);
 }
 
 .tableSizesContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-  padding: 3%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	padding: 3%;
 }
 
 .tableSizesInput {
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  width: 10%;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	width: 10%;
 }
 
 .render {
-  text-align: center;
+	text-align: center;
 }
 
 .alert {
-  position: fixed;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%) scaleY(1);
-  transition-duration: 0.5s;
+	position: fixed;
+	top: 80%;
+	left: 50%;
+	transform: translate(-50%, -50%) scaleY(1);
+	transition-duration: 0.5s;
 }
 
 .hideAlert {
-  position: absolute;
-  transform: translate(-50%, -50%) scaleY(0);
+	z-index: 200;
+	position: absolute;
+	transform: translate(-50%, -50%) scaleY(0);
 }
 
 .separator {
-  margin: 1%;
-  margin-left: 3%;
-  margin-right: 3%;
-  background-color: var(--primaryColor);
-  height: 0.7vmax;
-  transition-duration: 0.2s;
-  cursor: pointer;
+	margin: 1%;
+	margin-left: 3%;
+	margin-right: 3%;
+	background-color: var(--primaryColor);
+	height: 0.7vmax;
+	transition-duration: 0.2s;
+	cursor: pointer;
 }
 
 .separator:hover {
-  height: 1.2vmax;
+	height: 1.2vmax;
 }
 
 .deleteItemButton {
-  color: white;
-  background-color: red;
-  margin: 3%;
-  border: none;
-  transition-duration: 0.5s;
-  /* display: flex;
+	color: white;
+	background-color: red;
+	margin: 3%;
+	border: none;
+	transition-duration: 0.5s;
+	/* display: flex;
   align-items: center; */
-  height: 1.7vmax;
-  width: 50%;
+	height: 1.7vmax;
+	width: 50%;
 }
 
 .deleteItemButton:hover {
-  height: 2.2vmax;
-  cursor: pointer;
+	height: 2.2vmax;
+	cursor: pointer;
 }
 
 .smallRenderContainer {
-  overflow: auto;
+	overflow: auto;
+}
+
+.settingsButton {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+	float: right;
+	padding: 1%;
+	background-color: var(--primaryColor);
+	color: var(--secondaryColor);
+}
+
+.settingsStylesPairsContainer {
+	/* display: flex;
+  flex-direction: row; */
+}
+
+.settingsStyltesInput {
+	width: 20%;
+}
+
+.settingsButtons {
+	margin: 1%;
+	margin-left: 43%;
+	margin-right: 43%;
+}
+
+.settingsButtonContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.settingsStyleInput {
+	width: 20%;
 }

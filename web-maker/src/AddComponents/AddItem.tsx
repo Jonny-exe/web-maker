@@ -1,5 +1,5 @@
 import React from "react"
-import { item } from "../constants/defaultTypes.js"
+import { item } from "../constants/defaultTypes"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const AddItem = (props: any) => {

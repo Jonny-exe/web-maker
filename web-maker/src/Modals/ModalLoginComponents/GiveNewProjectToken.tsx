@@ -29,7 +29,7 @@ const GiveNewProjectToken: React.FC<Props> = ({
 					</div>
 					<button
 						onClick={hideModal}
-						className="preview loginButton"
+						className="preview defaultButton"
 						style={{ margin: "1%" }}>
 						Continue
 					</button>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { table } from "../constants/defaultTypes.js"
+import { table } from "../constants/defaultTypes"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const AddTable = (props: any) => {

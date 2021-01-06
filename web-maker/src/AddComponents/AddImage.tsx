@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { image } from "../constants/defaultTypes.js"
+import { image } from "../constants/defaultTypes"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const AddImage = (props: any) => {

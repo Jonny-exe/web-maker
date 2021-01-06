@@ -124,3 +124,22 @@ export const columnItem = {
 		},
 	],
 }
+
+export const bodyObject: { [key: string]: string } = {
+	type: "bodyObject",
+	title: "",
+	fontSize: "100%",
+	color: "black",
+	textAlign: "center",
+	background: "white",
+	padding: "1%",
+}
+
+export interface bodyObjectType {
+	type: string
+	fontSize: string
+	color: string
+	background: string
+	textAlign: string
+	title: string
+}

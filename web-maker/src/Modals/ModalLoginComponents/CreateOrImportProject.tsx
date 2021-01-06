@@ -25,13 +25,13 @@ const CreateOrImportProject: React.FC<Props> = ({
 				}`}>
 				<span style={textStyle}> Create new project </span>
 				<button
-					className="preview loginInput loginButton"
+					className="defaultButton"
 					onClick={() => setCreateProjectActivated(true)}>
 					Create
 				</button>
 				<span style={textStyle}> Import existing project </span>
 				<button
-					className="preview loginInput loginButton"
+					className="defaultButton"
 					onClick={() => setImportProjectActivated(true)}>
 					Import
 				</button>

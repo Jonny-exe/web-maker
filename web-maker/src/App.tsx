@@ -7,6 +7,8 @@ import Modal from "./Modals/Modal"
 import RenderContent from "./RenderContent"
 import Login from "./Login"
 import ModalEditPlacement from "./Modals/ModalEditPlacement"
+import Settings from "./SettingsComponents/Settings"
+import { bodyObject } from "./constants/defaultTypes"
 
 const App = () => {
 	const [itemIndex, setItemIndex] = useState(-1)
@@ -27,7 +29,8 @@ const App = () => {
 	})
 	const [editCount, setEditCount] = useState(0)
 	const [previewMode, setPreviewMode] = useState(false)
-	const [content, setContent] = useState([])
+	const [content, setContent] = useState([bodyObject])
+	console.log(content)
 
 	return (
 		<div className="App">
@@ -67,7 +70,7 @@ const App = () => {
 				modalStateActive={modalStateActive}
 				setModalStateActive={setModalStateActive}
 			/>
-			<div className="render">
+			<div style={content[0]} className="render">
 				<RenderContent
 					itemIndex={itemIndex}
 					setItemIndex={setItemIndex}
@@ -78,6 +81,11 @@ const App = () => {
 					content={content}
 				/>
 			</div>
+			<Settings
+				setContent={setContent}
+				previewMode={previewMode}
+				content={content}
+			/>
 		</div>
 	)
 }

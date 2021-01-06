@@ -32,7 +32,9 @@ const GiveNewProjectTokenFromRecoveryKey: React.FC<Props> = ({
 					Make sure you save this token. You will need the key to edit you
 					project the next time you want to edit it.
 				</div>
-				<button onClick={hideModal} className="preview loginButton loginInput">
+				<button
+					onClick={hideModal}
+					className="preview defaultButton defaultInput">
 					Continue
 				</button>
 			</div>

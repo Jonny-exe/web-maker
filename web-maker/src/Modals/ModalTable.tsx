@@ -9,34 +9,31 @@ const ModalTable = (props: any) => {
 						? "overlayActive addImageOverlayActive"
 						: ""
 				}`}
-				onClick={() => props.setAddTableOverlayActive(false)}
-			></div>
+				onClick={() => props.setAddTableOverlayActive(false)}></div>
 			<div
 				className={`addImageModal tableSizesContainer modal ${
 					props.addTableOverlayActive ? "modalActive" : ""
-				}`}
-			>
+				}`}>
 				<h1 style={{ fontWeight: "normal" }}> Create table </h1>
 				<input
 					type="number"
 					placeholder="Height"
-					className="loginInput input tableSizesInput"
+					className="defaultInput  tableSizesInput"
 					onChange={(e: any) => (props.tableSizes.width = e.target.value)}
 				/>
 				<input
 					type="number"
 					placeholder="Width"
-					className="loginInput input tableSizesInput"
+					className="defaultInput input tableSizesInput"
 					onChange={(e: any) => (props.tableSizes.height = e.target.value)}
 				/>
 				<button
-					className="preview loginButton"
+					className="preview defaultButton"
 					onClick={() => {
 						props.setAddTableOverlayActive(false)
 
 						props.setApplyTableCount(props.applyTableCount + 1)
-					}}
-				>
+					}}>
 					{" "}
 					Apply{" "}
 				</button>

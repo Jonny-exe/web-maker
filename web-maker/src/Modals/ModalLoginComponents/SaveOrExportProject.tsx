@@ -43,7 +43,7 @@ const SaveOrExportProject: React.FC<Props> = ({
 				<span style={textStyle}> Save your current project </span>
 				<button
 					onClick={saveOnClick}
-					className="preview loginInput loginButton">
+					className="preview defaultInput defaultButton">
 					Save
 				</button>
 				<span
@@ -65,13 +65,13 @@ const SaveOrExportProject: React.FC<Props> = ({
 				<button
 					type="button"
 					onClick={getFile}
-					className="preview loginInput loginButton">
+					className="preview defaultInput defaultButton">
 					Get html file
 				</button>
 				<button
 					type="button"
 					onClick={logOut}
-					className="preview loginInput loginButton">
+					className="preview defaultInput defaultButton">
 					Log out
 				</button>
 			</div>

@@ -36,7 +36,7 @@ const InsertRecoveryKey: React.FC<Props> = ({
 					</span>
 					<input
 						type="text"
-						className="input loginInput"
+						className=" defaultInput"
 						placeholder="Recovery key"
 						value={recoveryKeyInputValue}
 						onChange={(e: any) => setRecoveryKeyInputValue(e.target.value)}
@@ -59,7 +59,7 @@ const InsertRecoveryKey: React.FC<Props> = ({
 					</div>
 					<button
 						onClick={() => setCheckRecoveryKeyCount(checkRecoveryKeyCount + 1)}
-						className="preview loginInput loginButton">
+						className="preview defaultInput defaultButton">
 						Create
 					</button>
 				</div>

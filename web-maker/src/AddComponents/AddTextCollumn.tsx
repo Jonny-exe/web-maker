@@ -1,5 +1,5 @@
 import React from "react"
-import { columnItem } from "../constants/defaultTypes.js"
+import { columnItem } from "../constants/defaultTypes"
 import { faColumns } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

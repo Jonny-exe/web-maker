@@ -75,9 +75,10 @@ const ModalLogin = (props: any) => {
 		if (
 			responseContent !== null &&
 			responseContent !== undefined &&
-			responseContent.length !== null
+			responseContent.length !== 0
 		) {
 			props.setContent(responseContent)
+			debugger
 		}
 	}, [responseContent])
 

@@ -39,18 +39,15 @@ export const RenderContent = (props: any) => {
 	return (
 		<>
 			{props.content.map((item: any, index: number) =>
-				item.type === "img" ? (
-					<img
-						src={item.src}
-						style={item.style}
-						onMouseDown={() => handleMouseDown(index)}
-						alt="Image"
-					/>
+				item.type === "bodyContent" ? (
+					<></>
 				) : (
 					React.createElement(
 						item.type,
 						{
 							style: item.style,
+							src: item.type === "img" ? item.src : null,
+							alt: item.type === "img" ? "Image" : null,
 							contentEditable:
 								notEditable.includes(item.type) || props.previewMode
 									? "false"
@@ -88,7 +85,7 @@ export const RenderContent = (props: any) => {
 								itemIndex={props.itemIndex}
 								savedStyle={props.savedStyle}
 							/>
-						) : (
+						) : item.type === "img" ? null : (
 							item.content
 						)
 					)
