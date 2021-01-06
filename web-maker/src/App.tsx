@@ -70,7 +70,7 @@ const App = () => {
 				modalStateActive={modalStateActive}
 				setModalStateActive={setModalStateActive}
 			/>
-			<div style={content[0]} className="render">
+			<div style={content[0].style} className="render">
 				<RenderContent
 					itemIndex={itemIndex}
 					setItemIndex={setItemIndex}
@@ -82,6 +82,8 @@ const App = () => {
 				/>
 			</div>
 			<Settings
+				setEditCount={setEditCount}
+				editCount={editCount}
 				setContent={setContent}
 				previewMode={previewMode}
 				content={content}

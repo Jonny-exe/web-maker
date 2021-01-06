@@ -125,21 +125,25 @@ export const columnItem = {
 	],
 }
 
-export const bodyObject: { [key: string]: string } = {
+export const bodyObject: { [key: string]: any } = {
 	type: "bodyObject",
+	style: {
+		fontSize: "100%",
+		color: "black",
+		textAlign: "center",
+		background: "white",
+		padding: "1%",
+	},
 	title: "",
-	fontSize: "100%",
-	color: "black",
-	textAlign: "center",
-	background: "white",
-	padding: "1%",
 }
 
 export interface bodyObjectType {
 	type: string
-	fontSize: string
-	color: string
-	background: string
-	textAlign: string
+	style: {
+		fontSize: string
+		color: string
+		background: string
+		textAlign: string
+	}
 	title: string
 }

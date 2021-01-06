@@ -34,10 +34,9 @@ const SettingsStylesModal: React.FC<Props> = ({
 						<input
 							type="number"
 							className="defaultInput settingsStyleInput"
-							placeholder={newObject.fontSize}
-							value={newObject.fontSize}
+							placeholder={newObject.style.fontSize}
 							onChange={(e: any) =>
-								udpateStyles({ fontSize: e.target.value + "%" })
+								udpateStyles({ style: { fontSize: e.target.value + "%" } })
 							}
 						/>{" "}
 						%
@@ -46,25 +45,29 @@ const SettingsStylesModal: React.FC<Props> = ({
 						<span> Text color </span>
 						<input
 							className="defaultInput settingsStyleInput"
-							placeholder={newObject.color}
-							onChange={(e: any) => udpateStyles({ color: e.target.value })}
+							placeholder={newObject.style.color}
+							onChange={(e: any) =>
+								udpateStyles({ style: { color: e.target.value } })
+							}
 						/>
 					</div>
 					<div className="settingsStylesPairsContainer">
 						<span> Text Align </span>
 						<input
 							className="defaultInput settingsStyleInput"
-							placeholder={newObject.textAlign}
-							onChange={(e: any) => udpateStyles({ textAlign: e.target.value })}
+							placeholder={newObject.style.textAlign}
+							onChange={(e: any) =>
+								udpateStyles({ style: { textAlign: e.target.value } })
+							}
 						/>
 					</div>
 					<div className="settingsStylesPairsContainer">
 						<span> Background color </span>
 						<input
 							className="defaultInput settingsStyleInput"
-							placeholder={newObject.background}
+							placeholder={newObject.style.background}
 							onChange={(e: any) =>
-								udpateStyles({ background: e.target.value })
+								udpateStyles({ style: { background: e.target.value } })
 							}
 						/>
 					</div>

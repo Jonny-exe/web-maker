@@ -8,6 +8,8 @@ interface Props {
 	contentBody: bodyObjectType
 	content: object[] // I separte them so I am able to asing types to only content[0]
 	setContent: (newContent: { [key: string]: string }[]) => void
+	editCount: number
+	setEditCount: (editCount: number) => void
 }
 
 const SettingsModal: React.FC<Props> = ({
@@ -16,6 +18,8 @@ const SettingsModal: React.FC<Props> = ({
 	contentBody,
 	setSettingsModalActive,
 	settingsModalActive,
+	editCount,
+	setEditCount,
 }) => {
 	const [newTitleValue, setNewTitleValue] = useState("")
 	const [newObject, setNewObject] = useState(contentBody)
@@ -32,6 +36,7 @@ const SettingsModal: React.FC<Props> = ({
 			debugger
 		}
 		hideModal()
+		setEditCount(editCount + 1)
 	}
 
 	const hideModal = () => {
