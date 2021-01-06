@@ -252,16 +252,16 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	beautifiedCSSResult := beautifyCSSCode(CSSResult)
 
 	result := joinCSSandHTML(beautifiedHTMLResult, beautifiedCSSResult)
-	log.Println("Final result", result)
 	filecreator.ImportHTMLToFile(result, req.Token)
 
+	log.Println(http.StatusOK)
 	json.NewEncoder(w).Encode(http.StatusOK)
 	return
 }
 
 func joinCSSandHTML(HTML string, CSS string) string {
 	index := strings.Index(HTML, "<head>")
-	result := HTML[:index+6] + "\n<style>\nbody {\n\t\ttext-align: center;\n}\n" + CSS + "\n\n</style>" + HTML[index+6:] // maybe add '\n' between html and style
+	result := HTML[:index+6] + "\n<style> \n" + CSS + "\n\n</style>" + HTML[index+6:] // maybe add '\n' between html and style
 	return result
 }
 
@@ -282,7 +282,6 @@ func beautifyHTMLCode(htmlCode string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(res.Status)
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -298,7 +297,6 @@ func beautifyHTMLCode(htmlCode string) string {
 
 	bytes := []byte(stringBody)
 	json.Unmarshal(bytes, &result)
-	log.Println(result)
 	return string(result.Clean)
 }
 
@@ -319,7 +317,6 @@ func beautifyCSSCode(CSSCode string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(res.Status)
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -335,7 +332,6 @@ func beautifyCSSCode(CSSCode string) string {
 
 	bytes := []byte(stringBody)
 	json.Unmarshal(bytes, &result)
-	log.Println(result)
 	return string(result.Clean)
 }
 

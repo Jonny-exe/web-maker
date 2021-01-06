@@ -2,14 +2,15 @@ package export
 
 import (
 	"strings"
+
 	// "fmt"
 
 	"bytes"
 	"log"
-	"strconv"
 
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/itemmodels"
 	"github.com/Jonny-exe/web-maker/web-maker-server/httpd/models"
+	"go.mongodb.org/mongo-driver/bson"
 	// "os"
 	// "html/template" // You coulld use html/template but. This makes everything safer but it creates machine code which is not pleasent to read
 )
@@ -21,25 +22,30 @@ import (
 func Export(content models.Content, index int) (string, string) {
 	var finalHTML string
 	var finalCSS string
-	var idx int = index
+	var bodyCSS string
+	var idx = index
 	var childrenCSS string
 	var HTMLItem string
 	// var result stringº
 	// var objectContent []interface{} = json
 	contentLength := len(content)
 	for i := 0; i < contentLength; i++ {
-		// ClassIndex++
+		if idx == 0 {
+			// This is to handle the bodyCSS which is the 1 item of the array
+			bodyCSS = createCSSItem(content[i].Style, i)
+		} else {
+			// HTMLItem = item + itemChildren
+			HTMLItem, childrenCSS = createHTMLItem(content[i], idx)
 
+			// CSSItem = itemcss
+			CSSItem := createCSSItem(content[i].Style, idx)
+			finalHTML += HTMLItem
+			finalCSS += CSSItem + childrenCSS
+		}
 		idx++
-
-		// HTMLItem = item + itemChildren
-		HTMLItem, childrenCSS = createHTMLItem(content[i], idx)
-
-		// CSSItem = itemcss
-		CSSItem := createCSSItem(content[i].Style, idx)
-		finalHTML += HTMLItem
-		finalCSS += CSSItem + childrenCSS
 	}
+
+	finalCSS = bodyCSS + finalCSS
 
 	// result = joinCSSandHTML(finalHTML, finalCSS)
 	return finalHTML, finalCSS
@@ -56,7 +62,6 @@ func createHTMLItem(item models.ContentItem, index int) (string, string) {
 	var children string
 	var childrenStyle string
 	inputs.ClassIndex = index
-	log.Println("ClassIndex HTML: ", inputs.ClassIndex)
 
 	if len(inputs.Children) > 0 {
 		// Create children
@@ -82,20 +87,19 @@ func createHTMLItem(item models.ContentItem, index int) (string, string) {
 
 func createCSSItem(item map[string]string, index int) string {
 	var result string
-	var CSSBegining = "{"
-	var CSSEnd = "}"
+
 	// var resultMap map[string]string
 	if item == nil {
 		return ""
 	}
+	type input struct {
+		Key   string `json:"key"`
+		Value string `json:"value"`
+	}
 	for key, value := range item {
 		buf := new(bytes.Buffer)
 		newKey := convertToCSS(key)
-		type input struct {
-			Key   string `json:"key"`
-			Value string `json:"value"`
-		}
-		var inputs input = input{newKey, value}
+		var inputs = input{newKey, value}
 		err := itemmodels.CSSKeyValue.Execute(buf, inputs)
 		if err != nil {
 			log.Fatal("Error parsing css template: ", err)
@@ -103,8 +107,24 @@ func createCSSItem(item map[string]string, index int) string {
 		result += buf.String()
 	}
 
-	log.Println("ClassIndex CSS: ", index)
-	result = ".a" + strconv.Itoa(index) + CSSBegining + result + CSSEnd // "a" is added because css styles cant begin with a number
+	if index == 0 {
+		templateResult := new(bytes.Buffer)
+		var inputs = bson.M{"CSS": result}
+		err := itemmodels.CSSBody.Execute(templateResult, inputs)
+		if err != nil {
+			log.Fatal("Error parsing template: ", err)
+		}
+		result = templateResult.String()
+	} else {
+		// result = ".a" + strconv.Itoa(index) + CSSBegining + result + CSSEnd // "a" is added because css styles cant begin with a number
+		templateResult := new(bytes.Buffer)
+		var inputs = bson.M{"CSS": result, "Index": index}
+		err := itemmodels.CSSItem.Execute(templateResult, inputs)
+		if err != nil {
+			log.Fatal("Error parsing template: ", err)
+		}
+		result = templateResult.String()
+	}
 	return result
 }
 

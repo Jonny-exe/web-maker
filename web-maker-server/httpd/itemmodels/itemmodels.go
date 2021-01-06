@@ -20,3 +20,8 @@ var sTYLEBegingin string = "<steel"
 
 // JoinHTMLandCSS ..
 var JoinHTMLandCSS = template.Must(template.New("join").Parse(`<!DOCTYPE html><html><style>{{.CSS}}</style><body>{{.HTML}}</body></html>`))
+var CSSBody = template.Must(template.New("join").Parse(`body { {{.CSS}} }`))
+
+var CSSItem = template.Must(template.New("join").Parse(`.a{{.Index}} { {{.CSS}} }`))
+
+// result = ".a" + strconv.Itoa(index) + CSSBegining + result + CSSEnd // "a" is added because css styles cant begin with a number

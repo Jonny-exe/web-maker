@@ -11,7 +11,15 @@ import (
 // ImportHTMLToFile ...
 func ImportHTMLToFile(code string, token string) {
 	// Files have to be created there because they have to be in the same level or further than the main index.html which is in public directory
-	f, err := os.Create(tempFilesDir + "temp-" + token + ".html")
+	pathToFile := tempFilesDir + "temp-" + token + ".html"
+
+	doesFileExist := fileExists(pathToFile)
+	if doesFileExist {
+		RemoveFile(token)
+		log.Println("REMOVING FILE")
+	}
+
+	f, err := os.Create(pathToFile)
 	if err != nil {
 		log.Fatal("Error creating: ", err)
 	}
@@ -25,6 +33,16 @@ func ImportHTMLToFile(code string, token string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+	}
+	return true
 }
 
 // RemoveFile ..
