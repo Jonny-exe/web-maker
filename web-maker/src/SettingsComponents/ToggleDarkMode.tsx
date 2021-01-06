@@ -16,18 +16,18 @@ const ToggleDarkMode: React.FC<Props> = ({
 		<>
 			<FontAwesomeIcon
 				onClick={() => {
-					setDarkModeActive(true)
+					setDarkModeActive(false)
 					localStorage.setItem("dark-mode", "true")
 				}}
-				className={`${darkModeActive ? "notDisplay" : "display"}`}
+				className={`${darkModeActive ? "display" : "notDisplay"}`}
 				icon={faMoon}
 			/>
 			<FontAwesomeIcon
 				onClick={() => {
-					setDarkModeActive(false)
+					setDarkModeActive(true)
 					localStorage.setItem("dark-mode", "false")
 				}}
-				className={`${darkModeActive ? "display" : "notDisplay"}`}
+				className={`${darkModeActive ? "notDisplay" : "display"}`}
 				icon={faSun}
 			/>
 		</>
