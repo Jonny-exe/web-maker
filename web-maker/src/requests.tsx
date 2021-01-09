@@ -217,9 +217,8 @@ export const GetFile = (token: string, getFileCount: number) => {
 				loadingGetFile: true,
 			}))
 			const loadData = async () => {
-				debugger
 				const response = await fetch(thisURL, requestOptions)
-				debugger
+
 				var data: number = await response.json()
 				setState({ getFileStatus: 200, loadingGetFile: false })
 			}

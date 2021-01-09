@@ -1,4 +1,5 @@
 .App {
+	height: 100vh;
 	text-align: center;
 	--speed: 500ms;
 	--secondaryColor: #ccffee;
@@ -93,7 +94,8 @@ input[type="number"] {
 
 .dropdown:hover {
 	/* transform: translate(-45%); */
-	background-color: var(--secondaryColor);
+	background-color: var(--primaryColor);
+	color: var(--secondaryColor);
 }
 
 .menuItem {
@@ -399,7 +401,9 @@ input[type="number"] {
 }
 
 .render {
+	height: 100%;
 	text-align: center;
+	overflow: auto;
 }
 
 .alert {

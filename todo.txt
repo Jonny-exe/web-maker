@@ -1,0 +1,27 @@
+settings
+  - Title
+  - Day and night mode
+  - Style window
+    - Font
+    - Font color
+    - Font size
+    - Text align
+    - Background color
+  - Maybe default settings
+
+backend
+  - Make a way to get it separate
+  - Make a string template to fit everything
+  - Lint it manually
+  -
+
+
+content[0] type:
+  style {
+    - Font
+    - Font color
+    - Font size
+    - Text align
+    - Background color
+  }
+  -title

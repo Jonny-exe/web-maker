@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { bodyObjectType } from "../constants/defaultTypes"
+import { bodyObject, bodyObjectType } from "../constants/defaultTypes"
 
 interface Props {
 	settingsStyleActive: boolean
@@ -16,10 +16,21 @@ const SettingsStylesModal: React.FC<Props> = ({
 	settingsStyleActive,
 	setSettingsStyleActive,
 }) => {
-	const udpateStyles = (newStyleObject: object) => {
+	const updateStyles = (newStyleObject: object) => {
 		var itemCopy: bodyObjectType = JSON.parse(JSON.stringify(newObject))
 		Object.assign(itemCopy, newStyleObject)
 		setNewObject(itemCopy)
+	}
+
+	const setStyleDefault = (light: boolean) => {
+		if (light) {
+			updateStyles(bodyObject)
+		} else {
+			var itemCopy: bodyObjectType = JSON.parse(JSON.stringify(bodyObject))
+			itemCopy.style.background = "#292C35"
+			itemCopy.style.color = "white"
+			updateStyles(itemCopy)
+		}
 	}
 
 	return (
@@ -36,7 +47,7 @@ const SettingsStylesModal: React.FC<Props> = ({
 							className="defaultInput settingsStyleInput"
 							placeholder={newObject.style.fontSize}
 							onChange={(e: any) =>
-								udpateStyles({ style: { fontSize: e.target.value + "%" } })
+								updateStyles({ style: { fontSize: e.target.value + "%" } })
 							}
 						/>{" "}
 						%
@@ -47,7 +58,7 @@ const SettingsStylesModal: React.FC<Props> = ({
 							className="defaultInput settingsStyleInput"
 							placeholder={newObject.style.color}
 							onChange={(e: any) =>
-								udpateStyles({ style: { color: e.target.value } })
+								updateStyles({ style: { color: e.target.value } })
 							}
 						/>
 					</div>
@@ -57,7 +68,7 @@ const SettingsStylesModal: React.FC<Props> = ({
 							className="defaultInput settingsStyleInput"
 							placeholder={newObject.style.textAlign}
 							onChange={(e: any) =>
-								udpateStyles({ style: { textAlign: e.target.value } })
+								updateStyles({ style: { textAlign: e.target.value } })
 							}
 						/>
 					</div>
@@ -67,16 +78,31 @@ const SettingsStylesModal: React.FC<Props> = ({
 							className="defaultInput settingsStyleInput"
 							placeholder={newObject.style.background}
 							onChange={(e: any) =>
-								udpateStyles({ style: { background: e.target.value } })
+								updateStyles({ style: { background: e.target.value } })
 							}
 						/>
+					</div>
+					<div className="settingsStylesPairsContainer">
+						<button
+							className="defaultButton"
+							onClick={() => setStyleDefault(true)}>
+							{" "}
+							Default{" "}
+						</button>
+					</div>
+					<div className="settingsStylesPairsContainer">
+						<button
+							className="defaultButton"
+							onClick={() => setStyleDefault(false)}>
+							{" "}
+							Default dark{" "}
+						</button>
 					</div>
 				</div>
 				<button
 					onClick={() => setSettingsStyleActive(false)}
 					className="defaultButton">
-					{" "}
-					Apply{" "}
+					Apply
 				</button>
 			</div>
 			<div

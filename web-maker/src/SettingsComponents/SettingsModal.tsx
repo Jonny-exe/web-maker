@@ -36,7 +36,6 @@ const SettingsModal: React.FC<Props> = ({
 		}
 		if (contentBody !== undefined && contentBody !== null) {
 			content.splice(0, 1, newObject)
-			debugger
 		}
 		hideModal()
 		setEditCount(editCount + 1)
