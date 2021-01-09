@@ -254,7 +254,6 @@ func ExportIntoHTML(w http.ResponseWriter, r *http.Request) {
 	result := joinCSSandHTML(beautifiedHTMLResult, beautifiedCSSResult)
 	filecreator.ImportHTMLToFile(result, req.Token)
 
-	log.Println(http.StatusOK)
 	json.NewEncoder(w).Encode(http.StatusOK)
 	return
 }
@@ -367,7 +366,6 @@ func DoesRecoveryKeyExist(w http.ResponseWriter, r *http.Request) {
 
 // Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
-	export.Test()
 }
 
 // GetDirs ..

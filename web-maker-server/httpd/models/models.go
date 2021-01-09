@@ -27,6 +27,7 @@ type Content []ContentItem
 
 // ContentItem ...
 type ContentItem struct {
+	Title      string            `json:"title"`
 	Type       string            `json:"type"`
 	Text       string            `json:"text"`
 	Content    string            `json:"content"`

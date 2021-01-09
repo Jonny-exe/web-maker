@@ -24,7 +24,7 @@ const SettingsModal: React.FC<Props> = ({
 	darkModeActive,
 	setEditCount,
 }) => {
-	const [newTitleValue, setNewTitleValue] = useState("")
+	const [newTitleValue, setNewTitleValue] = useState(contentBody.title)
 	const [newObject, setNewObject] = useState(contentBody)
 	const [settingsStyleActive, setSettingsStyleActive] = useState(false)
 
@@ -35,6 +35,7 @@ const SettingsModal: React.FC<Props> = ({
 			}
 		}
 		if (contentBody !== undefined && contentBody !== null) {
+			newObject.title = newTitleValue
 			content.splice(0, 1, newObject)
 		}
 		hideModal()

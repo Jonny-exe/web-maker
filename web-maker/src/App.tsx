@@ -40,7 +40,7 @@ const App = () => {
 
 	return (
 		<div className={`App ${darkModeActive ? "dark" : ""}`}>
-			<div className="tools">
+			<div className={`tools ${previewMode ? "preview" : ""}`}>
 				<Login
 					content={content}
 					setContent={setContent}
@@ -76,7 +76,9 @@ const App = () => {
 				modalStateActive={modalStateActive}
 				setModalStateActive={setModalStateActive}
 			/>
-			<div style={content[0].style} className="render">
+			<div
+				style={content[0].style != undefined ? content[0].style : ""}
+				className="render">
 				<RenderContent
 					itemIndex={itemIndex}
 					setItemIndex={setItemIndex}

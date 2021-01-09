@@ -26,13 +26,15 @@ func Export(content models.Content, index int) (string, string) {
 	var idx = index
 	var childrenCSS string
 	var HTMLItem string
-	// var result stringº
-	// var objectContent []interface{} = json
+	var titleHTML string
+
 	contentLength := len(content)
 	for i := 0; i < contentLength; i++ {
 		if idx == 0 {
 			// This is to handle the bodyCSS which is the 1 item of the array
 			bodyCSS = createCSSItem(content[i].Style, i)
+			titleHTML = createHTMLTitle(content[i].Title)
+			log.Println(titleHTML)
 		} else {
 			// HTMLItem = item + itemChildren
 			HTMLItem, childrenCSS = createHTMLItem(content[i], idx)
@@ -46,14 +48,22 @@ func Export(content models.Content, index int) (string, string) {
 	}
 
 	finalCSS = bodyCSS + finalCSS
+	finalHTML = titleHTML + finalHTML
 
 	// result = joinCSSandHTML(finalHTML, finalCSS)
 	return finalHTML, finalCSS
 
 }
 
-// Test ...
-func Test() {
+func createHTMLTitle(title string) string {
+	buf := new(bytes.Buffer)
+	err := itemmodels.TitleHTML.Execute(buf, title)
+	if err != nil {
+		log.Fatal("Error parsing string template title: ", err)
+		return ""
+	}
+	log.Println("TITLE: ", buf.String())
+	return buf.String()
 }
 
 func createHTMLItem(item models.ContentItem, index int) (string, string) {

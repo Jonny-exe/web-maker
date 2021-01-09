@@ -78,6 +78,13 @@ input[type="number"] {
 	background-color: var(--secondaryColor);
 }
 
+.tools.preview {
+	display: flex;
+	padding: 1%;
+	background-color: var(--secondaryColor);
+	justify-content: center;
+}
+
 .dropdown {
 	/* transform: translate(-45%); */
 	background-color: var(--secondaryColor);

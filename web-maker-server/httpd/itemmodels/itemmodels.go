@@ -19,8 +19,9 @@ var hTMLEnd string = "</body></html>"
 var sTYLEBegingin string = "<steel"
 
 // JoinHTMLandCSS ..
-var JoinHTMLandCSS = template.Must(template.New("join").Parse(`<!DOCTYPE html><html><style>{{.CSS}}</style><body>{{.HTML}}</body></html>`))
+var JoinHTMLandCSS = template.Must(template.New("join").Parse(`<!DOCTYPE html><html><style>{{.CSS}}</style><title>{{.Title}}<title><body>{{.HTML}}</body></html>`))
 var CSSBody = template.Must(template.New("join").Parse(`body { {{.CSS}} }`))
+var TitleHTML = template.Must(template.New("join").Parse(`<title> {{.}} </title>`))
 
 var CSSItem = template.Must(template.New("join").Parse(`.a{{.Index}} { {{.CSS}} }`))
 
