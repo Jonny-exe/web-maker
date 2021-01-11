@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { bodyObject, bodyObjectType } from "../constants/defaultTypes"
 import SettingsStylesModal from "./SettingsStylesModal"
 import ToggleDarkMode from "./ToggleDarkMode"
@@ -27,6 +27,10 @@ const SettingsModal: React.FC<Props> = ({
 	const [newTitleValue, setNewTitleValue] = useState(contentBody.title)
 	const [newObject, setNewObject] = useState(contentBody)
 	const [settingsStyleActive, setSettingsStyleActive] = useState(false)
+
+	useEffect(() => {
+		if (contentBody.title != undefined) setNewTitleValue(contentBody.title)
+	}, [contentBody])
 
 	const applySettings = () => {
 		for (let [style, value] of Object.entries(newObject)) {

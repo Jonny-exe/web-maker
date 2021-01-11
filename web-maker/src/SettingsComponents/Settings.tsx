@@ -1,8 +1,6 @@
 import React, { useState } from "react"
-import { bodyObjectType } from "../constants/defaultTypes"
 import SettingsButton from "./SettingsButton"
 import SettingsModal from "./SettingsModal"
-import ToggleDarkMode from "./ToggleDarkMode"
 
 interface Props {
 	previewMode: boolean
