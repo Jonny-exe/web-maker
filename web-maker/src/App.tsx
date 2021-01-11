@@ -77,7 +77,7 @@ const App = () => {
 				setModalStateActive={setModalStateActive}
 			/>
 			<div
-				style={content[0].style != undefined ? content[0].style : ""}
+				style={content[0] != undefined ? content[0].style : ""}
 				className="render">
 				<RenderContent
 					itemIndex={itemIndex}

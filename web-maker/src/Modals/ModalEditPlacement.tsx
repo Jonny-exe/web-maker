@@ -46,26 +46,34 @@ const ModalEditPlacement = (props: any) => {
 				<div className="smallRenderContainer">
 					{props.content.map((item: any, index: number) => (
 						<>
-							<div className="separator" onClick={() => moveItem(index)}></div>
-							{exceptionToRender.includes(item.type) ? (
-								<span>{item.type === "div" ? "columns" : item.text}</span>
+							{index != 0 ? (
+								<>
+									<div
+										className="separator"
+										onClick={() => moveItem(index)}></div>
+									{exceptionToRender.includes(item.type) ? (
+										<span>{item.type === "div" ? "columns" : item.text}</span>
+									) : (
+										React.createElement(
+											item.type,
+											{
+												style: {
+													margin: "0%",
+												},
+											},
+											item.text
+										)
+									)}
+									{props.content.length === index + 1 ? (
+										<div
+											className="separator"
+											onClick={() => moveItem(index + 1)}></div>
+									) : (
+										""
+									)}
+								</>
 							) : (
-								React.createElement(
-									item.type,
-									{
-										style: {
-											margin: "0%",
-										},
-									},
-									item.text
-								)
-							)}
-							{props.content.length === index + 1 ? (
-								<div
-									className="separator"
-									onClick={() => moveItem(index + 1)}></div>
-							) : (
-								""
+								<></>
 							)}
 						</>
 					))}
