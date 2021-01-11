@@ -10,6 +10,7 @@ const Login = (props: any) => {
 	return (
 		<>
 			<FontAwesomeIcon
+				title="Project settings"
 				size={"1x"}
 				icon={faUser}
 				className={`preview ${props.previewMode ? "previewMode" : ""}`}

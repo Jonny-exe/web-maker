@@ -445,16 +445,16 @@ input[type="number"] {
 	color: white;
 	background-color: red;
 	margin: 3%;
+	width: 94%;
 	border: none;
 	transition-duration: 0.5s;
 	/* display: flex;
   align-items: center; */
-	height: 1.7vmax;
-	width: 50%;
+	height: 2.3vmax;
 }
 
 .deleteItemButton:hover {
-	height: 2.2vmax;
+	height: 3vmax;
 	cursor: pointer;
 }
 
@@ -502,4 +502,8 @@ input[type="number"] {
 
 .display {
 	display: initial;
+}
+
+.titleInput {
+	width: 50%;
 }

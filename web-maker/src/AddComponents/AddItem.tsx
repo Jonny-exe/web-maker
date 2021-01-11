@@ -12,7 +12,7 @@ const AddItem = (props: any) => {
 		props.setEditCount(props.editCount + 1)
 	}
 	return (
-		<div onClick={addTitle} className="dropdown">
+		<div title={props.title} onClick={addTitle} className="dropdown">
 			<div style={{ scale: `${props.size}` }}>
 				<FontAwesomeIcon size={"2x"} icon={props.icon} />
 			</div>

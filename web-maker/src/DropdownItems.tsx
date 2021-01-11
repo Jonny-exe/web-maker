@@ -16,6 +16,7 @@ export const DropdownItems = (props: any) => {
 				props.menuState ? "showDropdownItems" : "notShowDropdownItems"
 			}`}>
 			<AddItem
+				title={"Add Title"}
 				type={"h1"}
 				text={"Title"}
 				content={props.content}
@@ -26,6 +27,7 @@ export const DropdownItems = (props: any) => {
 				setEditCount={props.setEditCount}
 			/>
 			<AddItem
+				title={"Add subtitle"}
 				type={"h2"}
 				text={"SubTitle"}
 				content={props.content}
@@ -36,6 +38,7 @@ export const DropdownItems = (props: any) => {
 				setEditCount={props.setEditCount}
 			/>
 			<AddItem
+				title={"Add header"}
 				type={"h3"}
 				text={"Heading"}
 				content={props.content}
@@ -46,6 +49,7 @@ export const DropdownItems = (props: any) => {
 				setEditCount={props.setEditCount}
 			/>
 			<AddItem
+				title={"Add text"}
 				type={"p"}
 				text={"Text"}
 				content={props.content}
@@ -55,6 +59,7 @@ export const DropdownItems = (props: any) => {
 				setEditCount={props.setEditCount}
 			/>
 			<AddImage
+				title={"Add image"}
 				type={"img"}
 				text={"Image"}
 				imageSizes={props.imageSizes}
@@ -68,6 +73,7 @@ export const DropdownItems = (props: any) => {
 				setAddImageOverlayActive={props.setAddImageOverlayActive}
 			/>
 			<AddTable
+				title={"Add table"}
 				type={"table"}
 				text={"Table"}
 				tableSizes={props.tableSizes}
@@ -81,6 +87,7 @@ export const DropdownItems = (props: any) => {
 				setAddTableOverlayActive={props.setAddTableOverlayActive}
 			/>
 			<AddTextCollumns
+				title={"Add collumns"}
 				content={props.content}
 				setEditCount={props.setEditCount}
 				icon={faColumns}

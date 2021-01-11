@@ -12,7 +12,7 @@ const SettingsButton: React.FC<Props> = ({
 	setSettingsModalActive,
 }) => {
 	return (
-		<div>
+		<div title="Settings / Styles">
 			<FontAwesomeIcon
 				size={"2x"}
 				icon={faCog}

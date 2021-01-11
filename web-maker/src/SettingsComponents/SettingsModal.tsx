@@ -78,7 +78,7 @@ const SettingsModal: React.FC<Props> = ({
 					/>{" "}
 				</h2>
 				<input
-					className="defaultInput"
+					className="defaultInput titleInput"
 					style={{ display: "inline-block" }}
 					placeholder="Your webpage title"
 					value={newTitleValue}
