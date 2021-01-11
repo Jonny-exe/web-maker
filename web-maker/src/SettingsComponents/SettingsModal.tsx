@@ -30,6 +30,7 @@ const SettingsModal: React.FC<Props> = ({
 
 	useEffect(() => {
 		setNewTitleValue(contentBody.title)
+		setNewObject(contentBody)
 	}, [contentBody])
 
 	const applySettings = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { bodyObject, bodyObjectType } from "../constants/defaultTypes"
 
 interface Props {
@@ -17,8 +17,14 @@ const SettingsStylesModal: React.FC<Props> = ({
 	setSettingsStyleActive,
 }) => {
 	const updateStyles = (newStyleObject: object) => {
+		var newObjectCopy: any = JSON.parse(JSON.stringify(newObject)) // You have to copy because its read
 		var itemCopy: bodyObjectType = JSON.parse(JSON.stringify(newObject))
 		Object.assign(itemCopy, newStyleObject)
+
+		var copyStyle: any = newObjectCopy.style
+		Object.assign(copyStyle, itemCopy.style)
+
+		itemCopy.style = copyStyle
 		setNewObject(itemCopy)
 	}
 
