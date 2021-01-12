@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Guide</title>
+	</head>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+				"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+				"Helvetica Neue", sans-serif;
+			margin: 0%;
+			--secondaryColor: #ccffee;
+			--primaryColor: rgb(43, 255, 184);
+			text-align: center;
+			width: 100%;
+			height: 100vh;
+			overflow: auto;
+			color: var(--primaryColor);
+			background-color: var(--secondaryColor);
+			padding: 1%;
+		}
+
+		*:focus {
+			outline: none;
+		}
+
+		[placeholder] {
+			color: var(--primaryColor);
+		}
+
+		button {
+			border: 1vmax solid var(--primaryColor);
+			font-size: 10vmax;
+			background: var(--primaryColor);
+			color: var(--secondaryColor);
+			/* height: 10vmax; */
+			width: 26vmax;
+			transition-duration: 0.5s;
+		}
+
+		input {
+			width: 90%;
+			border: none;
+			border-bottom: 1px solid var(--primaryColor);
+			background-color: rgba(0, 0, 0, 0);
+			margin-top: 3%;
+			margin-bottom: auto;
+			white-space: pre-wrap;
+			/* <-- THIS PRESERVES THE LINE BREAKS */
+			margin-bottom: 2%;
+			margin-top: 2%;
+			margin-left: 1%;
+			margin-right: 1%;
+			scale: 110%;
+		}
+
+		button:hover {
+			background: var(--secondaryColor);
+			color: var(--primaryColor);
+			border: 1vmax solid var(--primaryColor);
+		}
+
+		#toolbar {
+			padding: 2%;
+		}
+
+		#render {
+			font-size: 200%;
+		}
+
+		.renderItem {
+			margin: 2%;
+			border-bottom: 1px solid;
+			padding: 1%;
+		}
+	</style>
+
+	<body>
+		<div id="app">
+			<div id="toolbar">
+				<input type="text" id="searchbar" value="" placeholder="Search" />
+			</div>
+			<div id="render">
+				<div class="renderItem">
+					Add items: click the plus icon on the left and choose which item you
+					want to add. You options are: title, subtitel, header, text, image,
+					table and collumns.
+				</div>
+				<div class="renderItem">
+					Remove items: long press the item you want to remove and click remove
+					item on the bottom.
+				</div>
+				<div class="renderItem">
+					Move items: long press the item you want to move and then select its
+					new location by pushing the bar that is in its position.
+				</div>
+				<div class="renderItem">
+					Preview: to preview you created web page click the eye icon in the top
+					middle. To unpreview click the eye again
+				</div>
+				<div class="renderItem">
+					Change project style: to change project style go to settings -> style,
+					and choose your prefered styles
+				</div>
+				<div class="renderItem">
+					Change project title: to change project title go to settings and
+					change the project title
+				</div>
+				<div class="renderItem">
+					Save your project: go to user settings on the top left. Then go to
+					create project if you havent and follow the steps. Once you did it
+					just click save.
+				</div>
+				<div class="renderItem">
+					Import a project: go to user settings -> import and write your project
+					token
+				</div>
+				<div class="renderItem">
+					Export a project: go to user settings -> get html file, and follow the
+					instructions.
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="./index.js" type="module"></script>
+</html>

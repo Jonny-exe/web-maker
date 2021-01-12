@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- This is thought to use as main page, but because I use everything in a subdomain I cant do it with react-dom-routes -->
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Web-maker home</title>
+	</head>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+				"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+				"Helvetica Neue", sans-serif;
+			margin: 0%;
+			font-weight: bold;
+		}
+
+		a,
+		a:hover,
+		a:focus,
+		a:active {
+			text-decoration: none;
+			text-decoration: underline;
+		}
+
+		@keyframes hello {
+			from {
+				transform: translateX(-100%);
+			}
+
+			to {
+				transform: translateX(0);
+			}
+		}
+
+		.landingPage {
+			--secondaryColor: #ccffee;
+			--primaryColor: rgb(43, 255, 184);
+			text-align: center;
+			width: 100%;
+			height: 100vh;
+			overflow: auto;
+			color: var(--primaryColor);
+			background-color: var(--secondaryColor);
+			/* filter: invert(100%) */
+		}
+
+		p {
+			animation-duration: 2s;
+			animation: hello 1s;
+		}
+
+		.mainHeader {
+			font-size: 5vmax;
+		}
+
+		.seccondaryHeader {
+			font-size: 2vmax;
+		}
+
+		.explication {
+			font-size: 1.5vmax;
+		}
+
+		.button {
+			border: 1vmax solid var(--primaryColor);
+			font-size: 10vmax;
+			background: var(--primaryColor);
+			color: var(--secondaryColor);
+			/* height: 10vmax; */
+			width: 26vmax;
+			transition-duration: 0.5s;
+		}
+
+		.button:hover {
+			background: var(--secondaryColor);
+			color: var(--primaryColor);
+			border: 1vmax solid var(--primaryColor);
+		}
+
+		.line {
+			border-bottom: solid 1px;
+			margin: 2%;
+		}
+
+		img {
+			width: 10vmax;
+		}
+	</style>
+
+	<body>
+		<div class="landingPage">
+			<p class="mainHeader">Hi, this is web-maker</p>
+			<div class="line">
+				<p class="seccondaryHeader">
+					Web-maker is a tool to create simple web applications with zero coding
+					skills
+				</p>
+			</div>
+			<a href="/web-maker">
+				<button class="button">Start</button>
+			</a>
+			<p></p>
+			<p class="seccondaryHeader">Make you own web in three easy steps</p>
+			<p class="explication">1. Creat a project</p>
+			<p class="explication">2. Add all the items you need</p>
+			<p class="explication">3. Export it into a finished HTML file</p>
+			<a href="./guide.html">
+				<p class="seccondaryHeader">Detailed guide</p>
+			</a>
+			<p class="seccondaryHeader">Good luck on your jouney</p>
+
+			<a href="https://github.com/Jonny-exe/web-maker">
+				<img
+					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmaxcdn.icons8.com%2FShare%2Ficon%2Fnolan%2Flogos%2Fgithub1600.png&f=1&nofb=1"
+				/>
+			</a>
+		</div>
+	</body>
+</html>
