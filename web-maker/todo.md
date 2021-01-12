@@ -1,1 +1,1 @@
-1. Make on hover dislay buttons to move or edit
+1. Make help page

@@ -1,4 +1,7 @@
 import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 
 export const Preveiw = (props: any) => {
 	return (
@@ -7,13 +10,13 @@ export const Preveiw = (props: any) => {
 				className={`preview ${props.previewMode ? "previewMode" : ""}`}
 				onClick={() => props.handlePreview(true)}>
 				{" "}
-				Preview{" "}
+				<FontAwesomeIcon icon={faEye} size={"1x"} />
 			</button>
 			<button
 				className={`preview ${props.previewMode ? "" : "previewMode"}`}
 				onClick={() => props.handlePreview(false)}>
 				{" "}
-				UnPreview{" "}
+				<FontAwesomeIcon icon={faEyeSlash} size={"1x"} />
 			</button>
 		</div>
 	)
